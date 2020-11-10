@@ -47,3 +47,45 @@ def flatten_query(queries):
         tmp_queries = list(queries[query_structure])
         all_queries.extend([(query, query_structure) for query in tmp_queries])
     return all_queries
+
+
+def flatten_structure(query_structure):
+    if type(query_structure) == str:
+        return [query_structure]
+
+    flat_structure = []
+    for element in query_structure:
+        flat_structure.extend(flatten_structure(element))
+
+    return flat_structure
+
+
+def query_to_atoms(query_structure, flat_ids):
+    flat_structure = flatten_structure(query_structure)
+    batch_size, query_length = flat_ids.shape
+    assert len(flat_structure) == query_length
+
+    query_triples = []
+    variable = 0
+    previous = flat_ids[:, 0]
+
+    for i in range(1, query_length):
+        if flat_structure[i] == 'r':
+            variable -= 1
+        elif flat_structure[i] == 'e':
+            previous = flat_ids[:, i]
+            variable += 1
+            continue
+
+        triples = torch.empty(batch_size, 3, device=flat_ids.device, dtype=torch.long)
+        triples[:, 0] = previous
+        triples[:, 1] = flat_ids[:, i]
+        triples[:, 2] = variable
+
+        query_triples.append(triples)
+        previous = variable
+
+    atoms = torch.stack(query_triples, dim=1)
+    num_variables = variable * -1
+
+    return atoms, num_variables

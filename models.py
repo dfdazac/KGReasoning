@@ -9,6 +9,8 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torch import optim
+from torch import Tensor
 from torch.utils.data import DataLoader
 from dataloader import TestDataset, TrainDataset, SingledirectionalOneShotIterator
 import random
@@ -19,6 +21,9 @@ import itertools
 import time
 from tqdm import tqdm
 import os
+from typing import Tuple, List, Dict, Optional, Callable
+
+from util import query_to_atoms
 
 def Identity(x):
     return x
@@ -584,16 +589,23 @@ class KGReasoning(nn.Module):
             negative_sample = negative_sample.cuda()
             subsampling_weight = subsampling_weight.cuda()
 
-        positive_logit, negative_logit, subsampling_weight, _ = model(positive_sample, negative_sample, subsampling_weight, batch_queries_dict, batch_idxs_dict)
+        if isinstance(model, CQD):
+            input_batch = batch_queries_dict[('e', ('r',))]
+            input_batch = torch.cat((input_batch, positive_sample.unsqueeze(1)), dim=1)
+            loss = model.loss(input_batch)
+            positive_sample_loss = negative_sample_loss = loss
+        else:
+            positive_logit, negative_logit, subsampling_weight, _ = model(positive_sample, negative_sample, subsampling_weight, batch_queries_dict, batch_idxs_dict)
 
-        negative_score = F.logsigmoid(-negative_logit).mean(dim=1)
-        positive_score = F.logsigmoid(positive_logit).squeeze(dim=1)
-        positive_sample_loss = - (subsampling_weight * positive_score).sum()
-        negative_sample_loss = - (subsampling_weight * negative_score).sum()
-        positive_sample_loss /= subsampling_weight.sum()
-        negative_sample_loss /= subsampling_weight.sum()
+            negative_score = F.logsigmoid(-negative_logit).mean(dim=1)
+            positive_score = F.logsigmoid(positive_logit).squeeze(dim=1)
+            positive_sample_loss = - (subsampling_weight * positive_score).sum()
+            negative_sample_loss = - (subsampling_weight * negative_score).sum()
+            positive_sample_loss /= subsampling_weight.sum()
+            negative_sample_loss /= subsampling_weight.sum()
 
-        loss = (positive_sample_loss + negative_sample_loss)/2
+            loss = (positive_sample_loss + negative_sample_loss)/2
+
         loss.backward()
         optimizer.step()
         log = {
@@ -611,7 +623,7 @@ class KGReasoning(nn.Module):
         total_steps = len(test_dataloader)
         logs = collections.defaultdict(list)
 
-        with torch.no_grad():
+        with torch.set_grad_enabled(isinstance(model, CQD)):
             for negative_sample, queries, queries_unflatten, query_structures in tqdm(test_dataloader, disable=not args.print_on_screen):
                 batch_queries_dict = collections.defaultdict(list)
                 batch_idxs_dict = collections.defaultdict(list)
@@ -689,3 +701,127 @@ class KGReasoning(nn.Module):
             metrics[query_structure]['num_queries'] = len(logs[query_structure])
 
         return metrics
+
+
+class N3:
+    def __init__(self, weight: float):
+        self.weight = weight
+
+    def forward(self, factors):
+        norm = 0
+        for f in factors:
+            norm += self.weight * torch.sum(
+                torch.abs(f) ** 3
+            )
+        return norm / factors[0].shape[0]
+
+
+class CQD(nn.Module):
+    def __init__(self, nentity:int , nrelation: int, rank: int,
+                 init_size: float = 1e-3, reg_weight: float = 1e-2, test_batch_size: int = 1):
+        super(CQD, self).__init__()
+
+        self.rank = rank
+        self.nentity = nentity
+        self.nrelation = nrelation
+
+        sizes = (nentity, nrelation)
+        self.embeddings = nn.ModuleList([nn.Embedding(s, 2 * rank) for s in sizes[:2]])
+        self.embeddings[0].weight.data *= init_size
+        self.embeddings[1].weight.data *= init_size
+
+        self.init_size = init_size
+        self.loss_fn = nn.CrossEntropyLoss(reduction='mean')
+        self.regularizer = N3(reg_weight)
+
+        batch_entity_range = torch.arange(nentity).to(torch.float).repeat(test_batch_size, 1)
+        self.register_buffer('batch_entity_range', batch_entity_range)
+
+    def loss(self, triples):
+        predictions, factors = self.score_candidates(triples)
+        truth = triples[:, 2]
+
+        l_fit = self.loss_fn(predictions, truth)
+        l_reg = self.regularizer.forward(factors)
+        l = l_fit + l_reg
+
+        return l
+
+    def split_emb(self, lhs_emb, rel_emb, rhs_emb):
+        lhs = lhs_emb[..., :self.rank], lhs_emb[..., self.rank:]
+        rel = rel_emb[..., :self.rank], rel_emb[..., self.rank:]
+        rhs = rhs_emb[..., :self.rank], rhs_emb[..., self.rank:]
+
+        return lhs, rel, rhs
+
+    def score_candidates(self, triples):
+        lhs_emb = self.embeddings[0](triples[:, 0])
+        rel_emb = self.embeddings[1](triples[:, 1])
+        rhs_emb = self.embeddings[0](triples[:, 2])
+
+        lhs, rel, rhs = self.split_emb(lhs_emb, rel_emb, rhs_emb)
+
+        to_score = self.embeddings[0].weight
+        to_score = to_score[:, :self.rank], to_score[:, self.rank:]
+        return (
+            (lhs[0] * rel[0] - lhs[1] * rel[1]) @ to_score[0].transpose(0, 1) +
+            (lhs[0] * rel[1] + lhs[1] * rel[0]) @ to_score[1].transpose(0, 1)
+        ), (
+            torch.sqrt(lhs[0] ** 2 + lhs[1] ** 2),
+            torch.sqrt(rel[0] ** 2 + rel[1] ** 2),
+            torch.sqrt(rhs[0] ** 2 + rhs[1] ** 2)
+        )
+
+    def score_emb(self, lhs_emb, rel_emb, rhs_emb):
+        lhs, rel, rhs = self.split_emb(lhs_emb, rel_emb, rhs_emb)
+
+        return torch.sum(
+            (lhs[0] * rel[0] - lhs[1] * rel[1]) * rhs[0] +
+            (lhs[0] * rel[1] + lhs[1] * rel[0]) * rhs[1],
+            -1), (
+                   torch.sqrt(lhs[0] ** 2 + lhs[1] ** 2),
+                   torch.sqrt(rel[0] ** 2 + rel[1] ** 2),
+                   torch.sqrt(rhs[0] ** 2 + rhs[1] ** 2)
+               )
+
+    def forward(self, positive_sample, negative_sample, subsampling_weight, batch_queries_dict, batch_idxs_dict):
+        all_idxs = []
+
+        for query_structure, queries in batch_queries_dict.items():
+            atoms, num_variables = query_to_atoms(query_structure, queries)
+            all_idxs.extend(batch_idxs_dict[query_structure])
+
+            if num_variables > 1:
+                # var embedding for ID 0 is unused for ease of implementation
+                var_embs = nn.Embedding(num_variables + 1, self.rank * 2)
+                var_embs.to(atoms.device)
+                optimizer = optim.Adam(var_embs.parameters(), lr=0.1)
+                head, rel, tail = atoms[..., 0], atoms[..., 1], atoms[..., 2]
+
+                head_vars_mask = head < 0
+                head[head_vars_mask] = 0
+                with torch.no_grad():
+                    h_emb = self.embeddings[0](head)
+                    r_emb = self.embeddings[1](rel)
+
+                # Optimization loop
+                for i in range(100):
+                    h_emb_vars = h_emb.clone()
+                    # Fill variable positions with optimizable embeddings
+                    h_emb_vars[head_vars_mask] = var_embs(head[head_vars_mask] * -1)
+                    t_emb = var_embs(tail * -1)
+
+                    scores, factors = self.score_emb(h_emb_vars, r_emb, t_emb)
+
+                    scores = torch.sigmoid(scores)
+                    t_norm = torch.prod(scores, dim=-1)
+                    loss = -t_norm.mean() + self.regularizer.forward(factors)
+
+                    optimizer.zero_grad()
+                    loss.backward()
+                    optimizer.step()
+
+        # TODO: score
+        scores = torch.zeros(negative_sample.shape, device=queries.device)
+
+        return None, scores, None, all_idxs

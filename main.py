@@ -13,7 +13,7 @@ import random
 import numpy as np
 import torch
 from torch.utils.data import DataLoader
-from models import KGReasoning
+from models import KGReasoning, CQD
 from dataloader import TestDataset, TrainDataset, SingledirectionalOneShotIterator
 from tensorboardX import SummaryWriter
 import time
@@ -65,6 +65,7 @@ def parse_args(args=None):
     parser.add_argument('-save', '--save_path', default=None, type=str, help="no need to set manually, will configure automatically")
     parser.add_argument('--max_steps', default=100000, type=int, help="maximum iterations to train")
     parser.add_argument('--warm_up_steps', default=None, type=int, help="no need to set manually, will configure automatically")
+    parser.add_argument('--disable_warmup', action='store_true')
     
     parser.add_argument('--save_checkpoint_steps', default=50000, type=int, help="save checkpoints every xx steps")
     parser.add_argument('--valid_steps', default=10000, type=int, help="evaluate validation queries every xx steps")
@@ -74,7 +75,7 @@ def parse_args(args=None):
     parser.add_argument('--nentity', type=int, default=0, help='DO NOT MANUALLY SET')
     parser.add_argument('--nrelation', type=int, default=0, help='DO NOT MANUALLY SET')
     
-    parser.add_argument('--geo', default='vec', type=str, choices=['vec', 'box', 'beta'], help='the reasoning model, vec for GQE, box for Query2box, beta for BetaE')
+    parser.add_argument('--geo', default='vec', type=str, choices=['vec', 'box', 'beta', 'cqd'], help='the reasoning model, vec for GQE, box for Query2box, beta for BetaE')
     parser.add_argument('--print_on_screen', action='store_true')
     
     parser.add_argument('--tasks', default='1p.2p.3p.2i.3i.ip.pi.2in.3in.inp.pin.pni.2u.up', type=str, help="tasks connected by dot, refer to the BetaE paper for detailed meaning and structure of each task")
@@ -141,7 +142,7 @@ def evaluate(model, tp_answers, fn_answers, args, dataloader, query_name_dict, m
     average_metrics = defaultdict(float)
     all_metrics = defaultdict(float)
 
-    metrics = model.test_step(model, tp_answers, fn_answers, args, dataloader, query_name_dict)
+    metrics = KGReasoning.test_step(model, tp_answers, fn_answers, args, dataloader, query_name_dict)
     num_query_structures = 0
     num_queries = 0
     for query_structure in metrics:
@@ -197,7 +198,7 @@ def main(args):
     set_global_seed(args.seed)
     tasks = args.tasks.split('.')
     for task in tasks:
-        if 'n' in task and args.geo in ['box', 'vec']:
+        if 'n' in task and args.geo in ['box', 'vec', 'cqd']:
             assert False, "Q2B and GQE cannot handle queries with negation"
     if args.evaluate_union == 'DM':
         assert args.geo == 'beta', "only BetaE supports modeling union using De Morgan's Laws"
@@ -216,6 +217,8 @@ def main(args):
         tmp_str = "g-{}".format(args.gamma)
     elif args.geo == 'beta':
         tmp_str = "g-{}-mode-{}".format(args.gamma, args.beta_mode)
+    else:
+        tmp_str = ''
 
     if args.checkpoint_path is not None:
         args.save_path = args.checkpoint_path
@@ -256,7 +259,7 @@ def main(args):
             logging.info(query_name_dict[query_structure]+": "+str(len(train_queries[query_structure])))
         train_path_queries = defaultdict(set)
         train_other_queries = defaultdict(set)
-        path_list = ['1p', '2p', '3p']
+        path_list = ['1p', '2p', '3p'] if args.geo != 'cqd' else ['1p']
         for query_structure in train_queries:
             if query_name_dict[query_structure] in path_list:
                 train_path_queries[query_structure] = train_queries[query_structure]
@@ -270,7 +273,7 @@ def main(args):
                                     num_workers=args.cpu_num,
                                     collate_fn=TrainDataset.collate_fn
                                 ))
-        if len(train_other_queries) > 0:
+        if len(train_other_queries) > 0 and args.geo != 'cqd':
             train_other_queries = flatten_query(train_other_queries)
             train_other_iterator = SingledirectionalOneShotIterator(DataLoader(
                                         TrainDataset(train_other_queries, nentity, nrelation, args.negative_sample_size, train_answers),
@@ -315,18 +318,21 @@ def main(args):
             collate_fn=TestDataset.collate_fn
         )
 
-    model = KGReasoning(
-        nentity=nentity,
-        nrelation=nrelation,
-        hidden_dim=args.hidden_dim,
-        gamma=args.gamma,
-        geo=args.geo,
-        use_cuda = args.cuda,
-        box_mode=eval_tuple(args.box_mode),
-        beta_mode = eval_tuple(args.beta_mode),
-        test_batch_size=args.test_batch_size,
-        query_name_dict = query_name_dict
-    )
+    if args.geo == 'cqd':
+        model = CQD(nentity, nrelation, rank=args.hidden_dim, test_batch_size=args.test_batch_size)
+    else:
+        model = KGReasoning(
+            nentity=nentity,
+            nrelation=nrelation,
+            hidden_dim=args.hidden_dim,
+            gamma=args.gamma,
+            geo=args.geo,
+            use_cuda = args.cuda,
+            box_mode=eval_tuple(args.box_mode),
+            beta_mode = eval_tuple(args.beta_mode),
+            test_batch_size=args.test_batch_size,
+            query_name_dict = query_name_dict
+        )
 
     logging.info('Model Parameter Configuration:')
     num_params = 0
@@ -370,7 +376,7 @@ def main(args):
     logging.info('init_step = %d' % init_step)
     if args.do_train:
         logging.info('Start Training...')
-        logging.info('learning_rate = %d' % current_learning_rate)
+        logging.info('learning_rate = %.6f' % current_learning_rate)
     logging.info('batch_size = %d' % args.batch_size)
     logging.info('hidden_dim = %d' % args.hidden_dim)
     logging.info('gamma = %f' % args.gamma)
@@ -382,18 +388,18 @@ def main(args):
             if step == 2*args.max_steps//3:
                 args.valid_steps *= 4
 
-            log = model.train_step(model, optimizer, train_path_iterator, args, step)
+            log = KGReasoning.train_step(model, optimizer, train_path_iterator, args, step)
             for metric in log:
                 writer.add_scalar('path_'+metric, log[metric], step)
             if train_other_iterator is not None:
-                log = model.train_step(model, optimizer, train_other_iterator, args, step)
+                log = KGReasoning.train_step(model, optimizer, train_other_iterator, args, step)
                 for metric in log:
                     writer.add_scalar('other_'+metric, log[metric], step)
-                log = model.train_step(model, optimizer, train_path_iterator, args, step)
+                log = KGReasoning.train_step(model, optimizer, train_path_iterator, args, step)
 
             training_logs.append(log)
 
-            if step >= warm_up_steps:
+            if not args.disable_warmup and step >= warm_up_steps:
                 current_learning_rate = current_learning_rate / 5
                 logging.info('Change learning_rate to %f at step %d' % (current_learning_rate, step))
                 optimizer = torch.optim.Adam(
