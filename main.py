@@ -209,7 +209,7 @@ def main(args):
     else:
         prefix = args.prefix
 
-    print ("overwritting args.save_path")
+    print("overwritting args.save_path")
     args.save_path = os.path.join(prefix, args.data_path.split('/')[-1], args.tasks, args.geo)
     if args.geo in ['box']:
         tmp_str = "g-{}-mode-{}".format(args.gamma, args.box_mode)
@@ -228,7 +228,7 @@ def main(args):
     if not os.path.exists(args.save_path):
         os.makedirs(args.save_path)
 
-    print ("logging to", args.save_path)
+    print("logging to", args.save_path)
     if not args.do_train: # if not training, then create tensorboard files in some tmp location
         writer = SummaryWriter('./logs-debug/unused-tb')
     else:
