@@ -817,23 +817,28 @@ class CQD(nn.Module):
                                         self.rank * 2)
                 var_embs.to(atoms.device)
                 optimizer = optim.Adam(var_embs.parameters(), lr=0.1)
+                prev_loss_value = 1000
+                loss_value = 999
+                i = 0
 
                 # CQD-CO optimization loop
-                for i in range(100):
+                while i < 100 and math.fabs(prev_loss_value - loss_value) > 1e-9:
+                    prev_loss_value = loss_value
+
                     h_emb = h_emb_constants.clone()
                     # Fill variable positions with optimizable embeddings
                     h_emb[head_vars_mask] = var_embs(head[head_vars_mask])
                     t_emb = var_embs(tail)
 
                     scores, factors = self.score_emb(h_emb, r_emb, t_emb)
-
-                    scores = torch.sigmoid(scores)
-                    t_norm = torch.prod(scores, dim=-1)
+                    t_norm = torch.prod(torch.sigmoid(scores), dim=-1)
                     loss = -t_norm.mean() + self.regularizer.forward(factors)
+                    loss_value = loss.item()
 
                     optimizer.zero_grad()
                     loss.backward()
                     optimizer.step()
+                    i += 1
             else:
                 h_emb = h_emb_constants
 
