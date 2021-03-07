@@ -726,7 +726,7 @@ class CQD(nn.Module):
         self.nrelation = nrelation
 
         sizes = (nentity, nrelation)
-        self.embeddings = nn.ModuleList([nn.Embedding(s, 2 * rank) for s in sizes[:2]])
+        self.embeddings = nn.ModuleList([nn.Embedding(s, 2 * rank, sparse=True) for s in sizes[:2]])
         self.embeddings[0].weight.data *= init_size
         self.embeddings[1].weight.data *= init_size
 
@@ -758,31 +758,31 @@ class CQD(nn.Module):
         lhs_emb = self.embeddings[0](triples[:, 0])
         rel_emb = self.embeddings[1](triples[:, 1])
         rhs_emb = self.embeddings[0](triples[:, 2])
-
-        lhs, rel, rhs = self.split_emb(lhs_emb, rel_emb, rhs_emb)
-
         to_score = self.embeddings[0].weight
-        to_score = to_score[:, :self.rank], to_score[:, self.rank:]
-        return (
-            (lhs[0] * rel[0] - lhs[1] * rel[1]) @ to_score[0].transpose(0, 1) +
-            (lhs[0] * rel[1] + lhs[1] * rel[0]) @ to_score[1].transpose(0, 1)
-        ), (
-            torch.sqrt(lhs[0] ** 2 + lhs[1] ** 2),
-            torch.sqrt(rel[0] ** 2 + rel[1] ** 2),
-            torch.sqrt(rhs[0] ** 2 + rhs[1] ** 2)
-        )
 
-    def score_emb(self, lhs_emb, rel_emb, rhs_emb):
+        scores, _ = self.score_emb(lhs_emb, rel_emb, to_score)
+
+        lhs, rel, rhs = self.split_emb(lhs_emb, rel_emb, rhs_emb)
+        factors = self.get_factors(lhs, rel, rhs)
+
+        return scores, factors
+
+    def score_emb(self, lhs_emb, rel_emb, rhs_emb, return_factors=False):
         lhs, rel, rhs = self.split_emb(lhs_emb, rel_emb, rhs_emb)
 
-        return torch.sum(
-            (lhs[0] * rel[0] - lhs[1] * rel[1]) * rhs[0] +
-            (lhs[0] * rel[1] + lhs[1] * rel[0]) * rhs[1],
-            -1), (
-                   torch.sqrt(lhs[0] ** 2 + lhs[1] ** 2),
-                   torch.sqrt(rel[0] ** 2 + rel[1] ** 2),
-                   torch.sqrt(rhs[0] ** 2 + rhs[1] ** 2)
-               )
+        score_1 = (lhs[0] * rel[0] - lhs[1] * rel[1]) @ rhs[0].transpose(0, 1)
+        score_2 = (lhs[0] * rel[1] + lhs[1] * rel[0]) @ rhs[1].transpose(0, 1)
+
+        factors = self.get_factors(lhs, rel, rhs) if return_factors else None
+
+        return score_1 + score_2, factors
+
+    def get_factors(self, lhs, rel, rhs):
+        factors = []
+        for term in (lhs, rel, rhs):
+            factors.append(torch.sqrt(term[0] ** 2 + term[1] ** 2))
+
+        return factors
 
     def forward(self, positive_sample, negative_sample, subsampling_weight, batch_queries_dict, batch_idxs_dict):
         all_idxs = []
@@ -846,8 +846,8 @@ class CQD(nn.Module):
                 # Select predicates involving target variable only
                 target_mask = target_mask.unsqueeze(-1).expand_as(h_emb)
                 emb_size = h_emb.shape[-1]
-                h_emb = h_emb[target_mask].reshape(batch_size, -1, 1, emb_size)
-                r_emb = r_emb[target_mask].reshape(batch_size, -1, 1, emb_size)
+                h_emb = h_emb[target_mask].reshape(batch_size, -1, emb_size)
+                r_emb = r_emb[target_mask].reshape(batch_size, -1, emb_size)
                 to_score = self.embeddings[0].weight
 
                 scores, factors = self.score_emb(h_emb, r_emb, to_score)
