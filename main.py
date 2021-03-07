@@ -60,7 +60,9 @@ def parse_args(args=None):
     parser.add_argument('-g', '--gamma', default=12.0, type=float, help="margin in the loss")
     parser.add_argument('-b', '--batch_size', default=1024, type=int, help="batch size of queries")
     parser.add_argument('--test_batch_size', default=1, type=int, help='valid/test batch size')
+    parser.add_argument('--optimizer', choices=['Adam', 'Adagrad'], default='Adam')
     parser.add_argument('-lr', '--learning_rate', default=0.0001, type=float)
+    parser.add_argument('--reg_weight', default=1e-3, type=float)
     parser.add_argument('-cpu', '--cpu_num', default=10, type=int, help="used to speed up torch.dataloader")
     parser.add_argument('-save', '--save_path', default=None, type=str, help="no need to set manually, will configure automatically")
     parser.add_argument('--max_steps', default=100000, type=int, help="maximum iterations to train")
@@ -319,7 +321,9 @@ def main(args):
         )
 
     if args.geo == 'cqd':
-        model = CQD(nentity, nrelation, rank=args.hidden_dim, test_batch_size=args.test_batch_size)
+        model = CQD(nentity, nrelation, rank=args.hidden_dim,
+                    test_batch_size=args.test_batch_size,
+                    reg_weight=args.reg_weight)
     else:
         model = KGReasoning(
             nentity=nentity,
@@ -347,10 +351,11 @@ def main(args):
     
     if args.do_train:
         current_learning_rate = args.learning_rate
-        optimizer = torch.optim.Adam(
-            filter(lambda p: p.requires_grad, model.parameters()), 
-            lr=current_learning_rate
-        )
+        parameters = filter(lambda p: p.requires_grad, model.parameters())
+        if args.optimizer == 'Adam':
+            optimizer = torch.optim.Adam(parameters, lr=current_learning_rate)
+        else:
+            optimizer = torch.optim.Adagrad(parameters, lr=current_learning_rate)
         warm_up_steps = args.max_steps // 2
 
     if args.checkpoint_path is not None:
