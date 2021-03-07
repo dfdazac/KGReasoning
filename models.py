@@ -770,8 +770,8 @@ class CQD(nn.Module):
     def score_emb(self, lhs_emb, rel_emb, rhs_emb, return_factors=False):
         lhs, rel, rhs = self.split_emb(lhs_emb, rel_emb, rhs_emb)
 
-        score_1 = (lhs[0] * rel[0] - lhs[1] * rel[1]) @ rhs[0].transpose(0, 1)
-        score_2 = (lhs[0] * rel[1] + lhs[1] * rel[0]) @ rhs[1].transpose(0, 1)
+        score_1 = (lhs[0] * rel[0] - lhs[1] * rel[1]) @ rhs[0].transpose(-1, -2)
+        score_2 = (lhs[0] * rel[1] + lhs[1] * rel[0]) @ rhs[1].transpose(-1, -2)
 
         factors = self.get_factors(lhs, rel, rhs) if return_factors else None
 
@@ -822,7 +822,7 @@ class CQD(nn.Module):
                 i = 0
 
                 # CQD-CO optimization loop
-                while i < 100 and math.fabs(prev_loss_value - loss_value) > 1e-9:
+                while i < 1000 and math.fabs(prev_loss_value - loss_value) > 1e-9:
                     prev_loss_value = loss_value
 
                     h_emb = h_emb_constants.clone()
@@ -830,7 +830,8 @@ class CQD(nn.Module):
                     h_emb[head_vars_mask] = var_embs(head[head_vars_mask])
                     t_emb = var_embs(tail)
 
-                    scores, factors = self.score_emb(h_emb, r_emb, t_emb)
+                    scores, factors = self.score_emb(h_emb, r_emb, t_emb,
+                                                     return_factors=True)
                     t_norm = torch.prod(torch.sigmoid(scores), dim=-1)
                     loss = -t_norm.mean() + self.regularizer.forward(factors)
                     loss_value = loss.item()
