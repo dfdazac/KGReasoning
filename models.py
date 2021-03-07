@@ -815,6 +815,8 @@ class CQD(nn.Module):
                 # var embedding for ID 0 is unused for ease of implementation
                 var_embs = nn.Embedding((num_variables * batch_size) + 1,
                                         self.rank * 2)
+                var_embs.weight.data *= self.init_size
+
                 var_embs.to(atoms.device)
                 optimizer = optim.Adam(var_embs.parameters(), lr=0.1)
                 prev_loss_value = 1000
@@ -830,9 +832,11 @@ class CQD(nn.Module):
                     h_emb[head_vars_mask] = var_embs(head[head_vars_mask])
                     t_emb = var_embs(tail)
 
-                    scores, factors = self.score_emb(h_emb, r_emb, t_emb,
+                    scores, factors = self.score_emb(h_emb.unsqueeze(-2),
+                                                     r_emb.unsqueeze(-2),
+                                                     t_emb.unsqueeze(-2),
                                                      return_factors=True)
-                    t_norm = torch.prod(torch.sigmoid(scores), dim=-1)
+                    t_norm = torch.prod(torch.sigmoid(scores), dim=1)
                     loss = -t_norm.mean() + self.regularizer.forward(factors)
                     loss_value = loss.item()
 
