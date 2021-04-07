@@ -1,18 +1,25 @@
+# -*- coding: utf-8 -*-
+
 import numpy as np
 import random
 import torch
 import time
 
+
 def list2tuple(l):
     return tuple(list2tuple(x) if type(x)==list else x for x in l)
+
 
 def tuple2list(t):
     return list(tuple2list(x) if type(x)==tuple else x for x in t)
 
-flatten=lambda l: sum(map(flatten, l),[]) if isinstance(l,tuple) else [l]
+
+flatten = lambda l: sum(map(flatten, l), []) if isinstance(l, tuple) else [l]
+
 
 def parse_time():
     return time.strftime("%Y.%m.%d-%H:%M:%S", time.localtime())
+
 
 def set_global_seed(seed):
     torch.manual_seed(seed)
@@ -20,6 +27,7 @@ def set_global_seed(seed):
     np.random.seed(seed)
     random.seed(seed)
     torch.backends.cudnn.deterministic=True
+
 
 def eval_tuple(arg_return):
     """Evaluate a tuple string into a tuple."""
@@ -40,6 +48,7 @@ def eval_tuple(arg_return):
             List.append(item)
         arg_return = tuple(List)
     return arg_return
+
 
 def flatten_query(queries):
     all_queries = []

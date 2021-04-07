@@ -8,19 +8,19 @@ import argparse
 import json
 import logging
 import os
-import random
 
 import numpy as np
 import torch
 from torch.utils.data import DataLoader
-from models import KGReasoning, CQD
+
+from models import KGReasoning
+from cqd import CQD
+
 from dataloader import TestDataset, TrainDataset, SingledirectionalOneShotIterator
 from tensorboardX import SummaryWriter
-import time
 import pickle
 from collections import defaultdict
-from tqdm import tqdm
-from util import flatten_query, list2tuple, parse_time, set_global_seed, eval_tuple
+from util import flatten_query, parse_time, set_global_seed, eval_tuple
 
 query_name_dict = {('e',('r',)): '1p', 
                     ('e', ('r', 'r')): '2p',
@@ -41,6 +41,7 @@ query_name_dict = {('e',('r',)): '1p',
                 }
 name_query_dict = {value: key for key, value in query_name_dict.items()}
 all_tasks = list(name_query_dict.keys()) # ['1p', '2p', '3p', '2i', '3i', 'ip', 'pi', '2in', '3in', 'inp', 'pin', 'pni', '2u-DNF', '2u-DM', 'up-DNF', 'up-DM']
+
 
 def parse_args(args=None):
     parser = argparse.ArgumentParser(
@@ -90,6 +91,7 @@ def parse_args(args=None):
 
     return parser.parse_args(args)
 
+
 def save_model(model, optimizer, save_variable_list, args):
     '''
     Save the parameters of the model and the optimizer,
@@ -106,6 +108,7 @@ def save_model(model, optimizer, save_variable_list, args):
         'optimizer_state_dict': optimizer.state_dict()},
         os.path.join(args.save_path, 'checkpoint')
     )
+
 
 def set_logger(args):
     '''
@@ -130,12 +133,14 @@ def set_logger(args):
         console.setFormatter(formatter)
         logging.getLogger('').addHandler(console)
 
+
 def log_metrics(mode, step, metrics):
     '''
     Print the evaluation logs
     '''
     for metric in metrics:
         logging.info('%s %s at step %d: %f' % (mode, metric, step, metrics[metric]))
+
 
 def evaluate(model, tp_answers, fn_answers, args, dataloader, query_name_dict, mode, step, writer):
     '''
@@ -164,7 +169,8 @@ def evaluate(model, tp_answers, fn_answers, args, dataloader, query_name_dict, m
     log_metrics('%s average'%mode, step, average_metrics)
 
     return all_metrics
-        
+
+
 def load_data(args, tasks):
     '''
     Load queries and remove queries not in tasks
@@ -195,6 +201,7 @@ def load_data(args, tasks):
                 del test_queries[query_structure]
 
     return train_queries, train_answers, valid_queries, valid_hard_answers, valid_easy_answers, test_queries, test_hard_answers, test_easy_answers
+
 
 def main(args):
     set_global_seed(args.seed)
@@ -455,6 +462,7 @@ def main(args):
         test_all_metrics = evaluate(model, test_easy_answers, test_hard_answers, args, test_dataloader, query_name_dict, 'Test', step, writer)
 
     logging.info("Training finished!!")
+
 
 if __name__ == '__main__':
     main(parse_args())
