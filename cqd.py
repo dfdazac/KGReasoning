@@ -11,10 +11,10 @@ import math
 
 from util import query_to_atoms
 
-from typing import Optional, Tuple
+from typing import Tuple
 
 
-class N3:
+class N3(nn.Module):
     def __init__(self, weight: float):
         self.weight = weight
 
