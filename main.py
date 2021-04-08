@@ -374,7 +374,8 @@ def main(args):
 
     if args.checkpoint_path is not None:
         logging.info('Loading checkpoint %s...' % args.checkpoint_path)
-        checkpoint = torch.load(os.path.join(args.checkpoint_path, 'checkpoint'))
+        checkpoint = torch.load(os.path.join(args.checkpoint_path, 'checkpoint'),
+                                map_location=torch.device('cpu') if not args.cuda else None)
         init_step = checkpoint['step']
         model.load_state_dict(checkpoint['model_state_dict'])
 
