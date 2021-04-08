@@ -85,6 +85,7 @@ def parse_args(args=None):
     
     parser.add_argument('--geo', default='vec', type=str, choices=['vec', 'box', 'beta', 'cqd'], help='the reasoning model, vec for GQE, box for Query2box, beta for BetaE')
     parser.add_argument('--print_on_screen', action='store_true')
+    parser.add_argument('--no-save', action='store_true')
     
     parser.add_argument('--tasks', default='1p.2p.3p.2i.3i.ip.pi.2in.3in.inp.pin.pni.2u.up', type=str, help="tasks connected by dot, refer to the BetaE paper for detailed meaning and structure of each task")
     parser.add_argument('--seed', default=0, type=int, help="random seed")
@@ -426,7 +427,7 @@ def main(args):
                 )
                 warm_up_steps = warm_up_steps * 1.5
             
-            if step % args.save_checkpoint_steps == 0:
+            if step % args.save_checkpoint_steps == 0 and not args.no_save:
                 save_variable_list = {
                     'step': step, 
                     'current_learning_rate': current_learning_rate,
@@ -451,15 +452,16 @@ def main(args):
                 log_metrics('Training average', step, metrics)
                 training_logs = []
 
-        save_variable_list = {
-            'step': step, 
-            'current_learning_rate': current_learning_rate,
-            'warm_up_steps': warm_up_steps
-        }
-        save_model(model, optimizer, save_variable_list, args)
+        if not args.no_save:
+            save_variable_list = {
+                'step': step,
+                'current_learning_rate': current_learning_rate,
+                'warm_up_steps': warm_up_steps
+            }
+            save_model(model, optimizer, save_variable_list, args)
         
     try:
-        print (step)
+        print(step)
     except:
         step = 0
 
