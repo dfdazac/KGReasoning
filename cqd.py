@@ -6,10 +6,12 @@ from __future__ import print_function
 
 import torch
 import torch.nn as nn
-from torch import optim
+from torch import optim, Tensor
 import math
 
 from util import query_to_atoms
+
+from typing import Optional, Tuple
 
 
 class N3:
@@ -19,14 +21,12 @@ class N3:
     def forward(self, factors):
         norm = 0
         for f in factors:
-            norm += self.weight * torch.sum(
-                torch.abs(f) ** 3
-            )
+            norm += self.weight * torch.sum(torch.abs(f) ** 3)
         return norm / factors[0].shape[0]
 
 
 class CQD(nn.Module):
-    def __init__(self, nentity:int , nrelation: int, rank: int,
+    def __init__(self, nentity: int, nrelation: int, rank: int,
                  init_size: float = 1e-3, reg_weight: float = 1e-2, test_batch_size: int = 1):
         super(CQD, self).__init__()
 
@@ -46,44 +46,47 @@ class CQD(nn.Module):
         batch_entity_range = torch.arange(nentity).to(torch.float).repeat(test_batch_size, 1)
         self.register_buffer('batch_entity_range', batch_entity_range)
 
-    def loss(self, triples):
-        predictions, factors = self.score_candidates(triples)
-        truth = triples[:, 2]
-
-        l_fit = self.loss_fn(predictions, truth)
-        l_reg = self.regularizer.forward(factors)
-        l = l_fit + l_reg
-
-        return l
-
-    def split_emb(self, lhs_emb, rel_emb, rhs_emb):
+    def split(self,
+              lhs_emb: Tensor,
+              rel_emb: Tensor,
+              rhs_emb: Tensor):
         lhs = lhs_emb[..., :self.rank], lhs_emb[..., self.rank:]
         rel = rel_emb[..., :self.rank], rel_emb[..., self.rank:]
         rhs = rhs_emb[..., :self.rank], rhs_emb[..., self.rank:]
-
         return lhs, rel, rhs
 
-    def score_candidates(self, triples):
+    def loss(self, triples):
+        (scores_o, scores_s), factors = self.score_candidates(triples)
+        l_fit = self.loss_fn(scores_o, triples[:, 2]) + self.loss_fn(scores_s, triples[:, 0])
+        l_reg = self.regularizer.forward(factors)
+        return l_fit + l_reg
+
+    def score_candidates(self, triples: Tensor) -> Tuple[Tuple[Tensor, Tensor], Tensor]:
         lhs_emb = self.embeddings[0](triples[:, 0])
         rel_emb = self.embeddings[1](triples[:, 1])
         rhs_emb = self.embeddings[0](triples[:, 2])
+
         to_score = self.embeddings[0].weight
+        scores_o, _ = self.score_o(lhs_emb, rel_emb, to_score)
+        scores_s, _ = self.score_s(to_score, rel_emb, rhs_emb)
 
-        scores, _ = self.score_emb(lhs_emb, rel_emb, to_score)
-
-        lhs, rel, rhs = self.split_emb(lhs_emb, rel_emb, rhs_emb)
+        lhs, rel, rhs = self.split(lhs_emb, rel_emb, rhs_emb)
         factors = self.get_factors(lhs, rel, rhs)
 
-        return scores, factors
+        return (scores_o, scores_s), factors
 
-    def score_emb(self, lhs_emb, rel_emb, rhs_emb, return_factors=False):
-        lhs, rel, rhs = self.split_emb(lhs_emb, rel_emb, rhs_emb)
-
+    def score_o(self, lhs_emb, rel_emb, rhs_emb, return_factors=False):
+        lhs, rel, rhs = self.split(lhs_emb, rel_emb, rhs_emb)
         score_1 = (lhs[0] * rel[0] - lhs[1] * rel[1]) @ rhs[0].transpose(-1, -2)
         score_2 = (lhs[0] * rel[1] + lhs[1] * rel[0]) @ rhs[1].transpose(-1, -2)
-
         factors = self.get_factors(lhs, rel, rhs) if return_factors else None
+        return score_1 + score_2, factors
 
+    def score_s(self, lhs_emb, rel_emb, rhs_emb, return_factors=False):
+        lhs, rel, rhs = self.split(lhs_emb, rel_emb, rhs_emb)
+        score_1 = (rhs[0] * rel[0] + rhs[1] * rel[1]) @ lhs[0].transpose(-1, -2)
+        score_2 = (rhs[1] * rel[0] - rhs[0] * rel[1]) @ lhs[1].transpose(-1, -2)
+        factors = self.get_factors(lhs, rel, rhs) if return_factors else None
         return score_1 + score_2, factors
 
     def get_factors(self, lhs, rel, rhs):
@@ -141,10 +144,10 @@ class CQD(nn.Module):
                     h_emb[head_vars_mask] = var_embs(head[head_vars_mask])
                     t_emb = var_embs(tail)
 
-                    scores, factors = self.score_emb(h_emb.unsqueeze(-2),
-                                                     r_emb.unsqueeze(-2),
-                                                     t_emb.unsqueeze(-2),
-                                                     return_factors=True)
+                    scores, factors = self.score_sp(h_emb.unsqueeze(-2),
+                                                 r_emb.unsqueeze(-2),
+                                                 t_emb.unsqueeze(-2),
+                                                 return_factors=True)
                     t_norm = torch.prod(torch.sigmoid(scores), dim=1)
                     loss = -t_norm.mean() + self.regularizer.forward(factors)
                     loss_value = loss.item()
@@ -164,7 +167,7 @@ class CQD(nn.Module):
                 r_emb = r_emb[target_mask].reshape(batch_size, -1, emb_size)
                 to_score = self.embeddings[0].weight
 
-                scores, factors = self.score_emb(h_emb, r_emb, to_score)
+                scores, factors = self.score_sp(h_emb, r_emb, to_score)
                 scores = torch.sigmoid(scores)
                 t_norm = torch.prod(scores, dim=1)
 

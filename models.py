@@ -582,6 +582,15 @@ class KGReasoning(nn.Module):
 
         if isinstance(model, CQD):
             input_batch = batch_queries_dict[('e', ('r',))]
+
+            # for k, v in batch_queries_dict.items():
+            #     print('k', k)
+            #     print('v', type(v), v.shape)
+            # print(positive_sample.shape)
+
+            # import sys
+            # sys.exit(0)
+
             input_batch = torch.cat((input_batch, positive_sample.unsqueeze(1)), dim=1)
             loss = model.loss(input_batch)
             positive_sample_loss = negative_sample_loss = loss

@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 from __future__ import absolute_import
 from __future__ import division
@@ -22,23 +23,27 @@ import pickle
 from collections import defaultdict
 from util import flatten_query, parse_time, set_global_seed, eval_tuple
 
-query_name_dict = {('e',('r',)): '1p', 
-                    ('e', ('r', 'r')): '2p',
-                    ('e', ('r', 'r', 'r')): '3p',
-                    (('e', ('r',)), ('e', ('r',))): '2i',
-                    (('e', ('r',)), ('e', ('r',)), ('e', ('r',))): '3i',
-                    ((('e', ('r',)), ('e', ('r',))), ('r',)): 'ip',
-                    (('e', ('r', 'r')), ('e', ('r',))): 'pi',
-                    (('e', ('r',)), ('e', ('r', 'n'))): '2in',
-                    (('e', ('r',)), ('e', ('r',)), ('e', ('r', 'n'))): '3in',
-                    ((('e', ('r',)), ('e', ('r', 'n'))), ('r',)): 'inp',
-                    (('e', ('r', 'r')), ('e', ('r', 'n'))): 'pin',
-                    (('e', ('r', 'r', 'n')), ('e', ('r',))): 'pni',
-                    (('e', ('r',)), ('e', ('r',)), ('u',)): '2u-DNF',
-                    ((('e', ('r',)), ('e', ('r',)), ('u',)), ('r',)): 'up-DNF',
-                    ((('e', ('r', 'n')), ('e', ('r', 'n'))), ('n',)): '2u-DM',
-                    ((('e', ('r', 'n')), ('e', ('r', 'n'))), ('n', 'r')): 'up-DM'
-                }
+from typing import List, Tuple
+
+
+query_name_dict = {
+    ('e', ('r',)): '1p',
+    ('e', ('r', 'r')): '2p',
+    ('e', ('r', 'r', 'r')): '3p',
+    (('e', ('r',)), ('e', ('r',))): '2i',
+    (('e', ('r',)), ('e', ('r',)), ('e', ('r',))): '3i',
+    ((('e', ('r',)), ('e', ('r',))), ('r',)): 'ip',
+    (('e', ('r', 'r')), ('e', ('r',))): 'pi',
+    (('e', ('r',)), ('e', ('r', 'n'))): '2in',
+    (('e', ('r',)), ('e', ('r',)), ('e', ('r', 'n'))): '3in',
+    ((('e', ('r',)), ('e', ('r', 'n'))), ('r',)): 'inp',
+    (('e', ('r', 'r')), ('e', ('r', 'n'))): 'pin',
+    (('e', ('r', 'r', 'n')), ('e', ('r',))): 'pni',
+    (('e', ('r',)), ('e', ('r',)), ('u',)): '2u-DNF',
+    ((('e', ('r',)), ('e', ('r',)), ('u',)), ('r',)): 'up-DNF',
+    ((('e', ('r', 'n')), ('e', ('r', 'n'))), ('n',)): '2u-DM',
+    ((('e', ('r', 'n')), ('e', ('r', 'n'))), ('n', 'r')): 'up-DM'
+}
 name_query_dict = {value: key for key, value in query_name_dict.items()}
 all_tasks = list(name_query_dict.keys()) # ['1p', '2p', '3p', '2i', '3i', 'ip', 'pi', '2in', '3in', 'inp', 'pin', 'pni', '2u-DNF', '2u-DM', 'up-DNF', 'up-DM']
 
@@ -184,7 +189,7 @@ def load_data(args, tasks):
     test_queries = pickle.load(open(os.path.join(args.data_path, "test-queries.pkl"), 'rb'))
     test_hard_answers = pickle.load(open(os.path.join(args.data_path, "test-hard-answers.pkl"), 'rb'))
     test_easy_answers = pickle.load(open(os.path.join(args.data_path, "test-easy-answers.pkl"), 'rb'))
-    
+
     # remove tasks not in args.tasks
     for name in all_tasks:
         if 'u' in name:
@@ -295,6 +300,7 @@ def main(args):
             train_other_iterator = None
     
     logging.info("Validation info:")
+
     if args.do_valid:
         for query_structure in valid_queries:
             logging.info(query_name_dict[query_structure]+": "+str(len(valid_queries[query_structure])))
@@ -310,8 +316,8 @@ def main(args):
             collate_fn=TestDataset.collate_fn
         )
 
-
     logging.info("Test info:")
+
     if args.do_test:
         for query_structure in test_queries:
             logging.info(query_name_dict[query_structure]+": "+str(len(test_queries[query_structure])))
@@ -338,11 +344,11 @@ def main(args):
             hidden_dim=args.hidden_dim,
             gamma=args.gamma,
             geo=args.geo,
-            use_cuda = args.cuda,
+            use_cuda=args.cuda,
             box_mode=eval_tuple(args.box_mode),
-            beta_mode = eval_tuple(args.beta_mode),
+            beta_mode=eval_tuple(args.beta_mode),
             test_batch_size=args.test_batch_size,
-            query_name_dict = query_name_dict
+            query_name_dict=query_name_dict
         )
 
     logging.info('Model Parameter Configuration:')
