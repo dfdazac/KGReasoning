@@ -78,7 +78,7 @@ class CQD(nn.Module):
     def score_o(self, lhs_emb, rel_emb, rhs_emb, return_factors=False):
         lhs, rel, rhs = self.split(lhs_emb, rel_emb, rhs_emb)
         score_1 = (lhs[0] * rel[0] - lhs[1] * rel[1]) @ rhs[0].transpose(-1, -2)
-        score_2 = (lhs[0] * rel[1] + lhs[1] * rel[0]) @ rhs[1].transpose(-1, -2)
+        score_2 = (lhs[1] * rel[0] + lhs[0] * rel[1]) @ rhs[1].transpose(-1, -2)
         factors = self.get_factors(lhs, rel, rhs) if return_factors else None
         return score_1 + score_2, factors
 
