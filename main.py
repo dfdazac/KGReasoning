@@ -240,7 +240,7 @@ def main(args):
     else:
         args.save_path = os.path.join(args.save_path, tmp_str, cur_time)
 
-    if not os.path.exists(args.save_path):
+    if not os.path.exists(args.save_path) and not args.no_save:
         os.makedirs(args.save_path)
 
     print("logging to", args.save_path)
