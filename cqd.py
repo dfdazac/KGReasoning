@@ -144,10 +144,10 @@ class CQD(nn.Module):
                     h_emb[head_vars_mask] = var_embs(head[head_vars_mask])
                     t_emb = var_embs(tail)
 
-                    scores, factors = self.score_sp(h_emb.unsqueeze(-2),
-                                                 r_emb.unsqueeze(-2),
-                                                 t_emb.unsqueeze(-2),
-                                                 return_factors=True)
+                    scores, factors = self.score_o(h_emb.unsqueeze(-2),
+                                                   r_emb.unsqueeze(-2),
+                                                   t_emb.unsqueeze(-2),
+                                                   return_factors=True)
                     t_norm = torch.prod(torch.sigmoid(scores), dim=1)
                     loss = -t_norm.mean() + self.regularizer.forward(factors)
                     loss_value = loss.item()
@@ -167,7 +167,7 @@ class CQD(nn.Module):
                 r_emb = r_emb[target_mask].reshape(batch_size, -1, emb_size)
                 to_score = self.embeddings[0].weight
 
-                scores, factors = self.score_sp(h_emb, r_emb, to_score)
+                scores, factors = self.score_o(h_emb, r_emb, to_score)
                 scores = torch.sigmoid(scores)
                 t_norm = torch.prod(scores, dim=1)
 

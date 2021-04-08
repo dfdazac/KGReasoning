@@ -8,7 +8,8 @@ import numpy as np
 import torch
 
 from torch.utils.data import Dataset
-from util import list2tuple, tuple2list, flatten
+from util import flatten
+
 
 class TestDataset(Dataset):
     def __init__(self, queries, nentity, nrelation):
@@ -34,7 +35,8 @@ class TestDataset(Dataset):
         query_unflatten = [_[2] for _ in data]
         query_structure = [_[3] for _ in data]
         return negative_sample, query, query_unflatten, query_structure
-    
+
+
 class TrainDataset(Dataset):
     def __init__(self, queries, nentity, nrelation, negative_sample_size, answer):
         # queries is a list of (query, query_structure) pairs
@@ -88,6 +90,7 @@ class TrainDataset(Dataset):
         for query, qtype in queries:
             count[query] = start + len(answer[query])
         return count
+
 
 class SingledirectionalOneShotIterator(object):
     def __init__(self, dataloader):
