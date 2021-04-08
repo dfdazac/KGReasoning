@@ -19,7 +19,7 @@ def summary(configuration):
 
 
 def to_cmd(c, _path=None):
-    command = f'PYTHONPATH=. python3 main.py --do_train --do_valid --do_test --data_path data/{c["d"]} ' \
+    command = f'PYTHONPATH=. python3 main.py --do_train --do_valid --do_test --data_path data/{c["data"]} ' \
               f'-n 1 -b {c["b"]} -d {c["k"]} -lr {c["lr"]} --disable_warmup --max_steps 100000 --cpu_num 0 --geo cqd ' \
               f'--valid_steps 500 --tasks "1p" --print_on_screen --test_batch_size 1000 --optimizer "Adagrad" ' \
               f'--reg_weight {c["n3"]} --log_steps 500 --cuda --no-save'
