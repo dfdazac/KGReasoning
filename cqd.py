@@ -125,8 +125,7 @@ class CQD(nn.Module):
 
             if num_variables > 1:
                 # var embedding for ID 0 is unused for ease of implementation
-                var_embs = nn.Embedding((num_variables * batch_size) + 1,
-                                        self.rank * 2)
+                var_embs = nn.Embedding((num_variables * batch_size) + 1, self.rank * 2)
                 var_embs.weight.data *= self.init_size
 
                 var_embs.to(atoms.device)
@@ -149,7 +148,7 @@ class CQD(nn.Module):
                                                    t_emb.unsqueeze(-2),
                                                    return_factors=True)
                     t_norm = torch.prod(torch.sigmoid(scores), dim=1)
-                    loss = -t_norm.mean() + self.regularizer.forward(factors)
+                    loss = - t_norm.mean() + self.regularizer.forward(factors)
                     loss_value = loss.item()
 
                     optimizer.zero_grad()

@@ -5,6 +5,8 @@ import random
 import torch
 import time
 
+from typing import List, Tuple
+
 
 def list2tuple(l):
     return tuple(list2tuple(x) if type(x)==list else x for x in l)
@@ -98,3 +100,9 @@ def query_to_atoms(query_structure, flat_ids):
     num_variables = variable * -1
 
     return atoms, num_variables
+
+
+def make_batches(size: int, batch_size: int) -> List[Tuple[int, int]]:
+    max_batch = int(np.ceil(size / float(batch_size)))
+    res = [(i * batch_size, min(size, (i + 1) * batch_size)) for i in range(0, max_batch)]
+    return res
