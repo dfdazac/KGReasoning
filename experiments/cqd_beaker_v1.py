@@ -37,7 +37,7 @@ def main(argv):
         b=[50, 100, 500, 1000],
         n3=[1e-3, 5e-3, 1e-2, 5e-2, 1e-1, 5e-1],
         lr=[0.1],
-        d=['FB15k-237-betae', 'FB15k-237-q2b', 'FB15k-betae', 'FB15k-q2b', 'NELL-betae', 'NELL-q2b']
+        data=['FB15k-237-betae', 'FB15k-237-q2b', 'FB15k-betae', 'FB15k-q2b', 'NELL-betae', 'NELL-q2b']
     )
 
     configurations = list(cartesian_product(hyp_space))
