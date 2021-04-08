@@ -14,7 +14,7 @@ from util import query_to_atoms
 from typing import Tuple
 
 
-class N3(nn.Module):
+class N3:
     def __init__(self, weight: float):
         self.weight = weight
 
