@@ -9,10 +9,12 @@ For instance, on the task of answering complex queries (such as *Which drugs int
 
 The UCL researchers proposed a novel and innovative solution to this problem. They train a Machine Learning model to answer *simple queries*, and translate each complex query into an *optimisation objective*, whose solution produces an answer to all the simple queries that compose the complex queries.
 
-![Drag Racing](output.png)
+![Complex Query Answering as an Optimisation Problem](output.png)
 
 Their approach produces more accurate results than state-of-the-art methods, without the need of training on a large and diverse set of complex queries: using orders of magnitude less training data, they achieve results that are from 8% up to 40% more accurate than state-of-the-art methods proposed so far.
  
 Also, they show that it is possible to explain the answers produced by teir model in terms of the intermediate solutions identified for each of the complex query atoms. 
+
+![Explainations](output2.png)
 
 The eight winning papers will be presented during two Outstanding Paper sessions on May 5 and 6.  To attend the event, individuals can [register at this link](https://iclr.cc/Register/view-registration).
