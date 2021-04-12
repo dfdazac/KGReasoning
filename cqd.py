@@ -28,9 +28,15 @@ class N3:
 
 
 class CQD(nn.Module):
-    def __init__(self, nentity: int, nrelation: int, rank: int,
-                 init_size: float = 1e-3, reg_weight: float = 1e-2, test_batch_size: int = 1,
-                 method: str = 'beam', query_name_dict: Dict = None):
+    def __init__(self,
+                 nentity: int,
+                 nrelation: int,
+                 rank: int,
+                 init_size: float = 1e-3,
+                 reg_weight: float = 1e-2,
+                 test_batch_size: int = 1,
+                 method: str = 'beam',
+                 query_name_dict: Dict = None):
         super(CQD, self).__init__()
 
         self.rank = rank
@@ -149,6 +155,8 @@ class CQD(nn.Module):
                 r_emb = self.embeddings[1](rel)
 
             if 'co' in self.method:
+
+                h_emb = h_emb_constants
                 if num_variables > 1:
                     # var embedding for ID 0 is unused for ease of implementation
                     var_embs = nn.Embedding((num_variables * batch_size) + 1, self.rank * 2)
@@ -182,8 +190,6 @@ class CQD(nn.Module):
                         loss.backward()
                         optimizer.step()
                         i += 1
-                else:
-                    h_emb = h_emb_constants
 
                 with torch.no_grad():
                     # Select predicates involving target variable only
@@ -203,7 +209,7 @@ class CQD(nn.Module):
 
             elif 'beam' in self.method:
 
-                def get_full_embeddings(queries: torch.Tensor) \
+                def get_full_embeddings(queries: Tensor) \
                         -> Tuple[Optional[Tensor], Optional[Tensor], Optional[Tensor]]:
                     lhs = rel = rhs = None
                     if torch.sum(queries[:, 0]).item() > 0:
@@ -228,7 +234,8 @@ class CQD(nn.Module):
                 scores = top_k_selection(chains,
                                          chain_instructions,
                                          graph_type,
-                                         scoring_function=lambda x, y, z: self.score_o(x, y, z)[0],
+                                         # score_o takes lhs, rel, rhs
+                                         scoring_function=lambda x, y, z: self.score_o(y, x, z)[0],
                                          forward_emb=lambda x, y: self.score_o(x, y, self.embeddings[0].weight)[0],
                                          entity_embeddings=self.embeddings[0],
                                          candidates=5,

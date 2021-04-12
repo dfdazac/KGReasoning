@@ -12,16 +12,16 @@ import math
 from util import query_to_atoms
 from cqd import N3
 
-from typing import Tuple, List, Optional, Dict, Any, Callable
+from typing import Tuple, Dict, Any, Callable
 
 
-def optimize(batch_queries_dict: Dict[Any, Any],
+def optimize(batch_queries_dict: Dict[Tuple, Tensor],
              batch_idxs_dict: Dict[Any, Any],
              embeddings: nn.ModuleList,
              rank: int,
              init_size: float,
              score_o: Callable,
-             regularizer: N3) -> Tuple[torch.Tensor, torch.Tensor]:
+             regularizer: N3) -> Tuple[Tensor, Tensor]:
     all_idxs = []
     all_scores = []
 

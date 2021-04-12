@@ -25,7 +25,7 @@ def t_conorm_fn(tens_1: Tensor, tens_2: Tensor, t_conorm: str = 'min') -> Tensor
 
 
 def get_best_candidates(rel: Tensor,
-                        arg1: Optional[Tensor],
+                        arg1: Tensor,
                         arg2: Optional[Tensor],
                         forward_emb: Callable[[Tensor, Tensor], Tensor],
                         entity_embeddings: Callable[[Tensor], Tensor],
