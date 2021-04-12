@@ -17,22 +17,19 @@ def t_norm_fn(tens_1: Tensor, tens_2: Tensor, t_norm: str = 'min') -> Tensor:
         return tens_1 * tens_2
 
 
-def t_conorm_fn(tens_1: Tensor, tens_2: Tensor, t_conorm: str = 'min') -> Tensor:
-    if 'min' in t_conorm:
+def t_conorm_fn(tens_1: Tensor, tens_2: Tensor, t_norm: str = 'min') -> Tensor:
+    if 'min' in t_norm:
         return torch.max(tens_1, tens_2)
-    elif 'prod' in t_conorm:
+    elif 'prod' in t_norm:
         return (tens_1 + tens_2) - (tens_1 * tens_2)
 
 
 def get_best_candidates(rel: Tensor,
                         arg1: Tensor,
-                        arg2: Optional[Tensor],
                         forward_emb: Callable[[Tensor, Tensor], Tensor],
                         entity_embeddings: Callable[[Tensor], Tensor],
                         candidates: int = 5,
                         last_step: bool = False) -> Tuple[Tensor, Tensor]:
-    assert (arg1 is None) ^ (arg2 is None)
-
     batch_size, embedding_size = rel.shape[0], rel.shape[1]
 
     # [B, N]
@@ -124,7 +121,7 @@ def top_k_selection(chains,
                         if f"rhs_{ind}" not in candidate_cache:
 
                             # print("STTEEE MTA")
-                            z_scores, rhs_3d = get_best_candidates(rel, lhs, None, forward_emb, entity_embeddings, candidates, last_step)
+                            z_scores, rhs_3d = get_best_candidates(rel, lhs, forward_emb, entity_embeddings, candidates, last_step)
 
                             # [Num_queries * Candidates^K]
                             z_scores_1d = z_scores.view(-1)
@@ -198,13 +195,12 @@ def top_k_selection(chains,
                             if 'disj' in graph_type or scores_normalize:
                                 z_scores_1d = torch.sigmoid(z_scores_1d)
 
-                            batch_scores = z_scores_1d if batch_scores is None else objective(z_scores_1d, batch_scores,
-                                                                                              t_norm)
+                            batch_scores = z_scores_1d if batch_scores is None else objective(z_scores_1d, batch_scores, t_norm)
 
                             continue
 
                         if f"rhs_{ind}" not in candidate_cache or last_step:
-                            z_scores, rhs_3d = get_best_candidates(rel, lhs, None, forward_emb, entity_embeddings, candidates, last_step)
+                            z_scores, rhs_3d = get_best_candidates(rel, lhs, forward_emb, entity_embeddings, candidates, last_step)
 
                             # [B * Candidates^K] or [B, S-1, N]
                             z_scores_1d = z_scores.view(-1)
