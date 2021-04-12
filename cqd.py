@@ -37,6 +37,7 @@ class CQD(nn.Module):
                  test_batch_size: int = 1,
                  method: str = 'beam',
                  t_norm_name: str = 'prod',
+                 k: int = 5,
                  query_name_dict: Dict = None):
         super(CQD, self).__init__()
 
@@ -45,6 +46,7 @@ class CQD(nn.Module):
         self.nrelation = nrelation
         self.method = method
         self.t_norm_name = t_norm_name
+        self.k = k
         self.query_name_dict = query_name_dict
 
         sizes = (nentity, nrelation)
@@ -237,17 +239,15 @@ class CQD(nn.Module):
                     chain = get_full_embeddings(part)
                     chains.append(chain)
 
-                print(chains[0][0].shape)
-
                 chain_instructions = create_instructions(atoms[0])
                 scores = top_k_selection(chains,
                                          chain_instructions,
                                          graph_type,
                                          # score_o takes lhs, rel, rhs
-                                         scoring_function=lambda x, y, z: self.score_o(y, x, z)[0],
-                                         forward_emb=lambda x, y: self.score_o(x, y, self.embeddings[0].weight)[0],
+                                         scoring_function=lambda rel_, lhs_, rhs_: self.score_o(lhs_, rel_, rhs_)[0],
+                                         forward_emb=lambda lhs_, rel_: self.score_o(lhs_, rel_, self.embeddings[0].weight)[0],
                                          entity_embeddings=self.embeddings[0],
-                                         candidates=5,
+                                         candidates=self.k,
                                          t_norm=self.t_norm_name,
                                          batch_size=1,
                                          scores_normalize='default')
