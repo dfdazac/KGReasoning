@@ -111,10 +111,17 @@ class Regularizer:
 
 
 class KGReasoning(nn.Module):
-    def __init__(self, nentity, nrelation, hidden_dim, gamma,
-                 geo, test_batch_size=1,
-                 box_mode=None, use_cuda=False,
-                 query_name_dict=None, beta_mode=None):
+    def __init__(self,
+                 nentity,
+                 nrelation,
+                 hidden_dim,
+                 gamma,
+                 geo,
+                 test_batch_size=1,
+                 box_mode=None,
+                 use_cuda=False,
+                 query_name_dict=None,
+                 beta_mode=None):
         super(KGReasoning, self).__init__()
         self.nentity = nentity
         self.nrelation = nrelation
@@ -586,7 +593,9 @@ class KGReasoning(nn.Module):
             # for k, v in batch_queries_dict.items():
             #     print('k', k)
             #     print('v', type(v), v.shape)
-            # print(positive_sample.shape)
+            # print(positive_sample)
+            # print(negative_sample)
+            # print(query_structures)
 
             # import sys
             # sys.exit(0)

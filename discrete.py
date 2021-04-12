@@ -1,26 +1,78 @@
 # -*- coding: utf-8 -*-
 
 import torch
+from torch import Tensor
 
 from tqdm import tqdm
 
 from util import make_batches
 
+from typing import Optional, Tuple, Callable
 
-def top_k_selection(self,
-                    chains,
+
+def t_norm_fn(tens_1: Tensor, tens_2: Tensor, t_norm: str = 'min') -> Tensor:
+    if 'min' in t_norm:
+        return torch.min(tens_1, tens_2)
+    elif 'prod' in t_norm:
+        return tens_1 * tens_2
+
+
+def t_conorm_fn(tens_1: Tensor, tens_2: Tensor, t_conorm: str = 'min') -> Tensor:
+    if 'min' in t_conorm:
+        return torch.max(tens_1, tens_2)
+    elif 'prod' in t_conorm:
+        return (tens_1 + tens_2) - (tens_1 * tens_2)
+
+
+def get_best_candidates(rel: Tensor,
+                        arg1: Optional[Tensor],
+                        arg2: Optional[Tensor],
+                        forward_emb: Callable[[Tensor, Tensor], Tensor],
+                        entity_embeddings: Callable[[Tensor], Tensor],
+                        candidates: int = 5,
+                        last_step: bool = False) -> Tuple[Tensor, Tensor]:
+    assert (arg1 is None) ^ (arg2 is None)
+
+    batch_size, embedding_size = rel.shape[0], rel.shape[1]
+
+    # [B, N]
+    scores = forward_emb(arg1, rel)
+
+    if not last_step:
+        # [B, K], [B, K]
+        k = min(candidates, scores.shape[1])
+        z_scores, z_indices = torch.topk(scores, k=k, dim=1)
+        # [B, K, E]
+        z_emb = entity_embeddings(z_indices)
+
+        # XXX: move before return
+        assert z_emb.shape[0] == batch_size
+        assert z_emb.shape[2] == embedding_size
+    else:
+        z_scores = scores
+
+        z_indices = torch.arange(z_scores.shape[1]).view(1, -1).repeat(z_scores.shape[0], 1).to(rel.device)
+        z_emb = entity_embeddings(z_indices)
+
+    return z_scores, z_emb
+
+
+def top_k_selection(chains,
                     chain_instructions,
                     graph_type,
+                    scoring_function: Callable[[Tensor, Tensor, Tensor], Tensor],
+                    forward_emb: Callable[[Tensor, Tensor], Tensor],
+                    entity_embeddings: Callable[[Tensor], Tensor],
                     candidates: int = 5,
                     t_norm: str = 'min',
                     batch_size: int = 1,
-                    scores_normalize: int = 0):
+                    scores_normalize: str = 'default'):
     res = None
 
     if 'disj' in graph_type:
-        objective = self.t_conorm
+        objective = t_conorm_fn
     else:
-        objective = self.t_norm
+        objective = t_norm_fn
 
     nb_queries, embedding_size = chains[0][0].shape[0], chains[0][0].shape[1]
 
@@ -49,8 +101,8 @@ def top_k_selection(self,
 
                     indices = [ind_1, ind_2]
 
-                    if objective == self.t_conorm and dnf_flag:
-                        objective = self.t_norm
+                    if objective == t_conorm_fn and dnf_flag:
+                        objective = t_norm_fn
 
                     last_hop = False
                     for hop_num, ind in enumerate(indices):
@@ -72,7 +124,7 @@ def top_k_selection(self,
                         if f"rhs_{ind}" not in candidate_cache:
 
                             # print("STTEEE MTA")
-                            z_scores, rhs_3d = self.get_best_candidates(rel, lhs, None, candidates, last_step)
+                            z_scores, rhs_3d = get_best_candidates(rel, lhs, None, forward_emb, entity_embeddings, candidates, last_step)
 
                             # [Num_queries * Candidates^K]
                             z_scores_1d = z_scores.view(-1)
@@ -97,13 +149,9 @@ def top_k_selection(self,
                             batch_scores, rhs_3d = candidate_cache[f"rhs_{ind}"]
                             candidate_cache[f"lhs_{ind + 1}"] = (batch_scores, rhs_3d)
                             last_hop = True
-                            del lhs, rel
-                            # #torch.cuda.empty_cache()
                             continue
 
                         last_hop = True
-                        del lhs, rel, rhs, rhs_3d, z_scores_1d, z_scores
-                    # #torch.cuda.empty_cache()
 
                 elif 'inter' in inst:
                     ind_1 = int(inst.split("_")[-2])
@@ -111,8 +159,8 @@ def top_k_selection(self,
 
                     indices = [ind_1, ind_2]
 
-                    if objective == self.t_norm and dnf_flag:
-                        objective = self.t_conorm
+                    if objective == t_norm_fn and dnf_flag:
+                        objective = t_conorm_fn
 
                     if len(inst.split("_")) > 3:
                         ind_1 = int(inst.split("_")[-3])
@@ -144,7 +192,7 @@ def top_k_selection(self,
                         if intersection_num > 0 and 'disj' in graph_type:
                             batch_scores, rhs_3d = candidate_cache[f"rhs_{ind}"]
                             rhs = rhs_3d.view(-1, embedding_size)
-                            z_scores = self.score_fixed(rel, lhs, rhs, candidates)
+                            z_scores = scoring_function(rel, lhs, rhs)
 
                             z_scores_1d = z_scores.view(-1)
                             if 'disj' in graph_type or scores_normalize:
@@ -156,7 +204,7 @@ def top_k_selection(self,
                             continue
 
                         if f"rhs_{ind}" not in candidate_cache or last_step:
-                            z_scores, rhs_3d = self.get_best_candidates(rel, lhs, None, candidates, last_step)
+                            z_scores, rhs_3d = get_best_candidates(rel, lhs, None, forward_emb, entity_embeddings, candidates, last_step)
 
                             # [B * Candidates^K] or [B, S-1, N]
                             z_scores_1d = z_scores.view(-1)
@@ -216,3 +264,66 @@ def top_k_selection(self,
         res = scores
 
     return res
+
+
+def create_instructions(chains):
+    instructions = []
+
+    prev_start = None
+    prev_end = None
+
+    path_stack = []
+    start_flag = True
+    for chain_ind, chain in enumerate(chains):
+        if start_flag:
+            prev_end = chain[-1]
+            start_flag = False
+            continue
+
+        if prev_end == chain[0]:
+            instructions.append(f"hop_{chain_ind-1}_{chain_ind}")
+            prev_end = chain[-1]
+            prev_start = chain[0]
+
+        elif prev_end == chain[-1]:
+
+            prev_start = chain[0]
+            prev_end = chain[-1]
+
+            instructions.append(f"intersect_{chain_ind-1}_{chain_ind}")
+        else:
+            path_stack.append(([prev_start, prev_end],chain_ind-1))
+            prev_start = chain[0]
+            prev_end = chain[-1]
+            start_flag = False
+            continue
+
+        if len(path_stack) > 0:
+
+            path_prev_start = path_stack[-1][0][0]
+            path_prev_end = path_stack[-1][0][-1]
+
+            if path_prev_end == chain[-1]:
+
+                prev_start = chain[0]
+                prev_end = chain[-1]
+
+                instructions.append(f"intersect_{path_stack[-1][1]}_{chain_ind}")
+                path_stack.pop()
+                continue
+
+    ans = []
+    for inst in instructions:
+        if ans:
+
+            if 'inter' in inst and ('inter' in ans[-1]):
+                    last_ind = inst.split("_")[-1]
+                    ans[-1] = ans[-1]+f"_{last_ind}"
+            else:
+                ans.append(inst)
+
+        else:
+            ans.append(inst)
+
+    instructions = ans
+    return instructions
