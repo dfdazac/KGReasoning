@@ -36,6 +36,7 @@ class CQD(nn.Module):
                  reg_weight: float = 1e-2,
                  test_batch_size: int = 1,
                  method: str = 'beam',
+                 t_norm_name: str = 'prod',
                  query_name_dict: Dict = None):
         super(CQD, self).__init__()
 
@@ -43,6 +44,7 @@ class CQD(nn.Module):
         self.nentity = nentity
         self.nrelation = nrelation
         self.method = method
+        self.t_norm_name = t_norm_name
         self.query_name_dict = query_name_dict
 
         sizes = (nentity, nrelation)
@@ -182,7 +184,14 @@ class CQD(nn.Module):
                                                        r_emb.unsqueeze(-2),
                                                        t_emb.unsqueeze(-2),
                                                        return_factors=True)
-                        t_norm = torch.prod(torch.sigmoid(scores), dim=1)
+
+                        if 'prod' in self.t_norm_name:
+                            t_norm = torch.prod(torch.sigmoid(scores), dim=1)
+                        elif 'min' in self.t_norm_name:
+                            t_norm, _ = torch.min(torch.sigmoid(scores), dim=1)
+                        else:
+                            assert False, f'Unknown t-norm {self.t_norm_name}'
+
                         loss = - t_norm.mean() + self.regularizer.forward(factors)
                         loss_value = loss.item()
 
@@ -239,7 +248,7 @@ class CQD(nn.Module):
                                          forward_emb=lambda x, y: self.score_o(x, y, self.embeddings[0].weight)[0],
                                          entity_embeddings=self.embeddings[0],
                                          candidates=5,
-                                         t_norm='prod',
+                                         t_norm=self.t_norm_name,
                                          batch_size=1,
                                          scores_normalize='default')
 
