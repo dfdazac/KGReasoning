@@ -259,7 +259,7 @@ def query_2u_dnf(entity_embeddings: nn.Module,
                  scoring_function: Callable[[Tensor, Tensor, Tensor], Tensor],
                  k: int = 10) -> Tensor:
 
-    scores_1 = query_2p(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
+    scores_1 = query_1p(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
                         queries=queries[:, 0:3], scoring_function=scoring_function, k=k)
     scores_2 = query_1p(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
                         queries=queries[:, 3:5], scoring_function=scoring_function)
