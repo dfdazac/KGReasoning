@@ -239,17 +239,12 @@ def query_ip(entity_embeddings: nn.Module,
     # [B * N, E]
     s_emb = e_emb.reshape(1, nb_entities, emb_size).repeat(batch_size, 1, 1).reshape(-1, emb_size)
 
-    # print(s_emb.shape, p_emb.shape, e_emb.shape)
-
-    # import sys
-    # sys.exit(0)
-
     # [B * N, N]
     scores_2, _ = score_candidates(s_emb=s_emb, p_emb=p_emb, candidates_emb=e_emb, k=None,
                                    entity_embeddings=entity_embeddings, scoring_function=scoring_function)
 
     # [B, N, N]
-    scores_1 = scores_1.reshape(batch_size, 1, nb_entities).repeat(1, nb_entities, 1)
+    scores_1 = scores_1.reshape(batch_size, nb_entities, 1).repeat(1, 1, nb_entities)
     scores_2 = scores_2.reshape(batch_size, nb_entities, nb_entities)
 
     res = torch.minimum(scores_1, scores_2)
