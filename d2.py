@@ -278,7 +278,7 @@ def query_up_dnf(entity_embeddings: nn.Module,
                             queries=queries[:, 0:4], scoring_function=scoring_function)
 
     # [B, E]
-    p_emb = predicate_embeddings(queries[:, 4])
+    p_emb = predicate_embeddings(queries[:, 5])
 
     batch_size = p_emb.shape[0]
     emb_size = p_emb.shape[1]
