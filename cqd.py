@@ -267,11 +267,13 @@ class CQD(nn.Module):
                     scores = d2.query_2p(entity_embeddings=self.embeddings[0],
                                          predicate_embeddings=self.embeddings[1],
                                          queries=queries,
-                                         scoring_function=scoring_function)
+                                         scoring_function=scoring_function,
+                                         k=self.k)
                 elif graph_type == "3p":
                     scores = d2.query_3p(entity_embeddings=self.embeddings[0],
                                          predicate_embeddings=self.embeddings[1],
                                          queries=queries,
-                                         scoring_function=scoring_function)
+                                         scoring_function=scoring_function,
+                                         k=self.k)
 
         return None, scores, None, all_idxs
