@@ -199,3 +199,19 @@ def query_3i(entity_embeddings: nn.Module,
     res = torch.minimum(res, scores_3)
 
     return res
+
+
+def query_pi(entity_embeddings: nn.Module,
+             predicate_embeddings: nn.Module,
+             queries: Tensor,
+             scoring_function: Callable[[Tensor, Tensor, Tensor], Tensor],
+             k: int = 10) -> Tensor:
+
+    scores_1 = query_2p(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
+                        queries=queries[:, 0:3], scoring_function=scoring_function, k=k)
+    scores_2 = query_1p(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
+                        queries=queries[:, 3:5], scoring_function=scoring_function)
+
+    res = torch.minimum(scores_1, scores_2)
+
+    return res
