@@ -260,9 +260,9 @@ def query_2u_dnf(entity_embeddings: nn.Module,
                  k: int = 10) -> Tensor:
 
     scores_1 = query_1p(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
-                        queries=queries[:, 0:3], scoring_function=scoring_function, k=k)
+                        queries=queries[:, 0:2], scoring_function=scoring_function)
     scores_2 = query_1p(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
-                        queries=queries[:, 3:5], scoring_function=scoring_function)
+                        queries=queries[:, 2:4], scoring_function=scoring_function)
 
     res = torch.maximum(scores_1, scores_2)
 
