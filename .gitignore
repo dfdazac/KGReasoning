@@ -8,5 +8,5 @@ data/
 *.eps
 submission/
 
-.ideea/
+.idea/
 logs-debug/

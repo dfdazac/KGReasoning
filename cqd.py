@@ -60,6 +60,8 @@ class CQD(nn.Module):
         self.loss_fn = nn.CrossEntropyLoss(reduction='mean')
         self.regularizer = N3(reg_weight)
 
+        # XXX: get rid of this hack
+        test_batch_size = 1000
         batch_entity_range = torch.arange(nentity).to(torch.float).repeat(test_batch_size, 1)
         self.register_buffer('batch_entity_range', batch_entity_range)
 
@@ -141,6 +143,8 @@ class CQD(nn.Module):
                 batch_idxs_dict):
         all_idxs = []
         all_scores = []
+
+        scores = None
 
         for query_structure, queries in batch_queries_dict.items():
             batch_size = queries.shape[0]
@@ -275,5 +279,15 @@ class CQD(nn.Module):
                                          queries=queries,
                                          scoring_function=scoring_function,
                                          k=self.k)
+                elif graph_type == "2i":
+                    scores = d2.query_2i(entity_embeddings=self.embeddings[0],
+                                         predicate_embeddings=self.embeddings[1],
+                                         queries=queries,
+                                         scoring_function=scoring_function)
+                elif graph_type == "3i":
+                    scores = d2.query_3i(entity_embeddings=self.embeddings[0],
+                                         predicate_embeddings=self.embeddings[1],
+                                         queries=queries,
+                                         scoring_function=scoring_function)
 
         return None, scores, None, all_idxs
