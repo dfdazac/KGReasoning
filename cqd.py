@@ -305,7 +305,7 @@ class CQD(nn.Module):
                                              predicate_embeddings=self.embeddings[1],
                                              queries=queries,
                                              scoring_function=scoring_function)
-                elif graph_type == "up_DNF":
+                elif graph_type == "up-DNF":
                     scores = d2.query_up_dnf(entity_embeddings=self.embeddings[0],
                                              predicate_embeddings=self.embeddings[1],
                                              queries=queries,
