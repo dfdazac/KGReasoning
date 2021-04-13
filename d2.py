@@ -251,3 +251,54 @@ def query_ip(entity_embeddings: nn.Module,
     res, _ = torch.max(res, dim=1)
 
     return res
+
+
+def query_2u_dnf(entity_embeddings: nn.Module,
+                 predicate_embeddings: nn.Module,
+                 queries: Tensor,
+                 scoring_function: Callable[[Tensor, Tensor, Tensor], Tensor],
+                 k: int = 10) -> Tensor:
+
+    scores_1 = query_2p(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
+                        queries=queries[:, 0:3], scoring_function=scoring_function, k=k)
+    scores_2 = query_1p(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
+                        queries=queries[:, 3:5], scoring_function=scoring_function)
+
+    res = torch.maximum(scores_1, scores_2)
+
+    return res
+
+
+def query_up_dnf(entity_embeddings: nn.Module,
+                 predicate_embeddings: nn.Module,
+                 queries: Tensor,
+                 scoring_function: Callable[[Tensor, Tensor, Tensor], Tensor]) -> Tensor:
+    # [B, N]
+    scores_1 = query_2u_dnf(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
+                            queries=queries[:, 0:4], scoring_function=scoring_function)
+
+    # [B, E]
+    p_emb = predicate_embeddings(queries[:, 4])
+
+    batch_size = p_emb.shape[0]
+    emb_size = p_emb.shape[1]
+
+    # [N, E]
+    e_emb = entity_embeddings.weight
+    nb_entities = e_emb.shape[0]
+
+    # [B * N, E]
+    s_emb = e_emb.reshape(1, nb_entities, emb_size).repeat(batch_size, 1, 1).reshape(-1, emb_size)
+
+    # [B * N, N]
+    scores_2, _ = score_candidates(s_emb=s_emb, p_emb=p_emb, candidates_emb=e_emb, k=None,
+                                   entity_embeddings=entity_embeddings, scoring_function=scoring_function)
+
+    # [B, N, N]
+    scores_1 = scores_1.reshape(batch_size, nb_entities, 1).repeat(1, 1, nb_entities)
+    scores_2 = scores_2.reshape(batch_size, nb_entities, nb_entities)
+
+    res = torch.minimum(scores_1, scores_2)
+    res, _ = torch.max(res, dim=1)
+
+    return res
