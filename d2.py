@@ -6,13 +6,12 @@ from torch import nn, Tensor
 from typing import Callable, Tuple, Optional
 
 
-def score_candidates(
-        s_emb: Tensor,
-        p_emb: Tensor,
-        candidates_emb: Tensor,
-        k: Optional[int],
-        entity_embeddings: nn.Module,
-        scoring_function: Callable[[Tensor, Tensor, Tensor], Tensor]) -> Tuple[Tensor, Optional[Tensor]]:
+def score_candidates(s_emb: Tensor,
+                     p_emb: Tensor,
+                     candidates_emb: Tensor,
+                     k: Optional[int],
+                     entity_embeddings: nn.Module,
+                     scoring_function: Callable[[Tensor, Tensor, Tensor], Tensor]) -> Tuple[Tensor, Optional[Tensor]]:
 
     batch_size = max(s_emb.shape[0], p_emb.shape[0])
     embedding_size = s_emb.shape[1]
