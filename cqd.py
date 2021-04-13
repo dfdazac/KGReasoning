@@ -13,6 +13,8 @@ from util import query_to_atoms
 from discrete import top_k_selection
 from discrete import create_instructions
 
+import d2
+
 from typing import Tuple, List, Optional, Dict
 
 
@@ -38,7 +40,7 @@ class CQD(nn.Module):
                  method: str = 'beam',
                  t_norm_name: str = 'prod',
                  k: int = 5,
-                 query_name_dict: Dict = None):
+                 query_name_dict: Optional[Dict] = None):
         super(CQD, self).__init__()
 
         self.rank = rank
@@ -82,14 +84,11 @@ class CQD(nn.Module):
         lhs_emb = self.embeddings[0](triples[:, 0])
         rel_emb = self.embeddings[1](triples[:, 1])
         rhs_emb = self.embeddings[0](triples[:, 2])
-
         to_score = self.embeddings[0].weight
         scores_o, _ = self.score_o(lhs_emb, rel_emb, to_score)
         scores_s, _ = self.score_s(to_score, rel_emb, rhs_emb)
-
         lhs, rel, rhs = self.split(lhs_emb, rel_emb, rhs_emb)
         factors = self.get_factors(lhs, rel, rhs)
-
         return (scores_o, scores_s), factors
 
     def score_o(self,
@@ -122,6 +121,17 @@ class CQD(nn.Module):
         for term in (lhs, rel, rhs):
             factors.append(torch.sqrt(term[0] ** 2 + term[1] ** 2))
         return factors
+
+    def get_full_embeddings(self, queries: Tensor) \
+            -> Tuple[Optional[Tensor], Optional[Tensor], Optional[Tensor]]:
+        lhs = rel = rhs = None
+        if torch.sum(queries[:, 0]).item() > 0:
+            lhs = self.embeddings[0](queries[:, 0])
+        if torch.sum(queries[:, 1]).item() > 0:
+            rel = self.embeddings[1](queries[:, 1])
+        if torch.sum(queries[:, 2]).item() > 0:
+            rhs = self.embeddings[0](queries[:, 2])
+        return lhs, rel, rhs
 
     def forward(self,
                 positive_sample,
@@ -159,7 +169,6 @@ class CQD(nn.Module):
                 r_emb = self.embeddings[1](rel)
 
             if 'co' in self.method:
-
                 h_emb = h_emb_constants
                 if num_variables > 1:
                     # var embedding for ID 0 is unused for ease of implementation
@@ -181,11 +190,7 @@ class CQD(nn.Module):
                         h_emb[head_vars_mask] = var_embs(head[head_vars_mask])
 
                         t_emb = var_embs(tail)
-
-                        scores, factors = self.score_o(h_emb.unsqueeze(-2),
-                                                       r_emb.unsqueeze(-2),
-                                                       t_emb.unsqueeze(-2),
-                                                       return_factors=True)
+                        scores, factors = self.score_o(h_emb.unsqueeze(-2), r_emb.unsqueeze(-2), t_emb.unsqueeze(-2), return_factors=True)
 
                         if 'prod' in self.t_norm_name:
                             t_norm = torch.prod(torch.sigmoid(scores), dim=1)
@@ -219,27 +224,21 @@ class CQD(nn.Module):
                 scores = torch.cat(all_scores, dim=0)
 
             elif 'beam' in self.method:
-
-                def get_full_embeddings(queries: Tensor) \
-                        -> Tuple[Optional[Tensor], Optional[Tensor], Optional[Tensor]]:
-                    lhs = rel = rhs = None
-                    if torch.sum(queries[:, 0]).item() > 0:
-                        lhs = self.embeddings[0](queries[:, 0])
-                    if torch.sum(queries[:, 1]).item() > 0:
-                        rel = self.embeddings[1](queries[:, 1])
-                    if torch.sum(queries[:, 2]).item() > 0:
-                        rhs = self.embeddings[0](queries[:, 2])
-                    return lhs, rel, rhs
-
                 graph_type = self.query_name_dict[query_structure]
 
+                chain_instructions = create_instructions(atoms[0])
                 chains = []
+                print('A', atoms.shape)
+
                 for atom in range(len(atoms[0])):
                     part = atoms[:, atom, :]
-                    chain = get_full_embeddings(part)
+                    print('P', part.shape, part[:5, :])
+                    chain = self.get_full_embeddings(part)
+                    print('CHAIN', type(chain), len(chain), [c.shape for c in chain])
                     chains.append(chain)
+                    print('CHAIN INSTRUCTIONS', chain_instructions)
+                    print('QS', query_structure, self.query_name_dict[query_structure])
 
-                chain_instructions = create_instructions(atoms[0])
                 scores = top_k_selection(chains,
                                          chain_instructions,
                                          graph_type,
@@ -251,5 +250,28 @@ class CQD(nn.Module):
                                          t_norm=self.t_norm_name,
                                          batch_size=1,
                                          scores_normalize='default')
+
+            elif 'd2' in self.method:
+                graph_type = self.query_name_dict[query_structure]
+
+                def scoring_function(rel_: Tensor, lhs_: Tensor, rhs_: Tensor) -> Tensor:
+                    res, _ = self.score_o(lhs_, rel_, rhs_)
+                    return res
+
+                if graph_type == "1p":
+                    scores = d2.query_1p(entity_embeddings=self.embeddings[0],
+                                         predicate_embeddings=self.embeddings[1],
+                                         queries=queries,
+                                         scoring_function=scoring_function)
+                elif graph_type == "2p":
+                    scores = d2.query_2p(entity_embeddings=self.embeddings[0],
+                                         predicate_embeddings=self.embeddings[1],
+                                         queries=queries,
+                                         scoring_function=scoring_function)
+                elif graph_type == "3p":
+                    scores = d2.query_3p(entity_embeddings=self.embeddings[0],
+                                         predicate_embeddings=self.embeddings[1],
+                                         queries=queries,
+                                         scoring_function=scoring_function)
 
         return None, scores, None, all_idxs

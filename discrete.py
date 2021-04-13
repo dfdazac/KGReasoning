@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 from util import make_batches
 
-from typing import Optional, Tuple, Callable
+from typing import Tuple, Callable
 
 
 def t_norm_fn(tens_1: Tensor, tens_2: Tensor, t_norm: str = 'min') -> Tensor:
