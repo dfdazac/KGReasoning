@@ -226,11 +226,13 @@ def query_ip(entity_embeddings: nn.Module,
     scores_1 = query_2i(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
                         queries=queries[:, 0:4], scoring_function=scoring_function)
 
+    # [B, E]
     p_emb = predicate_embeddings(queries[:, 4])
 
     batch_size = p_emb.shape[0]
     emb_size = p_emb.shape[1]
 
+    # [N, E]
     e_emb = entity_embeddings.weight
     nb_entities = e_emb.shape[0]
 
@@ -246,6 +248,7 @@ def query_ip(entity_embeddings: nn.Module,
     scores_2, _ = score_candidates(s_emb=s_emb, p_emb=p_emb, candidates_emb=e_emb, k=None,
                                    entity_embeddings=entity_embeddings, scoring_function=scoring_function)
 
+    # [B, N, N]
     scores_1 = scores_1.reshape(batch_size, 1, nb_entities).repeat(1, nb_entities, 1)
     scores_2 = scores_2.reshape(batch_size, nb_entities, nb_entities)
 
