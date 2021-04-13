@@ -215,3 +215,41 @@ def query_pi(entity_embeddings: nn.Module,
     res = torch.minimum(scores_1, scores_2)
 
     return res
+
+
+def query_ip(entity_embeddings: nn.Module,
+             predicate_embeddings: nn.Module,
+             queries: Tensor,
+             scoring_function: Callable[[Tensor, Tensor, Tensor], Tensor]) -> Tensor:
+
+    # [B, N]
+    scores_1 = query_2i(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
+                        queries=queries[:, 0:4], scoring_function=scoring_function)
+
+    p_emb = predicate_embeddings(queries[:, 4])
+
+    batch_size = p_emb.shape[0]
+    emb_size = p_emb.shape[1]
+
+    e_emb = entity_embeddings.weight
+    nb_entities = e_emb.shape[0]
+
+    # [B * N, E]
+    s_emb = e_emb.reshape(1, nb_entities, emb_size).repeat(batch_size, 1, 1).reshape(-1, emb_size)
+
+    # print(s_emb.shape, p_emb.shape, e_emb.shape)
+
+    # import sys
+    # sys.exit(0)
+
+    # [B * N, N]
+    scores_2, _ = score_candidates(s_emb=s_emb, p_emb=p_emb, candidates_emb=e_emb, k=None,
+                                   entity_embeddings=entity_embeddings, scoring_function=scoring_function)
+
+    scores_1 = scores_1.reshape(batch_size, 1, nb_entities).repeat(1, nb_entities, 1)
+    scores_2 = scores_2.reshape(batch_size, nb_entities, nb_entities)
+
+    res = torch.minimum(scores_1, scores_2)
+    res, _ = torch.max(res, dim=1)
+
+    return res

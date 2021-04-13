@@ -295,6 +295,10 @@ class CQD(nn.Module):
                                          queries=queries,
                                          scoring_function=scoring_function,
                                          k=self.k)
-
+                elif graph_type == "ip":
+                    scores = d2.query_ip(entity_embeddings=self.embeddings[0],
+                                         predicate_embeddings=self.embeddings[1],
+                                         queries=queries,
+                                         scoring_function=scoring_function)
 
         return None, scores, None, all_idxs
