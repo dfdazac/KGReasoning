@@ -219,7 +219,7 @@ def main(args):
     set_global_seed(args.seed)
     tasks = args.tasks.split('.')
     for task in tasks:
-        if 'n' in task and args.geo in ['box', 'vec', 'cqd']:
+        if 'n' in task and args.geo in ['box', 'vec']:
             assert False, "Q2B and GQE cannot handle queries with negation"
     if args.evaluate_union == 'DM':
         assert args.geo == 'beta', "only BetaE supports modeling union using De Morgan's Laws"
