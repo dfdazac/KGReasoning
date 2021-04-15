@@ -480,6 +480,11 @@ def main(args):
     except:
         step = 0
 
+
+    if args.do_valid:
+        logging.info('Evaluating on Valid Dataset...')
+        valid_all_metrics = evaluate(model, valid_easy_answers, valid_hard_answers, args, valid_dataloader, query_name_dict, 'Valid', step, writer)
+
     if args.do_test:
         logging.info('Evaluating on Test Dataset...')
         test_all_metrics = evaluate(model, test_easy_answers, test_hard_answers, args, test_dataloader, query_name_dict, 'Test', step, writer)
