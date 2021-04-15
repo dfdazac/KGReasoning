@@ -310,5 +310,27 @@ class CQD(nn.Module):
                                              predicate_embeddings=self.embeddings[1],
                                              queries=queries,
                                              scoring_function=scoring_function)
+                elif graph_type == "2in":
+                    scores = d2.query_2in(entity_embeddings=self.embeddings[0],
+                                          predicate_embeddings=self.embeddings[1],
+                                          queries=queries,
+                                          scoring_function=scoring_function)
+                elif graph_type == "3in":
+                    scores = d2.query_3in(entity_embeddings=self.embeddings[0],
+                                          predicate_embeddings=self.embeddings[1],
+                                          queries=queries,
+                                          scoring_function=scoring_function)
+                elif graph_type == "pin":
+                    scores = d2.query_pin(entity_embeddings=self.embeddings[0],
+                                          predicate_embeddings=self.embeddings[1],
+                                          queries=queries,
+                                          scoring_function=scoring_function,
+                                          k=self.k)
+                elif graph_type == "pni":
+                    scores = d2.query_pni(entity_embeddings=self.embeddings[0],
+                                          predicate_embeddings=self.embeddings[1],
+                                          queries=queries,
+                                          scoring_function=scoring_function,
+                                          k=self.k)
 
         return None, scores, None, all_idxs
