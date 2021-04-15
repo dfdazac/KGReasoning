@@ -40,7 +40,9 @@ class CQD(nn.Module):
                  method: str = 'beam',
                  t_norm_name: str = 'prod',
                  k: int = 5,
-                 query_name_dict: Optional[Dict] = None):
+                 query_name_dict: Optional[Dict] = None,
+                 do_sigmoid: bool = False,
+                 do_normalize: bool = False):
         super(CQD, self).__init__()
 
         self.rank = rank
@@ -59,6 +61,9 @@ class CQD(nn.Module):
         self.init_size = init_size
         self.loss_fn = nn.CrossEntropyLoss(reduction='mean')
         self.regularizer = N3(reg_weight)
+
+        self.do_sigmoid = do_sigmoid
+        self.do_normalize = do_normalize
 
         # XXX: get rid of this hack
         test_batch_size = 1000
@@ -258,8 +263,33 @@ class CQD(nn.Module):
             elif 'd2' in self.method:
                 graph_type = self.query_name_dict[query_structure]
 
+                def t_norm(a: Tensor, b: Tensor) -> Tensor:
+                    return torch.minimum(a, b)
+
+                def t_conorm(a: Tensor, b: Tensor) -> Tensor:
+                    return torch.maximum(a, b)
+
+                def negation(a: Tensor) -> Tensor:
+                    return 1 - a
+
+                if 'prod' in self.t_norm_name:
+                    def t_norm(a: Tensor, b: Tensor) -> Tensor:
+                        return a * b
+
+                    def t_conorm(a: Tensor, b: Tensor) -> Tensor:
+                        return 1 - ((1 - a) * (1 - b))
+
+                def normalize(scores_: Tensor) -> Tensor:
+                    scores_ = scores_ - scores_.min(1, keepdim=True)[0]
+                    scores_ = scores_ / scores_.max(1, keepdim=True)[0]
+                    return scores_
+
                 def scoring_function(rel_: Tensor, lhs_: Tensor, rhs_: Tensor) -> Tensor:
                     res, _ = self.score_o(lhs_, rel_, rhs_)
+                    if self.do_sigmoid is True:
+                        res = torch.sigmoid(res)
+                    if self.do_normalize is True:
+                        res = normalize(res)
                     return res
 
                 if graph_type == "1p":
@@ -272,65 +302,70 @@ class CQD(nn.Module):
                                          predicate_embeddings=self.embeddings[1],
                                          queries=queries,
                                          scoring_function=scoring_function,
-                                         k=self.k)
+                                         k=self.k, t_norm=t_norm)
                 elif graph_type == "3p":
                     scores = d2.query_3p(entity_embeddings=self.embeddings[0],
                                          predicate_embeddings=self.embeddings[1],
                                          queries=queries,
                                          scoring_function=scoring_function,
-                                         k=self.k)
+                                         k=self.k, t_norm=t_norm)
                 elif graph_type == "2i":
                     scores = d2.query_2i(entity_embeddings=self.embeddings[0],
                                          predicate_embeddings=self.embeddings[1],
                                          queries=queries,
-                                         scoring_function=scoring_function)
+                                         scoring_function=scoring_function, t_norm=t_norm)
                 elif graph_type == "3i":
                     scores = d2.query_3i(entity_embeddings=self.embeddings[0],
                                          predicate_embeddings=self.embeddings[1],
                                          queries=queries,
-                                         scoring_function=scoring_function)
+                                         scoring_function=scoring_function, t_norm=t_norm)
                 elif graph_type == "pi":
                     scores = d2.query_pi(entity_embeddings=self.embeddings[0],
                                          predicate_embeddings=self.embeddings[1],
                                          queries=queries,
                                          scoring_function=scoring_function,
-                                         k=self.k)
+                                         k=self.k, t_norm=t_norm)
                 elif graph_type == "ip":
                     scores = d2.query_ip(entity_embeddings=self.embeddings[0],
                                          predicate_embeddings=self.embeddings[1],
                                          queries=queries,
-                                         scoring_function=scoring_function)
+                                         scoring_function=scoring_function,
+                                         t_norm=t_norm)
                 elif graph_type == "2u-DNF":
                     scores = d2.query_2u_dnf(entity_embeddings=self.embeddings[0],
                                              predicate_embeddings=self.embeddings[1],
                                              queries=queries,
-                                             scoring_function=scoring_function)
+                                             scoring_function=scoring_function,
+                                             t_conorm=t_conorm)
                 elif graph_type == "up-DNF":
                     scores = d2.query_up_dnf(entity_embeddings=self.embeddings[0],
                                              predicate_embeddings=self.embeddings[1],
                                              queries=queries,
-                                             scoring_function=scoring_function)
+                                             scoring_function=scoring_function,
+                                             t_norm=t_norm, t_conorm=t_conorm)
                 elif graph_type == "2in":
                     scores = d2.query_2in(entity_embeddings=self.embeddings[0],
                                           predicate_embeddings=self.embeddings[1],
                                           queries=queries,
-                                          scoring_function=scoring_function)
+                                          scoring_function=scoring_function,
+                                          t_norm=t_norm, negation=negation)
                 elif graph_type == "3in":
                     scores = d2.query_3in(entity_embeddings=self.embeddings[0],
                                           predicate_embeddings=self.embeddings[1],
                                           queries=queries,
-                                          scoring_function=scoring_function)
+                                          scoring_function=scoring_function,
+                                          t_norm=t_norm, negation=negation)
                 elif graph_type == "pin":
                     scores = d2.query_pin(entity_embeddings=self.embeddings[0],
                                           predicate_embeddings=self.embeddings[1],
                                           queries=queries,
                                           scoring_function=scoring_function,
-                                          k=self.k)
+                                          k=self.k, t_norm=t_norm, negation=negation)
                 elif graph_type == "pni":
                     scores = d2.query_pni(entity_embeddings=self.embeddings[0],
                                           predicate_embeddings=self.embeddings[1],
                                           queries=queries,
                                           scoring_function=scoring_function,
-                                          k=self.k)
+                                          k=self.k, t_norm=t_norm, negation=negation)
 
         return None, scores, None, all_idxs
