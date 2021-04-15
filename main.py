@@ -90,6 +90,8 @@ def parse_args(args=None):
     parser.add_argument('--cqd-type', '--cqd', default='co', type=str, choices=['co', 'beam', 'd2'])
     parser.add_argument('--cqd-t-norm', default='prod', type=str, choices=['min', 'prod'])
     parser.add_argument('--cqd-k', default=5, type=int)
+    parser.add_argument('--cqd-sigmoid-scores', '--cqd-sigmoid', action='store_true', default=False)
+    parser.add_argument('--cqd-normalize-scores', '--cqd-normalize', action='store_true', default=False)
 
     parser.add_argument('--tasks', default='1p.2p.3p.2i.3i.ip.pi.2in.3in.inp.pin.pni.2u.up', type=str, help="tasks connected by dot, refer to the BetaE paper for detailed meaning and structure of each task")
     parser.add_argument('--seed', default=0, type=int, help="random seed")
@@ -347,7 +349,9 @@ def main(args):
                     query_name_dict=query_name_dict,
                     method=args.cqd_type,
                     t_norm_name=args.cqd_t_norm,
-                    k=args.cqd_k)
+                    k=args.cqd_k,
+                    do_sigmoid=args.cqd_sigmoid_scores,
+                    do_normalize=args.cqd_normalize_scores)
     else:
         model = KGReasoning(
             nentity=nentity,
