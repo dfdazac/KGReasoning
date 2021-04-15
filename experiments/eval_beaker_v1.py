@@ -25,7 +25,7 @@ def to_cmd(c, _path=None):
               f'--disable_warmup --max_steps 1000 --cpu_num 0 --geo cqd --valid_steps 20  --tasks "{c["q"]}" ' \
               f'--print_on_screen --test_batch_size 1 --optimizer "Adagrad" --reg_weight 0.05 ' \
               f'--log_steps 5 --checkpoint_path "logs/FB15k-237-q2b/1p/cqd/2021.04.07-20:45:36" ' \
-              f'--cqd d2 --cqd-t-norm {c["t"]} {s_normalize} {s_sigmoid} --cqd-k {c["k"]} --cuda'
+              f'--cqd d2 --cqd-t-norm {c["t"]} {s_normalize} {s_sigmoid} --cqd-k {c["k"]} --no-save --cuda'
     return command
 
 
