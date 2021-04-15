@@ -25,7 +25,6 @@ def score_candidates(s_emb: Tensor,
     s_emb = reshape(s_emb)
     p_emb = reshape(p_emb)
     nb_entities = candidates_emb.shape[0]
-    k_ = min(k, nb_entities)
 
     x_k_emb_3d = None
 
@@ -34,6 +33,8 @@ def score_candidates(s_emb: Tensor,
     atom_k_scores_2d = atom_scores_2d
 
     if k is not None:
+        k_ = min(k, nb_entities)
+
         # [B, K], [B, K]
         atom_k_scores_2d, atom_k_indices = torch.topk(atom_scores_2d, k=k_, dim=1)
 
