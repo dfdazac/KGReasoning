@@ -17,13 +17,11 @@ from torch.utils.data import DataLoader
 from models import KGReasoning
 from cqd import CQD
 
-from dataloader import TestDataset, TrainDataset, SingledirectionalOneShotIterator
+from dataloader import TestDataset, TrainDataset, CQDTrainDataset, SingledirectionalOneShotIterator
 from tensorboardX import SummaryWriter
 import pickle
 from collections import defaultdict
 from util import flatten_query, parse_time, set_global_seed, eval_tuple
-
-from typing import List, Tuple
 
 
 query_name_dict = {
@@ -92,6 +90,8 @@ def parse_args(args=None):
     parser.add_argument('--cqd-k', default=5, type=int)
     parser.add_argument('--cqd-sigmoid-scores', '--cqd-sigmoid', action='store_true', default=False)
     parser.add_argument('--cqd-normalize-scores', '--cqd-normalize', action='store_true', default=False)
+
+    parser.add_argument('--use-qa-iterator', action='store_true', default=False)
 
     parser.add_argument('--tasks', default='1p.2p.3p.2i.3i.ip.pi.2in.3in.inp.pin.pni.2u.up', type=str, help="tasks connected by dot, refer to the BetaE paper for detailed meaning and structure of each task")
     parser.add_argument('--seed', default=0, type=int, help="random seed")
@@ -287,21 +287,31 @@ def main(args):
             else:
                 train_other_queries[query_structure] = train_queries[query_structure]
         train_path_queries = flatten_query(train_path_queries)
+
+        _train_dataset_class = TrainDataset
+        if args.use_qa_iterator is True:
+            _train_dataset_class = CQDTrainDataset
+
         train_path_iterator = SingledirectionalOneShotIterator(DataLoader(
-                                    TrainDataset(train_path_queries, nentity, nrelation, args.negative_sample_size, train_answers),
+                                    _train_dataset_class(train_path_queries, nentity, nrelation, args.negative_sample_size, train_answers),
                                     batch_size=args.batch_size,
                                     shuffle=True,
                                     num_workers=args.cpu_num,
-                                    collate_fn=TrainDataset.collate_fn
+                                    collate_fn=_train_dataset_class.collate_fn
                                 ))
         if len(train_other_queries) > 0 and args.geo != 'cqd':
             train_other_queries = flatten_query(train_other_queries)
+
+            _train_dataset_class = TrainDataset
+            if args.use_qa_iterator is True:
+                _train_dataset_class = CQDTrainDataset
+
             train_other_iterator = SingledirectionalOneShotIterator(DataLoader(
-                                        TrainDataset(train_other_queries, nentity, nrelation, args.negative_sample_size, train_answers),
+                                        _train_dataset_class(train_other_queries, nentity, nrelation, args.negative_sample_size, train_answers),
                                         batch_size=args.batch_size,
                                         shuffle=True,
                                         num_workers=args.cpu_num,
-                                        collate_fn=TrainDataset.collate_fn
+                                        collate_fn=_train_dataset_class.collate_fn
                                     ))
         else:
             train_other_iterator = None
