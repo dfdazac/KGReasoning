@@ -3870,3 +3870,9 @@
 2021-04-20 14:32:10,957 INFO     Training average positive_sample_loss at step 80500: 7.364215
 2021-04-20 14:32:10,958 INFO     Training average negative_sample_loss at step 80500: 7.364215
 2021-04-20 14:32:10,958 INFO     Training average loss at step 80500: 7.364215
+2021-04-20 14:47:10,722 INFO     Training average positive_sample_loss at step 81000: 7.363228
+2021-04-20 14:47:10,722 INFO     Training average negative_sample_loss at step 81000: 7.363228
+2021-04-20 14:47:10,723 INFO     Training average loss at step 81000: 7.363228
+2021-04-20 15:02:04,657 INFO     Training average positive_sample_loss at step 81500: 7.363303
+2021-04-20 15:02:04,657 INFO     Training average negative_sample_loss at step 81500: 7.363303
+2021-04-20 15:02:04,658 INFO     Training average loss at step 81500: 7.363303
