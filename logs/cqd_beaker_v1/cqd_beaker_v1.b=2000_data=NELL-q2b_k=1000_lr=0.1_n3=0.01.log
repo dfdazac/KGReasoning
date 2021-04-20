@@ -1,0 +1,27 @@
+overwritting args.save_path
+logging to logs/NELL-q2b/1p/cqd/2021.04.18-19:28:56
+Traceback (most recent call last):
+  File "/home/pminervi/anaconda3/envs/gpu/lib/python3.6/site-packages/tensorboardX/record_writer.py", line 47, in directory_check
+    factory = REGISTERED_FACTORIES[prefix]
+KeyError: 'logs/NELL-q2b/1p/cqd/2021.04.18-19'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main.py", line 506, in <module>
+    main(parse_args())
+  File "main.py", line 256, in main
+    writer = SummaryWriter(args.save_path)
+  File "/home/pminervi/anaconda3/envs/gpu/lib/python3.6/site-packages/tensorboardX/writer.py", line 275, in __init__
+    self._get_file_writer()
+  File "/home/pminervi/anaconda3/envs/gpu/lib/python3.6/site-packages/tensorboardX/writer.py", line 327, in _get_file_writer
+    **self.kwargs)
+  File "/home/pminervi/anaconda3/envs/gpu/lib/python3.6/site-packages/tensorboardX/writer.py", line 95, in __init__
+    logdir, max_queue, flush_secs, filename_suffix)
+  File "/home/pminervi/anaconda3/envs/gpu/lib/python3.6/site-packages/tensorboardX/event_file_writer.py", line 104, in __init__
+    directory_check(self._logdir)
+  File "/home/pminervi/anaconda3/envs/gpu/lib/python3.6/site-packages/tensorboardX/record_writer.py", line 51, in directory_check
+    os.makedirs(path)
+  File "/home/pminervi/anaconda3/envs/gpu/lib/python3.6/os.py", line 220, in makedirs
+    mkdir(name, mode)
+FileExistsError: [Errno 17] File exists: 'logs/NELL-q2b/1p/cqd/2021.04.18-19:28:56'
