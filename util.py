@@ -23,12 +23,16 @@ def parse_time():
     return time.strftime("%Y.%m.%d-%H:%M:%S", time.localtime())
 
 
-def set_global_seed(seed):
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed(seed)
-    np.random.seed(seed)
+def set_global_seed(seed: int, is_deterministic: bool = True):
     random.seed(seed)
-    torch.backends.cudnn.deterministic=True
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+        if is_deterministic is True:
+            torch.backends.cudnn.deterministic = True
+            torch.backends.cudnn.benchmark = False
+    return
 
 
 def eval_tuple(arg_return):
