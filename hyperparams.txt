@@ -1,20 +1,35 @@
 $ ls *FB15k-237-q2b*.log | xargs grep "Valid 1p MRR at step 99999" | tr ":" " " | awk '{ print $13 " " $1 }' | sort -n | tail -n 1
 0.448211 cqd_beaker_v2.b=2000_data=FB15k-237-q2b_k=1000_lr=0.1_n3=0.1.log
 
-PYTHONPATH=. python3 main.py --do_train --do_valid --do_test --data_path data/FB15k-237-q2b -n 1 -b 2000 -d 1000 -lr 0.1 --disable_warmup --max_steps 100000 --cpu_num 0 --geo cqd --valid_steps 500 --tasks "1p" --print_on_screen --test_batch_size 1000 --optimizer "Adagrad" --reg_weight 0.1 --log_steps 500 --cuda --save-path models/fb15k-237-q2b --use-qa-iterator 
+R
+PYTHONPATH=. python3 main.py --do_train --do_valid --do_test --data_path data/FB15k-237-q2b -n 1 -b 2000 -d 1000 -lr 0.1 --disable_warmup --max_steps 100000 --cpu_num 0 --geo cqd --valid_steps 500 --tasks "1p" --print_on_screen --test_batch_size 1000 --optimizer "Adagrad" --reg_weight 0.1 --log_steps 500 --cuda --save_path models/fb15k-237-q2b --use-qa-iterator > models/fb15k-237-q2b/train.log 2>&1
 
 $ ls *FB15k-237-betae*.log | xargs grep "Valid 1p MRR at step 99999" | tr ":" " " | awk '{ print $13 " " $1 }' | sort -n | tail -n 1
 0.448284 cqd_beaker_v2.b=2000_data=FB15k-237-betae_k=1000_lr=0.1_n3=0.1.log
 
+R
+PYTHONPATH=. python3 main.py --do_train --do_valid --do_test --data_path data/FB15k-237-betae -n 1 -b 2000 -d 1000 -lr 0.1 --disable_warmup --max_steps 100000 --cpu_num 0 --geo cqd --valid_steps 500 --tasks "1p" --print_on_screen --test_batch_size 1000 --optimizer "Adagrad" --reg_weight 0.1 --log_steps 500 --cuda --save_path models/fb15k-237-betae --use-qa-iterator > models/fb15k-237-betae/train.log 2>&1
+
 $ ls *FB15k-q2b*.log | xargs grep "Valid 1p MRR at step 99999" | tr ":" " " | awk '{ print $13 " " $1 }' | sort -n | tail -n 1  
 0.791398 cqd_beaker_v2.b=5000_data=FB15k-q2b_k=1000_lr=0.1_n3=0.01.log
+
+R
+PYTHONPATH=. python3 main.py --do_train --do_valid --do_test --data_path data/FB15k-q2b -n 1 -b 5000 -d 1000 -lr 0.1 --disable_warmup --max_steps 100000 --cpu_num 0 --geo cqd --valid_steps 500 --tasks "1p" --print_on_screen --test_batch_size 1000 --optimizer "Adagrad" --reg_weight 0.01 --log_steps 500 --cuda --save_path models/fb15k-q2b --use-qa-iterator > models/fb15k-q2b/train.log 2>&1
 
 $ ls *FB15k-betae*.log | xargs grep "Valid 1p MRR at step 99999" | tr ":" " " | awk '{ print $13 " " $1 }' | sort -n | tail -n 1
 0.791665 cqd_beaker_v2.b=5000_data=FB15k-betae_k=1000_lr=0.1_n3=0.01.log
 
+T
+PYTHONPATH=. python3 main.py --do_train --do_valid --do_test --data_path data/FB15k-betae -n 1 -b 5000 -d 1000 -lr 0.1 --disable_warmup --max_steps 100000 --cpu_num 0 --geo cqd --valid_steps 500 --tasks "1p" --print_on_screen --test_batch_size 1000 --optimizer "Adagrad" --reg_weight 0.01 --log_steps 500 --cuda --save_path models/fb15k-betae --use-qa-iterator > models/fb15k-betae/train.log 2>&1
+
 $ ls *NELL-q2b*.log | xargs grep "Valid 1p MRR at step 99999" | tr ":" " " | awk '{ print $13 " " $1 }' | sort -n | tail -n 1
 0.587790 cqd_beaker_v2.b=2000_data=NELL-q2b_k=1000_lr=0.1_n3=0.1.log
+
+T
+PYTHONPATH=. python3 main.py --do_train --do_valid --do_test --data_path data/NELL-q2b -n 1 -b 2000 -d 1000 -lr 0.1 --disable_warmup --max_steps 100000 --cpu_num 0 --geo cqd --valid_steps 500 --tasks "1p" --print_on_screen --test_batch_size 1000 --optimizer "Adagrad" --reg_weight 0.1 --log_steps 500 --cuda --save_path models/nell-q2b --use-qa-iterator > models/nell-q2b/train.log 2>&1
 
 $ ls *NELL-betae*.log | xargs grep "Valid 1p MRR at step 99999" | tr ":" " " | awk '{ print $13 " " $1 }' | sort -n | tail -n 1
 0.588582 cqd_beaker_v2.b=2000_data=NELL-betae_k=1000_lr=0.1_n3=0.1.log
 
+T
+PYTHONPATH=. python3 main.py --do_train --do_valid --do_test --data_path data/NELL-betae -n 1 -b 2000 -d 1000 -lr 0.1 --disable_warmup --max_steps 100000 --cpu_num 0 --geo cqd --valid_steps 500 --tasks "1p" --print_on_screen --test_batch_size 1000 --optimizer "Adagrad" --reg_weight 0.1 --log_steps 500 --cuda --save_path models/nell-betae --use-qa-iterator > models/nell-betae/train.log 2>&1
