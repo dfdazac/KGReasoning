@@ -1,0 +1,42 @@
+2021-04-26 09:30:12 INFO     ---------------------------------------------------------------------------------------------
+2021-04-26 09:30:12 INFO     Geo: cqd
+2021-04-26 09:30:12 INFO     Data Path: data/NELL-betae
+2021-04-26 09:30:12 INFO     #entity: 63361
+2021-04-26 09:30:12 INFO     #relation: 400
+2021-04-26 09:30:12 INFO     #max steps: 10
+2021-04-26 09:30:12 INFO     Evaluate unoins using: DNF
+2021-04-26 09:30:12 INFO     loading data
+2021-04-26 09:36:08 INFO     Training info:
+2021-04-26 09:36:08 INFO     1p: 107982
+2021-04-26 09:36:09 INFO     Validation info:
+2021-04-26 09:36:09 INFO     1p: 16910
+2021-04-26 09:36:09 INFO     Test info:
+2021-04-26 09:36:09 INFO     1p: 17021
+2021-04-26 09:36:09 INFO     Model Parameter Configuration:
+2021-04-26 09:36:09 INFO     Parameter embeddings.0.weight: torch.Size([63361, 200]), require_grad = True
+2021-04-26 09:36:09 INFO     Parameter embeddings.1.weight: torch.Size([400, 200]), require_grad = True
+2021-04-26 09:36:09 INFO     Parameter Number: 12752200
+2021-04-26 09:36:09 INFO     Ramdomly Initializing cqd Model...
+2021-04-26 09:36:09 INFO     tasks = 1p
+2021-04-26 09:36:09 INFO     init_step = 0
+2021-04-26 09:36:09 INFO     Start Training...
+2021-04-26 09:36:09 INFO     learning_rate = 0.100000
+2021-04-26 09:36:09 INFO     batch_size = 10
+2021-04-26 09:36:09 INFO     hidden_dim = 100
+2021-04-26 09:36:09 INFO     gamma = 12.000000
+2021-04-26 09:36:09 INFO     Training average positive_sample_loss at step 0: 22.113207
+2021-04-26 09:36:09 INFO     Training average negative_sample_loss at step 0: 22.113207
+2021-04-26 09:36:09 INFO     Training average loss at step 0: 22.113207
+2021-04-26 09:36:10 INFO     Evaluating on Valid Dataset...
+2021-04-26 09:39:48 INFO     Evaluating the model... (0/17)
+2021-04-26 09:42:30 INFO     Valid 1p MRR at step 9: 0.018124
+2021-04-26 09:42:30 INFO     Valid 1p HITS1 at step 9: 0.012253
+2021-04-26 09:42:30 INFO     Valid 1p HITS3 at step 9: 0.023458
+2021-04-26 09:42:30 INFO     Valid 1p HITS10 at step 9: 0.024613
+2021-04-26 09:42:30 INFO     Valid 1p num_queries at step 9: 16910.000000
+2021-04-26 09:42:30 INFO     Valid average MRR at step 9: 0.018124
+2021-04-26 09:42:30 INFO     Valid average HITS1 at step 9: 0.012253
+2021-04-26 09:42:30 INFO     Valid average HITS3 at step 9: 0.023458
+2021-04-26 09:42:30 INFO     Valid average HITS10 at step 9: 0.024613
+2021-04-26 09:42:30 INFO     Evaluating on Test Dataset...
+2021-04-26 09:42:39 INFO     Evaluating the model... (0/18)

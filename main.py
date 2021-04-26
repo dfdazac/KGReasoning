@@ -230,21 +230,22 @@ def main(args):
     else:
         prefix = args.prefix
 
-    print("overwritting args.save_path")
-    args.save_path = os.path.join(prefix, args.data_path.split('/')[-1], args.tasks, args.geo)
-    if args.geo in ['box']:
-        tmp_str = "g-{}-mode-{}".format(args.gamma, args.box_mode)
-    elif args.geo in ['vec']:
-        tmp_str = "g-{}".format(args.gamma)
-    elif args.geo == 'beta':
-        tmp_str = "g-{}-mode-{}".format(args.gamma, args.beta_mode)
-    else:
-        tmp_str = ''
+    if args.save_path is None:
+        print("overwritting args.save_path")
+        args.save_path = os.path.join(prefix, args.data_path.split('/')[-1], args.tasks, args.geo)
+        if args.geo in ['box']:
+            tmp_str = "g-{}-mode-{}".format(args.gamma, args.box_mode)
+        elif args.geo in ['vec']:
+            tmp_str = "g-{}".format(args.gamma)
+        elif args.geo == 'beta':
+            tmp_str = "g-{}-mode-{}".format(args.gamma, args.beta_mode)
+        else:
+            tmp_str = ''
 
-    if args.checkpoint_path is not None:
-        args.save_path = args.checkpoint_path
-    else:
-        args.save_path = os.path.join(args.save_path, tmp_str, cur_time)
+        if args.checkpoint_path is not None:
+            args.save_path = args.checkpoint_path
+        else:
+            args.save_path = os.path.join(args.save_path, tmp_str, cur_time)
 
     if not os.path.exists(args.save_path) and not args.no_save:
         os.makedirs(args.save_path)
