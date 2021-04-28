@@ -35,8 +35,8 @@ def main(argv):
     hyp_space = dict(
         k=[1000],
         b=[50, 100, 500, 1000, 2000, 5000],
-        n3=[1e-3, 5e-3, 1e-2, 5e-2, 1e-1, 5e-1],
-        lr=[0.1],
+        n3=[1e-3, 2e-3, 5e-3, 1e-2, 2e-2, 5e-2, 1e-1, 2e-1, 5e-1],
+        lr=[0.1, 0.01],
         data=['FB15k-237-betae', 'FB15k-237-q2b', 'FB15k-betae', 'FB15k-q2b', 'NELL-betae', 'NELL-q2b']
     )
 
