@@ -30,6 +30,10 @@ class N3:
 
 
 class CQD(nn.Module):
+    MIN_NORM = 'min'
+    PROD_NORM = 'prod'
+    NORMS = {MIN_NORM, PROD_NORM}
+
     def __init__(self,
                  nentity: int,
                  nrelation: int,
@@ -140,6 +144,44 @@ class CQD(nn.Module):
             rhs = self.embeddings[0](queries[:, 2])
         return lhs, rel, rhs
 
+    def batch_t_norm(self, scores: Tensor) -> Tensor:
+        if self.t_norm_name == CQD.MIN_NORM:
+            scores = torch.min(scores, dim=1)[0]
+        elif self.t_norm_name == CQD.PROD_NORM:
+            scores = torch.prod(scores, dim=1)
+        else:
+            raise ValueError(f't_norm must be one of {CQD.NORMS}, got {self.t_norm_name}')
+
+        return scores
+
+    def batch_t_conorm(self, scores: Tensor) -> Tensor:
+        if self.t_norm_name == CQD.MIN_NORM:
+            scores = torch.max(scores, dim=1, keepdim=True)[0]
+        elif self.t_norm_name == CQD.PROD_NORM:
+            scores = torch.sum(scores, dim=1, keepdim=True) - torch.prod(scores, dim=1, keepdim=True)
+        else:
+            raise ValueError(f't_norm must be one of {CQD.NORMS}, got {self.t_norm_name}')
+
+        return scores
+
+    def reduce_query_score(self, atom_scores, conjunction_mask, negation_mask):
+        batch_size, num_atoms, *extra_dims = atom_scores.shape
+
+        atom_scores = torch.sigmoid(atom_scores)
+        scores = atom_scores.clone()
+        scores[negation_mask] = 1 - atom_scores[negation_mask]
+
+        disjunctions = scores[~conjunction_mask].reshape(batch_size, -1, *extra_dims)
+        conjunctions = scores[conjunction_mask].reshape(batch_size, -1, *extra_dims)
+
+        if disjunctions.shape[1] > 0:
+            disjunctions = self.batch_t_conorm(disjunctions)
+
+        conjunctions = torch.cat([disjunctions, conjunctions], dim=1)
+
+        t_norm = self.batch_t_norm(conjunctions)
+        return t_norm
+
     def forward(self,
                 positive_sample,
                 negative_sample,
@@ -151,9 +193,11 @@ class CQD(nn.Module):
 
         scores = None
 
+        torch.autograd.set_detect_anomaly(True)
+
         for query_structure, queries in batch_queries_dict.items():
             batch_size = queries.shape[0]
-            atoms, num_variables = query_to_atoms(query_structure, queries)
+            atoms, num_variables, conjunction_mask, negation_mask = query_to_atoms(query_structure, queries)
 
             all_idxs.extend(batch_idxs_dict[query_structure])
 
@@ -199,16 +243,16 @@ class CQD(nn.Module):
                         h_emb[head_vars_mask] = var_embs(head[head_vars_mask])
 
                         t_emb = var_embs(tail)
-                        scores, factors = self.score_o(h_emb.unsqueeze(-2), r_emb.unsqueeze(-2), t_emb.unsqueeze(-2), return_factors=True)
+                        scores, factors = self.score_o(h_emb.unsqueeze(-2),
+                                                       r_emb.unsqueeze(-2),
+                                                       t_emb.unsqueeze(-2),
+                                                       return_factors=True)
 
-                        if 'prod' in self.t_norm_name:
-                            t_norm = torch.prod(torch.sigmoid(scores), dim=1)
-                        elif 'min' in self.t_norm_name:
-                            t_norm, _ = torch.min(torch.sigmoid(scores), dim=1)
-                        else:
-                            assert False, f'Unknown t-norm {self.t_norm_name}'
+                        query_score = self.reduce_query_score(scores,
+                                                              conjunction_mask,
+                                                              negation_mask)
 
-                        loss = - t_norm.mean() + self.regularizer.forward(factors)
+                        loss = - query_score.mean() + self.regularizer.forward(factors)
                         loss_value = loss.item()
 
                         optimizer.zero_grad()
@@ -218,6 +262,9 @@ class CQD(nn.Module):
 
                 with torch.no_grad():
                     # Select predicates involving target variable only
+                    conjunction_mask = conjunction_mask[target_mask].reshape(batch_size, -1)
+                    negation_mask = negation_mask[target_mask].reshape(batch_size, -1)
+
                     target_mask = target_mask.unsqueeze(-1).expand_as(h_emb)
                     emb_size = h_emb.shape[-1]
                     h_emb = h_emb[target_mask].reshape(batch_size, -1, emb_size)
@@ -225,10 +272,10 @@ class CQD(nn.Module):
                     to_score = self.embeddings[0].weight
 
                     scores, factors = self.score_o(h_emb, r_emb, to_score)
-                    scores = torch.sigmoid(scores)
-                    t_norm = torch.prod(scores, dim=1)
-
-                    all_scores.append(t_norm)
+                    query_score = self.reduce_query_score(scores,
+                                                          conjunction_mask,
+                                                          negation_mask)
+                    all_scores.append(query_score)
 
                 scores = torch.cat(all_scores, dim=0)
 
@@ -272,7 +319,7 @@ class CQD(nn.Module):
                 def negation(a: Tensor) -> Tensor:
                     return 1 - a
 
-                if 'prod' in self.t_norm_name:
+                if self.t_norm_name == CQD.PROD_NORM:
                     def t_norm(a: Tensor, b: Tensor) -> Tensor:
                         return a * b
 

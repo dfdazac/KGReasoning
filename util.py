@@ -83,27 +83,37 @@ def query_to_atoms(query_structure, flat_ids):
     query_triples = []
     variable = 0
     previous = flat_ids[:, 0]
+    conjunction_mask = []
+    negation_mask = []
 
     for i in range(1, query_length):
         if flat_structure[i] == 'r':
             variable -= 1
+            triples = torch.empty(batch_size, 3,
+                                  device=flat_ids.device,
+                                  dtype=torch.long)
+            triples[:, 0] = previous
+            triples[:, 1] = flat_ids[:, i]
+            triples[:, 2] = variable
+
+            query_triples.append(triples)
+            previous = variable
+            conjunction_mask.append(True)
+            negation_mask.append(False)
         elif flat_structure[i] == 'e':
             previous = flat_ids[:, i]
             variable += 1
-            continue
-
-        triples = torch.empty(batch_size, 3, device=flat_ids.device, dtype=torch.long)
-        triples[:, 0] = previous
-        triples[:, 1] = flat_ids[:, i]
-        triples[:, 2] = variable
-
-        query_triples.append(triples)
-        previous = variable
+        elif flat_structure[i] == 'u':
+            conjunction_mask = [False] * len(conjunction_mask)
+        elif flat_structure[i] == 'n':
+            negation_mask[-1] = True
 
     atoms = torch.stack(query_triples, dim=1)
     num_variables = variable * -1
+    conjunction_mask = torch.tensor(conjunction_mask).unsqueeze(0).expand(batch_size, -1)
+    negation_mask = torch.tensor(negation_mask).unsqueeze(0).expand(batch_size, -1)
 
-    return atoms, num_variables
+    return atoms, num_variables, conjunction_mask, negation_mask
 
 
 def make_batches(size: int, batch_size: int) -> List[Tuple[int, int]]:

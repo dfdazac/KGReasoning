@@ -87,7 +87,7 @@ def parse_args(args=None):
     parser.add_argument('--no-save', action='store_true')
 
     parser.add_argument('--cqd-type', '--cqd', default='co', type=str, choices=['co', 'beam', 'd2'])
-    parser.add_argument('--cqd-t-norm', default='prod', type=str, choices=['min', 'prod'])
+    parser.add_argument('--cqd-t-norm', default=CQD.PROD_NORM, type=str, choices=CQD.NORMS)
     parser.add_argument('--cqd-k', default=5, type=int)
     parser.add_argument('--cqd-sigmoid-scores', '--cqd-sigmoid', action='store_true', default=False)
     parser.add_argument('--cqd-normalize-scores', '--cqd-normalize', action='store_true', default=False)
