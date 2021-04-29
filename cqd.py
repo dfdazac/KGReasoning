@@ -193,8 +193,6 @@ class CQD(nn.Module):
 
         scores = None
 
-        torch.autograd.set_detect_anomaly(True)
-
         for query_structure, queries in batch_queries_dict.items():
             batch_size = queries.shape[0]
             atoms, num_variables, conjunction_mask, negation_mask = query_to_atoms(query_structure, queries)
