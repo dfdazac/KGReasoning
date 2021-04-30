@@ -364,7 +364,7 @@ def query_pni(entity_embeddings: nn.Module,
     scores_1 = query_2p(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
                         queries=queries[:, 0:3], scoring_function=scoring_function, k=k, t_norm=t_norm)
     scores_2 = query_1p(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
-                        queries=queries[:, 3:5], scoring_function=scoring_function)
+                        queries=queries[:, 4:6], scoring_function=scoring_function)
 
     scores_1 = negation(scores_1)
 
