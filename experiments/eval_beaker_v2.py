@@ -42,7 +42,7 @@ def main(argv):
         s=[True, False],
         n=[True, False],
         k=[1, 2, 4, 8, 16, 32, 64],
-        data=['fb15k-q2b', 'fb15k-betae', 'fb15k-237-q2b', 'fb15k-237-betae']
+        data=['fb15k-q2b', 'fb15k-betae', 'fb15k-237-q2b', 'fb15k-237-betae', 'nell-q2b', 'nell-betae']
     )
 
     configurations = list(cartesian_product(hyp_space))
