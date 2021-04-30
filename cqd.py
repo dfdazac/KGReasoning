@@ -412,5 +412,23 @@ class CQD(nn.Module):
                                           queries=queries,
                                           scoring_function=scoring_function,
                                           k=self.k, t_norm=t_norm, negation=negation)
+                elif graph_type == "inp":
+
+                    # print(queries.shape)
+                    # print(queries[0])
+                    # print(queries[1])
+                    # print(queries[2])
+                    # print(queries[3])
+
+                    # import sys
+                    # sys.exit(0)
+
+                    scores = d2.query_inp(entity_embeddings=self.embeddings[0],
+                                          predicate_embeddings=self.embeddings[1],
+                                          queries=queries,
+                                          scoring_function=scoring_function,
+                                          t_norm=t_norm, negation=negation)
+                else:
+                    raise ValueError(f'Unknown query type: {graph_type}')
 
         return None, scores, None, all_idxs

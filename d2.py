@@ -307,7 +307,7 @@ def query_inp(entity_embeddings: nn.Module,
                          queries=queries[:, 0:4], scoring_function=scoring_function, t_norm=t_norm, negation=negation)
 
     # [B, E]
-    p_emb = predicate_embeddings(queries[:, 4])
+    p_emb = predicate_embeddings(queries[:, 5])
 
     batch_size = p_emb.shape[0]
     emb_size = p_emb.shape[1]
