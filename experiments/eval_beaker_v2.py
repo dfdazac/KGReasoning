@@ -88,7 +88,7 @@ def main(argv):
 #$ -e $HOME/array.err
 #$ -t 1-{}
 #$ -l tmem=16G
-#$ -l h_rt=4:00:00
+#$ -l h_rt=2:00:00
 #$ -l gpu=true
 
 conda activate gpu
