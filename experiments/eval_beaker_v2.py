@@ -21,7 +21,8 @@ def summary(configuration):
 def to_cmd(c, _path=None):
     s_normalize = '--cqd-normalize' if c["n"] else ''
     s_sigmoid = '--cqd-sigmoid' if c["s"] else ''
-    command = f'PYTHONPATH=. python3 main.py --do_valid --do_test --data_path data/{c["data"].replace("fb", "FB")} ' \
+    command = f'PYTHONPATH=. python3 main.py --do_valid --do_test ' \
+              f'--data_path data/{c["data"].replace("fb", "FB").replace("nell", "NELL")} ' \
               f'-n 1 -b 1000 -d 1000 -lr 0.1 ' \
               f'--disable_warmup --max_steps 1000 --cpu_num 0 --geo cqd --valid_steps 20  --tasks "{c["q"]}" ' \
               f'--print_on_screen --test_batch_size 1 --optimizer "Adagrad" --reg_weight 0.05 ' \
