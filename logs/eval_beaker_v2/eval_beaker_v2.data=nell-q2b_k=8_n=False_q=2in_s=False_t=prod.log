@@ -1,9 +1,30 @@
-main.py --do_valid --do_test --data_path data/nell-q2b -n 1 -b 1000 -d 1000 -lr 0.1 --disable_warmup --max_steps 1000 --cpu_num 0 --geo cqd --valid_steps 20 --tasks 2in --print_on_screen --test_batch_size 1 --optimizer Adagrad --reg_weight 0.05 --log_steps 5 --checkpoint_path models/nell-q2b --cqd d2 --cqd-t-norm prod --cqd-k 8 --no-save --cuda
+2021-05-01 16:58:30,107 INFO     ---------------------------------------------------------------------------------------------
+2021-05-01 16:58:30,108 INFO     Geo: cqd
+2021-05-01 16:58:30,108 INFO     Data Path: data/NELL-q2b
+2021-05-01 16:58:30,108 INFO     #entity: 63361
+2021-05-01 16:58:30,108 INFO     #relation: 400
+2021-05-01 16:58:30,108 INFO     #max steps: 1000
+2021-05-01 16:58:30,108 INFO     Evaluate unoins using: DNF
+2021-05-01 16:58:30,108 INFO     loading data
+2021-05-01 16:58:44,591 INFO     Training info:
+2021-05-01 16:58:44,592 INFO     Validation info:
+2021-05-01 16:58:44,592 INFO     Test info:
+2021-05-01 16:58:46,121 INFO     Model Parameter Configuration:
+2021-05-01 16:58:46,121 INFO     Parameter embeddings.0.weight: torch.Size([63361, 2000]), require_grad = True
+2021-05-01 16:58:46,121 INFO     Parameter embeddings.1.weight: torch.Size([400, 2000]), require_grad = True
+2021-05-01 16:58:46,121 INFO     Parameter Number: 127522000
+2021-05-01 16:58:51,278 INFO     Loading checkpoint models/nell-q2b...
+2021-05-01 16:58:52,583 INFO     tasks = 2in
+2021-05-01 16:58:52,583 INFO     init_step = 99999
+2021-05-01 16:58:52,583 INFO     batch_size = 1000
+2021-05-01 16:58:52,583 INFO     hidden_dim = 1000
+2021-05-01 16:58:52,583 INFO     gamma = 12.000000
+2021-05-01 16:58:52,583 INFO     Evaluating on Valid Dataset...
+0it [00:00, ?it/s]
+2021-05-01 16:58:52,586 INFO     Evaluating on Test Dataset...
+0it [00:00, ?it/s]
+2021-05-01 16:58:52,587 INFO     Training finished!!
+main.py --do_valid --do_test --data_path data/NELL-q2b -n 1 -b 1000 -d 1000 -lr 0.1 --disable_warmup --max_steps 1000 --cpu_num 0 --geo cqd --valid_steps 20 --tasks 2in --print_on_screen --test_batch_size 1 --optimizer Adagrad --reg_weight 0.05 --log_steps 5 --checkpoint_path models/nell-q2b --cqd d2 --cqd-t-norm prod --cqd-k 8 --no-save --cuda
 overwritting args.save_path
 logging to models/nell-q2b
-Traceback (most recent call last):
-  File "main.py", line 508, in <module>
-    main(parse_args())
-  File "main.py", line 261, in main
-    with open('%s/stats.txt'%args.data_path) as f:
-FileNotFoundError: [Errno 2] No such file or directory: 'data/nell-q2b/stats.txt'
+99999
