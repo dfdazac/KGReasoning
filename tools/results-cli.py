@@ -77,13 +77,12 @@ def main(argv):
     data_values = sorted(data_values)
     query_values = sorted(query_values)
 
+    query_values = ['1p', '2p', '3p', '2i', '3i', 'pi', 'ip', '2in', '3in', 'inp', 'pin', 'pni']
+
     data_pd_values = []
     metric_pd_values = []
     query_pd_values = []
     result_pd_values = []
-
-    data_pd2_values = []
-    query_type_to_pd2_values = []
 
     for data in data_values:
         for q in query_values:
@@ -121,9 +120,10 @@ def main(argv):
     df = pd.DataFrame(pd_dict)
     metric_df = df[df.Metric == metric]
 
-    print(metric_df.set_index(['Data', 'Query']).drop(['Metric'], axis=1).unstack().to_latex())
+    new_df = metric_df.set_index(['Data', 'Query']).drop(['Metric'], axis=1).unstack()
+    new_df = new_df[[('Result', q) for q in query_values]]
 
-
+    print(new_df.to_latex())
 
 
 if __name__ == '__main__':
