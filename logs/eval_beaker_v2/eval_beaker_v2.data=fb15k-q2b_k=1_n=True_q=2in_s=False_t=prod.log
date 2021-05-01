@@ -1,0 +1,30 @@
+2021-05-01 02:04:34,764 INFO     ---------------------------------------------------------------------------------------------
+2021-05-01 02:04:34,765 INFO     Geo: cqd
+2021-05-01 02:04:34,765 INFO     Data Path: data/FB15k-q2b
+2021-05-01 02:04:34,765 INFO     #entity: 14951
+2021-05-01 02:04:34,765 INFO     #relation: 2690
+2021-05-01 02:04:34,765 INFO     #max steps: 1000
+2021-05-01 02:04:34,765 INFO     Evaluate unoins using: DNF
+2021-05-01 02:04:34,765 INFO     loading data
+2021-05-01 02:05:36,698 INFO     Training info:
+2021-05-01 02:05:36,699 INFO     Validation info:
+2021-05-01 02:05:36,699 INFO     Test info:
+2021-05-01 02:05:37,110 INFO     Model Parameter Configuration:
+2021-05-01 02:05:37,110 INFO     Parameter embeddings.0.weight: torch.Size([14951, 2000]), require_grad = True
+2021-05-01 02:05:37,110 INFO     Parameter embeddings.1.weight: torch.Size([2690, 2000]), require_grad = True
+2021-05-01 02:05:37,111 INFO     Parameter Number: 35282000
+2021-05-01 02:05:39,763 INFO     Loading checkpoint models/fb15k-q2b...
+2021-05-01 02:05:39,982 INFO     tasks = 2in
+2021-05-01 02:05:39,982 INFO     init_step = 99999
+2021-05-01 02:05:39,982 INFO     batch_size = 1000
+2021-05-01 02:05:39,982 INFO     hidden_dim = 1000
+2021-05-01 02:05:39,982 INFO     gamma = 12.000000
+2021-05-01 02:05:39,982 INFO     Evaluating on Valid Dataset...
+0it [00:00, ?it/s]
+2021-05-01 02:05:39,986 INFO     Evaluating on Test Dataset...
+0it [00:00, ?it/s]
+2021-05-01 02:05:39,987 INFO     Training finished!!
+main.py --do_valid --do_test --data_path data/FB15k-q2b -n 1 -b 1000 -d 1000 -lr 0.1 --disable_warmup --max_steps 1000 --cpu_num 0 --geo cqd --valid_steps 20 --tasks 2in --print_on_screen --test_batch_size 1 --optimizer Adagrad --reg_weight 0.05 --log_steps 5 --checkpoint_path models/fb15k-q2b --cqd d2 --cqd-t-norm prod --cqd-normalize --cqd-k 1 --no-save --cuda
+overwritting args.save_path
+logging to models/fb15k-q2b
+99999

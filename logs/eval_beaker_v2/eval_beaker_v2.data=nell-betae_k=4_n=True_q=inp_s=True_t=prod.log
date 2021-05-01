@@ -1,0 +1,51 @@
+2021-05-01 02:49:27,348 INFO     ---------------------------------------------------------------------------------------------
+2021-05-01 02:49:27,473 INFO     Geo: cqd
+2021-05-01 02:49:27,473 INFO     Data Path: data/NELL-betae
+2021-05-01 02:49:27,474 INFO     #entity: 63361
+2021-05-01 02:49:27,474 INFO     #relation: 400
+2021-05-01 02:49:27,474 INFO     #max steps: 1000
+2021-05-01 02:49:27,474 INFO     Evaluate unoins using: DNF
+2021-05-01 02:49:27,474 INFO     loading data
+2021-05-01 02:49:46,267 INFO     Training info:
+2021-05-01 02:49:46,270 INFO     Validation info:
+2021-05-01 02:49:46,271 INFO     inp: 4000
+2021-05-01 02:49:46,272 INFO     Test info:
+2021-05-01 02:49:46,272 INFO     inp: 4000
+2021-05-01 02:49:47,817 INFO     Model Parameter Configuration:
+2021-05-01 02:49:47,817 INFO     Parameter embeddings.0.weight: torch.Size([63361, 2000]), require_grad = True
+2021-05-01 02:49:47,818 INFO     Parameter embeddings.1.weight: torch.Size([400, 2000]), require_grad = True
+2021-05-01 02:49:47,818 INFO     Parameter Number: 127522000
+2021-05-01 02:49:51,713 INFO     Loading checkpoint models/nell-betae...
+2021-05-01 02:49:58,871 INFO     tasks = inp
+2021-05-01 02:49:58,871 INFO     init_step = 99999
+2021-05-01 02:49:58,871 INFO     batch_size = 1000
+2021-05-01 02:49:58,871 INFO     hidden_dim = 1000
+2021-05-01 02:49:58,871 INFO     gamma = 12.000000
+2021-05-01 02:49:58,872 INFO     Evaluating on Valid Dataset...
+  0%|          | 0/4000 [00:00<?, ?it/s]
+main.py --do_valid --do_test --data_path data/NELL-betae -n 1 -b 1000 -d 1000 -lr 0.1 --disable_warmup --max_steps 1000 --cpu_num 0 --geo cqd --valid_steps 20 --tasks inp --print_on_screen --test_batch_size 1 --optimizer Adagrad --reg_weight 0.05 --log_steps 5 --checkpoint_path models/nell-betae --cqd d2 --cqd-t-norm prod --cqd-normalize --cqd-sigmoid --cqd-k 4 --no-save --cuda
+overwritting args.save_path
+logging to models/nell-betae
+99999
+Traceback (most recent call last):
+  File "main.py", line 508, in <module>
+    main(parse_args())
+  File "main.py", line 497, in main
+    valid_all_metrics = evaluate(model, valid_easy_answers, valid_hard_answers, args, valid_dataloader, query_name_dict, 'Valid', step, writer)
+  File "main.py", line 165, in evaluate
+    metrics = KGReasoning.test_step(model, tp_answers, fn_answers, args, dataloader, query_name_dict)
+  File "/home/pminervi/workspace/KGReasoning/models.py", line 654, in test_step
+    _, negative_logit, _, idxs = model(None, negative_sample, None, batch_queries_dict, batch_idxs_dict)
+  File "/home/pminervi/anaconda3/envs/gpu/lib/python3.6/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/pminervi/workspace/KGReasoning/cqd.py", line 420, in forward
+    t_norm=t_norm, negation=negation)
+  File "/home/pminervi/workspace/KGReasoning/d2.py", line 324, in query_inp
+    entity_embeddings=entity_embeddings, scoring_function=scoring_function)
+  File "/home/pminervi/workspace/KGReasoning/d2.py", line 32, in score_candidates
+    atom_scores_2d = scoring_function(s_emb, p_emb, candidates_emb)
+  File "/home/pminervi/workspace/KGReasoning/cqd.py", line 333, in scoring_function
+    res, _ = self.score_o(lhs_, rel_, rhs_)
+  File "/home/pminervi/workspace/KGReasoning/cqd.py", line 111, in score_o
+    score_1 = (lhs[0] * rel[0] - lhs[1] * rel[1]) @ rhs[0].transpose(-1, -2)
+RuntimeError: CUDA out of memory. Tried to allocate 14.96 GiB (GPU 0; 10.92 GiB total capacity; 3.08 GiB already allocated; 7.07 GiB free; 3.10 GiB reserved in total by PyTorch)
