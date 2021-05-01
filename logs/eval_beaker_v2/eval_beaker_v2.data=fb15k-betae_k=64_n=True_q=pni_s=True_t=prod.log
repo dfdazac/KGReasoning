@@ -1,583 +1,66 @@
-2021-04-29 19:35:48,756 INFO     ---------------------------------------------------------------------------------------------
-2021-04-29 19:35:48,756 INFO     Geo: cqd
-2021-04-29 19:35:48,756 INFO     Data Path: data/FB15k-betae
-2021-04-29 19:35:48,756 INFO     #entity: 14951
-2021-04-29 19:35:48,756 INFO     #relation: 2690
-2021-04-29 19:35:48,756 INFO     #max steps: 1000
-2021-04-29 19:35:48,756 INFO     Evaluate unoins using: DNF
-2021-04-29 19:35:48,756 INFO     loading data
-2021-04-29 19:37:02,421 INFO     Training info:
-2021-04-29 19:37:02,430 INFO     Validation info:
-2021-04-29 19:37:02,432 INFO     pni: 8000
-2021-04-29 19:37:02,446 INFO     Test info:
-2021-04-29 19:37:02,446 INFO     pni: 8000
-2021-04-29 19:37:02,950 INFO     Model Parameter Configuration:
-2021-04-29 19:37:02,950 INFO     Parameter embeddings.0.weight: torch.Size([14951, 2000]), require_grad = True
-2021-04-29 19:37:02,951 INFO     Parameter embeddings.1.weight: torch.Size([2690, 2000]), require_grad = True
-2021-04-29 19:37:02,951 INFO     Parameter Number: 35282000
-2021-04-29 19:37:07,027 INFO     Loading checkpoint models/fb15k-betae...
-2021-04-29 19:37:07,400 INFO     tasks = pni
-2021-04-29 19:37:07,400 INFO     init_step = 99999
-2021-04-29 19:37:07,400 INFO     batch_size = 1000
-2021-04-29 19:37:07,400 INFO     hidden_dim = 1000
-2021-04-29 19:37:07,400 INFO     gamma = 12.000000
-2021-04-29 19:37:07,400 INFO     Evaluating on Valid Dataset...
-  0%|          | 0/8000 [00:00<?, ?it/s]/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [96,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [97,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [98,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [99,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [100,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [101,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [102,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [103,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [104,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [105,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [106,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [107,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [108,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [109,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [110,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [111,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [112,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [113,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [114,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [115,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [116,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [117,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [118,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [119,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [120,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [121,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [122,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [123,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [124,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [125,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [126,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [127,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [0,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [1,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [2,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [3,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [4,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [5,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [6,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [7,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [8,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [9,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [10,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [11,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [12,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [13,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [14,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [15,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [16,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [17,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [18,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [19,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [20,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [21,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [22,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [23,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [24,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [25,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [26,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [27,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [28,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [29,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [30,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [31,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [0,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [1,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [2,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [3,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [4,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [5,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [6,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [7,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [8,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [9,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [10,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [11,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [12,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [13,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [14,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [15,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [16,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [17,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [18,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [19,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [20,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [21,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [22,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [23,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [24,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [25,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [26,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [27,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [28,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [29,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [30,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [31,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [32,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [33,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [34,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [35,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [36,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [37,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [38,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [39,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [40,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [41,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [42,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [43,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [44,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [45,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [46,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [47,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [48,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [49,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [50,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [51,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [52,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [53,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [54,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [55,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [56,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [57,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [58,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [59,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [60,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [61,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [62,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [63,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [64,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [65,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [66,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [67,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [68,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [69,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [70,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [71,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [72,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [73,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [74,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [75,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [76,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [77,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [78,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [79,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [80,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [81,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [82,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [83,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [84,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [85,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [86,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [87,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [88,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [89,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [90,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [91,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [92,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [93,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [94,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [95,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [96,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [97,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [98,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [99,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [100,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [101,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [102,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [103,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [104,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [105,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [106,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [107,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [108,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [109,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [110,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [111,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [112,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [113,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [114,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [115,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [116,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [117,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [118,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [119,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [120,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [121,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [122,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [123,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [124,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [125,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [126,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [11,0,0], thread: [127,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [32,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [33,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [34,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [35,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [36,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [37,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [38,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [39,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [40,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [41,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [42,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [43,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [44,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [45,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [46,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [47,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [48,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [49,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [50,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [51,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [52,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [53,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [54,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [55,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [56,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [57,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [58,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [59,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [60,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [61,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [62,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [63,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [0,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [1,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [2,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [3,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [4,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [5,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [6,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [7,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [8,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [9,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [10,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [11,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [12,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [13,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [14,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [15,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [16,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [17,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [18,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [19,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [20,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [21,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [22,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [23,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [24,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [25,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [26,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [27,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [28,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [29,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [30,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [31,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [64,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [65,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [66,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [67,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [68,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [69,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [70,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [71,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [72,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [73,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [74,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [75,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [76,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [77,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [78,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [79,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [80,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [81,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [82,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [83,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [84,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [85,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [86,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [87,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [88,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [89,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [90,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [91,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [92,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [93,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [94,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [95,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [96,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [97,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [98,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [99,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [100,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [101,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [102,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [103,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [104,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [105,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [106,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [107,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [108,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [109,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [110,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [111,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [112,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [113,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [114,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [115,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [116,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [117,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [118,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [119,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [120,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [121,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [122,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [123,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [124,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [125,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [126,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [12,0,0], thread: [127,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [64,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [65,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [66,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [67,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [68,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [69,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [70,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [71,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [72,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [73,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [74,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [75,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [76,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [77,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [78,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [79,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [80,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [81,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [82,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [83,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [84,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [85,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [86,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [87,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [88,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [89,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [90,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [91,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [92,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [93,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [94,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [95,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [32,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [33,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [34,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [35,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [36,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [37,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [38,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [39,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [40,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [41,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [42,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [43,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [44,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [45,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [46,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [47,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [48,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [49,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [50,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [51,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [52,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [53,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [54,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [55,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [56,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [57,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [58,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [59,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [60,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [61,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [62,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [10,0,0], thread: [63,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [32,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [33,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [34,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [35,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [36,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [37,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [38,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [39,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [40,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [41,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [42,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [43,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [44,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [45,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [46,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [47,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [48,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [49,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [50,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [51,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [52,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [53,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [54,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [55,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [56,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [57,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [58,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [59,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [60,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [61,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [62,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [4,0,0], thread: [63,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [0,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [1,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [2,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [3,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [4,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [5,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [6,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [7,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [8,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [9,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [10,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [11,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [12,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [13,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [14,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [15,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [16,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [17,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [18,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [19,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [20,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [21,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [22,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [23,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [24,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [25,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [26,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [27,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [28,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [29,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [30,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [31,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [32,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [33,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [34,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [35,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [36,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [37,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [38,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [39,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [40,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [41,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [42,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [43,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [44,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [45,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [46,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [47,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [48,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [49,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [50,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [51,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [52,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [53,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [54,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [55,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [56,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [57,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [58,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [59,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [60,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [61,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [62,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [63,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [64,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [65,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [66,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [67,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [68,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [69,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [70,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [71,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [72,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [73,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [74,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [75,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [76,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [77,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [78,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [79,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [80,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [81,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [82,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [83,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [84,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [85,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [86,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [87,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [88,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [89,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [90,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [91,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [92,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [93,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [94,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [95,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [96,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [97,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [98,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [99,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [100,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [101,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [102,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [103,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [104,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [105,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [106,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [107,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [108,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [109,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [110,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [111,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [112,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [113,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [114,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [115,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [116,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [117,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [118,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [119,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [120,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [121,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [122,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [123,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [124,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [125,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [126,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-/pytorch/aten/src/ATen/native/cuda/Indexing.cu:609: indexSelectSmallIndex: block: [5,0,0], thread: [127,0,0] Assertion `srcIndex < srcSelectDimSize` failed.
-
+2021-05-01 08:32:58,653 INFO     ---------------------------------------------------------------------------------------------
+2021-05-01 08:32:58,654 INFO     Geo: cqd
+2021-05-01 08:32:58,654 INFO     Data Path: data/FB15k-betae
+2021-05-01 08:32:58,654 INFO     #entity: 14951
+2021-05-01 08:32:58,654 INFO     #relation: 2690
+2021-05-01 08:32:58,654 INFO     #max steps: 1000
+2021-05-01 08:32:58,654 INFO     Evaluate unoins using: DNF
+2021-05-01 08:32:58,654 INFO     loading data
+2021-05-01 08:34:28,612 INFO     Training info:
+2021-05-01 08:34:28,613 INFO     Validation info:
+2021-05-01 08:34:28,615 INFO     pni: 8000
+2021-05-01 08:34:28,628 INFO     Test info:
+2021-05-01 08:34:28,628 INFO     pni: 8000
+2021-05-01 08:34:29,057 INFO     Model Parameter Configuration:
+2021-05-01 08:34:29,058 INFO     Parameter embeddings.0.weight: torch.Size([14951, 2000]), require_grad = True
+2021-05-01 08:34:29,058 INFO     Parameter embeddings.1.weight: torch.Size([2690, 2000]), require_grad = True
+2021-05-01 08:34:29,058 INFO     Parameter Number: 35282000
+2021-05-01 08:34:33,646 INFO     Loading checkpoint models/fb15k-betae...
+2021-05-01 08:34:34,132 INFO     tasks = pni
+2021-05-01 08:34:34,132 INFO     init_step = 99999
+2021-05-01 08:34:34,132 INFO     batch_size = 1000
+2021-05-01 08:34:34,132 INFO     hidden_dim = 1000
+2021-05-01 08:34:34,132 INFO     gamma = 12.000000
+2021-05-01 08:34:34,132 INFO     Evaluating on Valid Dataset...
+  0%|          | 0/8000 [00:00<?, ?it/s]2021-05-01 08:34:34,340 INFO     Evaluating the model... (0/8000)
+  0%|          | 1/8000 [00:00<27:21,  4.87it/s]  0%|          | 22/8000 [00:00<19:17,  6.89it/s]  1%|          | 46/8000 [00:00<13:38,  9.72it/s]  1%|          | 71/8000 [00:00<09:40, 13.66it/s]  1%|          | 96/8000 [00:00<06:54, 19.05it/s]  2%|▏         | 121/8000 [00:00<04:59, 26.35it/s]  2%|▏         | 147/8000 [00:00<03:37, 36.05it/s]  2%|▏         | 173/8000 [00:00<02:41, 48.56it/s]  2%|▎         | 200/8000 [00:01<02:01, 64.25it/s]  3%|▎         | 225/8000 [00:01<01:34, 82.57it/s]  3%|▎         | 251/8000 [00:01<01:14, 103.74it/s]  3%|▎         | 276/8000 [00:01<01:01, 125.74it/s]  4%|▍         | 302/8000 [00:01<00:51, 148.36it/s]  4%|▍         | 327/8000 [00:01<00:45, 168.54it/s]  4%|▍         | 353/8000 [00:01<00:40, 187.87it/s]  5%|▍         | 379/8000 [00:01<00:37, 202.30it/s]  5%|▌         | 405/8000 [00:01<00:35, 214.75it/s]  5%|▌         | 431/8000 [00:01<00:33, 225.99it/s]  6%|▌         | 457/8000 [00:02<00:32, 233.30it/s]  6%|▌         | 483/8000 [00:02<00:31, 237.40it/s]  6%|▋         | 509/8000 [00:02<00:31, 238.12it/s]  7%|▋         | 535/8000 [00:02<00:30, 242.07it/s]  7%|▋         | 562/8000 [00:02<00:30, 247.92it/s]  7%|▋         | 588/8000 [00:02<00:29, 250.64it/s]  8%|▊         | 614/8000 [00:02<00:29, 253.21it/s]  8%|▊         | 640/8000 [00:02<00:35, 208.54it/s]  8%|▊         | 663/8000 [00:02<00:34, 212.21it/s]  9%|▊         | 686/8000 [00:03<00:34, 212.46it/s]  9%|▉         | 708/8000 [00:03<00:36, 198.24it/s]  9%|▉         | 732/8000 [00:03<00:34, 207.96it/s]  9%|▉         | 757/8000 [00:03<00:33, 216.90it/s] 10%|▉         | 780/8000 [00:03<00:32, 220.57it/s] 10%|█         | 803/8000 [00:03<00:32, 222.34it/s] 10%|█         | 827/8000 [00:03<00:31, 225.31it/s] 11%|█         | 850/8000 [00:03<00:31, 225.85it/s] 11%|█         | 873/8000 [00:03<00:34, 209.43it/s] 11%|█         | 897/8000 [00:04<00:32, 215.93it/s] 11%|█▏        | 919/8000 [00:04<00:33, 214.23it/s] 12%|█▏        | 941/8000 [00:04<00:32, 215.82it/s] 12%|█▏        | 963/8000 [00:04<00:35, 196.62it/s] 12%|█▏        | 985/8000 [00:04<00:34, 203.04it/s]2021-05-01 08:34:38,665 INFO     Evaluating the model... (1000/8000)
+ 13%|█▎        | 1009/8000 [00:04<00:32, 212.00it/s] 13%|█▎        | 1031/8000 [00:04<00:33, 210.63it/s] 13%|█▎        | 1053/8000 [00:04<00:32, 213.08it/s] 13%|█▎        | 1077/8000 [00:04<00:31, 218.42it/s] 14%|█▍        | 1101/8000 [00:04<00:30, 224.12it/s] 14%|█▍        | 1125/8000 [00:05<00:30, 226.54it/s] 14%|█▍        | 1149/8000 [00:05<00:29, 229.32it/s] 15%|█▍        | 1173/8000 [00:05<00:29, 230.06it/s] 15%|█▍        | 1198/8000 [00:05<00:29, 229.82it/s] 15%|█▌        | 1222/8000 [00:05<00:29, 231.01it/s] 16%|█▌        | 1247/8000 [00:05<00:28, 234.15it/s] 16%|█▌        | 1271/8000 [00:05<00:29, 229.73it/s] 16%|█▌        | 1297/8000 [00:05<00:28, 236.20it/s] 17%|█▋        | 1323/8000 [00:05<00:27, 241.33it/s] 17%|█▋        | 1349/8000 [00:06<00:27, 243.99it/s] 17%|█▋        | 1375/8000 [00:06<00:26, 247.16it/s] 18%|█▊        | 1401/8000 [00:06<00:26, 248.68it/s] 18%|█▊        | 1427/8000 [00:06<00:26, 251.06it/s] 18%|█▊        | 1453/8000 [00:06<00:26, 245.29it/s] 18%|█▊        | 1479/8000 [00:06<00:26, 248.64it/s] 19%|█▉        | 1505/8000 [00:06<00:26, 249.43it/s] 19%|█▉        | 1531/8000 [00:06<00:25, 250.75it/s] 19%|█▉        | 1557/8000 [00:06<00:25, 249.87it/s] 20%|█▉        | 1583/8000 [00:06<00:25, 251.32it/s] 20%|██        | 1609/8000 [00:07<00:25, 250.59it/s] 20%|██        | 1635/8000 [00:07<00:25, 251.72it/s] 21%|██        | 1661/8000 [00:07<00:25, 251.25it/s] 21%|██        | 1687/8000 [00:07<00:25, 252.31it/s] 21%|██▏       | 1713/8000 [00:07<00:24, 251.89it/s] 22%|██▏       | 1739/8000 [00:07<00:24, 253.23it/s] 22%|██▏       | 1765/8000 [00:07<00:24, 251.56it/s] 22%|██▏       | 1792/8000 [00:07<00:24, 254.13it/s] 23%|██▎       | 1818/8000 [00:07<00:24, 254.91it/s] 23%|██▎       | 1844/8000 [00:07<00:24, 249.92it/s] 23%|██▎       | 1870/8000 [00:08<00:26, 230.68it/s] 24%|██▎       | 1894/8000 [00:08<00:27, 223.66it/s] 24%|██▍       | 1917/8000 [00:08<00:27, 222.72it/s] 24%|██▍       | 1940/8000 [00:08<00:29, 207.25it/s] 25%|██▍       | 1963/8000 [00:08<00:28, 212.15it/s] 25%|██▍       | 1986/8000 [00:08<00:27, 215.83it/s]2021-05-01 08:34:42,878 INFO     Evaluating the model... (2000/8000)
+ 25%|██▌       | 2008/8000 [00:08<00:27, 214.91it/s] 25%|██▌       | 2031/8000 [00:08<00:27, 219.12it/s] 26%|██▌       | 2055/8000 [00:08<00:26, 223.27it/s] 26%|██▌       | 2078/8000 [00:09<00:26, 223.43it/s] 26%|██▋       | 2101/8000 [00:09<00:26, 222.53it/s] 27%|██▋       | 2124/8000 [00:09<00:26, 220.91it/s] 27%|██▋       | 2148/8000 [00:09<00:26, 224.01it/s] 27%|██▋       | 2171/8000 [00:09<00:26, 223.89it/s] 27%|██▋       | 2194/8000 [00:09<00:25, 225.21it/s] 28%|██▊       | 2217/8000 [00:09<00:25, 226.23it/s] 28%|██▊       | 2240/8000 [00:09<00:25, 227.00it/s] 28%|██▊       | 2265/8000 [00:09<00:24, 230.84it/s] 29%|██▊       | 2289/8000 [00:10<00:27, 211.27it/s] 29%|██▉       | 2311/8000 [00:10<00:27, 209.07it/s] 29%|██▉       | 2334/8000 [00:10<00:26, 213.44it/s] 29%|██▉       | 2358/8000 [00:10<00:25, 219.70it/s] 30%|██▉       | 2382/8000 [00:10<00:25, 223.93it/s] 30%|███       | 2405/8000 [00:10<00:28, 195.37it/s] 30%|███       | 2426/8000 [00:10<00:28, 194.44it/s] 31%|███       | 2449/8000 [00:10<00:27, 202.34it/s] 31%|███       | 2475/8000 [00:10<00:25, 214.86it/s] 31%|███       | 2499/8000 [00:11<00:24, 221.71it/s] 32%|███▏      | 2525/8000 [00:11<00:23, 231.19it/s] 32%|███▏      | 2551/8000 [00:11<00:22, 237.02it/s] 32%|███▏      | 2577/8000 [00:11<00:22, 241.78it/s] 33%|███▎      | 2603/8000 [00:11<00:22, 244.48it/s] 33%|███▎      | 2628/8000 [00:11<00:22, 242.66it/s] 33%|███▎      | 2654/8000 [00:11<00:21, 247.07it/s] 33%|███▎      | 2679/8000 [00:11<00:21, 247.13it/s] 34%|███▍      | 2705/8000 [00:11<00:21, 248.32it/s] 34%|███▍      | 2731/8000 [00:11<00:21, 250.25it/s] 34%|███▍      | 2757/8000 [00:12<00:20, 252.68it/s] 35%|███▍      | 2783/8000 [00:12<00:20, 251.77it/s] 35%|███▌      | 2809/8000 [00:12<00:20, 253.61it/s] 35%|███▌      | 2835/8000 [00:12<00:20, 253.75it/s] 36%|███▌      | 2862/8000 [00:12<00:20, 256.52it/s] 36%|███▌      | 2888/8000 [00:12<00:19, 255.74it/s] 36%|███▋      | 2914/8000 [00:12<00:19, 256.39it/s] 37%|███▋      | 2940/8000 [00:12<00:19, 256.82it/s] 37%|███▋      | 2966/8000 [00:12<00:19, 257.20it/s] 37%|███▋      | 2992/8000 [00:12<00:19, 256.13it/s]2021-05-01 08:34:47,131 INFO     Evaluating the model... (3000/8000)
+ 38%|███▊      | 3018/8000 [00:13<00:19, 255.69it/s] 38%|███▊      | 3044/8000 [00:13<00:19, 252.40it/s] 38%|███▊      | 3070/8000 [00:13<00:19, 254.03it/s] 39%|███▊      | 3096/8000 [00:13<00:20, 242.84it/s] 39%|███▉      | 3121/8000 [00:13<00:20, 238.97it/s] 39%|███▉      | 3145/8000 [00:13<00:20, 238.09it/s] 40%|███▉      | 3169/8000 [00:13<00:20, 236.62it/s] 40%|███▉      | 3193/8000 [00:13<00:24, 197.33it/s] 40%|████      | 3215/8000 [00:13<00:23, 201.93it/s] 40%|████      | 3239/8000 [00:14<00:22, 210.06it/s] 41%|████      | 3261/8000 [00:14<00:22, 211.83it/s] 41%|████      | 3285/8000 [00:14<00:21, 217.35it/s] 41%|████▏     | 3308/8000 [00:14<00:22, 207.68it/s] 42%|████▏     | 3330/8000 [00:14<00:22, 203.96it/s] 42%|████▏     | 3354/8000 [00:14<00:21, 211.82it/s] 42%|████▏     | 3376/8000 [00:14<00:21, 214.05it/s] 42%|████▏     | 3398/8000 [00:14<00:22, 202.88it/s] 43%|████▎     | 3422/8000 [00:14<00:21, 209.48it/s] 43%|████▎     | 3444/8000 [00:15<00:21, 211.15it/s] 43%|████▎     | 3466/8000 [00:15<00:21, 212.90it/s] 44%|████▎     | 3488/8000 [00:15<00:21, 211.59it/s] 44%|████▍     | 3511/8000 [00:15<00:20, 216.37it/s] 44%|████▍     | 3535/8000 [00:15<00:20, 220.45it/s] 44%|████▍     | 3559/8000 [00:15<00:19, 225.75it/s] 45%|████▍     | 3583/8000 [00:15<00:19, 227.33it/s] 45%|████▌     | 3607/8000 [00:15<00:19, 229.21it/s] 45%|████▌     | 3631/8000 [00:15<00:18, 232.05it/s] 46%|████▌     | 3655/8000 [00:15<00:18, 232.33it/s] 46%|████▌     | 3680/8000 [00:16<00:18, 236.71it/s] 46%|████▋     | 3706/8000 [00:16<00:17, 241.09it/s] 47%|████▋     | 3731/8000 [00:16<00:17, 242.92it/s] 47%|████▋     | 3756/8000 [00:16<00:17, 244.21it/s] 47%|████▋     | 3781/8000 [00:16<00:17, 245.03it/s] 48%|████▊     | 3807/8000 [00:16<00:16, 248.91it/s] 48%|████▊     | 3834/8000 [00:16<00:16, 252.27it/s] 48%|████▊     | 3860/8000 [00:16<00:16, 251.69it/s] 49%|████▊     | 3887/8000 [00:16<00:16, 254.38it/s] 49%|████▉     | 3913/8000 [00:16<00:16, 255.41it/s] 49%|████▉     | 3939/8000 [00:17<00:15, 255.17it/s] 50%|████▉     | 3965/8000 [00:17<00:15, 256.29it/s] 50%|████▉     | 3991/8000 [00:17<00:15, 257.31it/s]2021-05-01 08:34:51,467 INFO     Evaluating the model... (4000/8000)
+ 50%|█████     | 4017/8000 [00:17<00:15, 253.79it/s] 51%|█████     | 4044/8000 [00:17<00:15, 256.28it/s] 51%|█████     | 4071/8000 [00:17<00:15, 257.81it/s] 51%|█████     | 4098/8000 [00:17<00:15, 259.02it/s] 52%|█████▏    | 4124/8000 [00:17<00:15, 258.17it/s] 52%|█████▏    | 4151/8000 [00:17<00:14, 259.46it/s] 52%|█████▏    | 4177/8000 [00:18<00:14, 259.11it/s] 53%|█████▎    | 4203/8000 [00:18<00:14, 258.50it/s] 53%|█████▎    | 4229/8000 [00:18<00:14, 258.28it/s] 53%|█████▎    | 4256/8000 [00:18<00:14, 259.21it/s] 54%|█████▎    | 4282/8000 [00:18<00:14, 257.40it/s] 54%|█████▍    | 4309/8000 [00:18<00:14, 258.47it/s] 54%|█████▍    | 4335/8000 [00:18<00:15, 241.57it/s] 55%|█████▍    | 4360/8000 [00:18<00:15, 236.24it/s] 55%|█████▍    | 4384/8000 [00:18<00:15, 236.09it/s] 55%|█████▌    | 4408/8000 [00:18<00:15, 233.54it/s] 55%|█████▌    | 4432/8000 [00:19<00:15, 229.09it/s] 56%|█████▌    | 4455/8000 [00:19<00:16, 211.37it/s] 56%|█████▌    | 4477/8000 [00:19<00:17, 203.85it/s] 56%|█████▌    | 4498/8000 [00:19<00:17, 205.16it/s] 57%|█████▋    | 4521/8000 [00:19<00:16, 210.57it/s] 57%|█████▋    | 4546/8000 [00:19<00:15, 218.75it/s] 57%|█████▋    | 4569/8000 [00:19<00:15, 218.13it/s] 57%|█████▋    | 4591/8000 [00:19<00:15, 217.94it/s] 58%|█████▊    | 4614/8000 [00:19<00:15, 220.67it/s] 58%|█████▊    | 4637/8000 [00:20<00:15, 220.53it/s] 58%|█████▊    | 4660/8000 [00:20<00:15, 218.03it/s] 59%|█████▊    | 4682/8000 [00:20<00:15, 217.15it/s] 59%|█████▉    | 4706/8000 [00:20<00:14, 222.35it/s] 59%|█████▉    | 4729/8000 [00:20<00:18, 178.18it/s] 59%|█████▉    | 4749/8000 [00:20<00:18, 172.19it/s] 60%|█████▉    | 4771/8000 [00:20<00:17, 183.21it/s] 60%|█████▉    | 4795/8000 [00:20<00:16, 195.80it/s] 60%|██████    | 4819/8000 [00:20<00:15, 207.18it/s] 61%|██████    | 4843/8000 [00:21<00:14, 214.23it/s] 61%|██████    | 4866/8000 [00:21<00:16, 192.47it/s] 61%|██████    | 4887/8000 [00:21<00:16, 191.00it/s] 61%|██████▏   | 4911/8000 [00:21<00:15, 203.43it/s] 62%|██████▏   | 4934/8000 [00:21<00:14, 209.59it/s] 62%|██████▏   | 4959/8000 [00:21<00:13, 219.99it/s] 62%|██████▏   | 4984/8000 [00:21<00:13, 227.01it/s]2021-05-01 08:34:55,943 INFO     Evaluating the model... (5000/8000)
+ 63%|██████▎   | 5010/8000 [00:21<00:12, 235.10it/s] 63%|██████▎   | 5036/8000 [00:21<00:12, 240.15it/s] 63%|██████▎   | 5062/8000 [00:22<00:11, 245.11it/s] 64%|██████▎   | 5088/8000 [00:22<00:11, 247.67it/s] 64%|██████▍   | 5114/8000 [00:22<00:11, 251.16it/s] 64%|██████▍   | 5140/8000 [00:22<00:11, 253.14it/s] 65%|██████▍   | 5166/8000 [00:22<00:11, 253.34it/s] 65%|██████▍   | 5193/8000 [00:22<00:10, 255.47it/s] 65%|██████▌   | 5220/8000 [00:22<00:10, 257.01it/s] 66%|██████▌   | 5247/8000 [00:22<00:10, 258.88it/s] 66%|██████▌   | 5273/8000 [00:22<00:10, 258.42it/s] 66%|██████▋   | 5300/8000 [00:22<00:10, 260.28it/s] 67%|██████▋   | 5327/8000 [00:23<00:10, 259.63it/s] 67%|██████▋   | 5353/8000 [00:23<00:10, 255.68it/s] 67%|██████▋   | 5380/8000 [00:23<00:10, 257.57it/s] 68%|██████▊   | 5407/8000 [00:23<00:10, 259.07it/s] 68%|██████▊   | 5433/8000 [00:23<00:09, 258.54it/s] 68%|██████▊   | 5460/8000 [00:23<00:09, 260.04it/s] 69%|██████▊   | 5487/8000 [00:23<00:09, 262.05it/s] 69%|██████▉   | 5514/8000 [00:23<00:09, 261.80it/s] 69%|██████▉   | 5541/8000 [00:23<00:09, 250.99it/s] 70%|██████▉   | 5567/8000 [00:24<00:09, 248.47it/s] 70%|██████▉   | 5592/8000 [00:24<00:09, 241.84it/s] 70%|███████   | 5617/8000 [00:24<00:09, 241.42it/s] 71%|███████   | 5642/8000 [00:24<00:09, 236.95it/s] 71%|███████   | 5666/8000 [00:24<00:10, 230.50it/s] 71%|███████   | 5691/8000 [00:24<00:09, 234.02it/s] 71%|███████▏  | 5715/8000 [00:24<00:10, 224.60it/s] 72%|███████▏  | 5738/8000 [00:24<00:10, 222.52it/s] 72%|███████▏  | 5761/8000 [00:24<00:10, 223.32it/s] 72%|███████▏  | 5786/8000 [00:24<00:09, 230.27it/s] 73%|███████▎  | 5810/8000 [00:25<00:09, 231.78it/s] 73%|███████▎  | 5834/8000 [00:25<00:09, 229.72it/s] 73%|███████▎  | 5858/8000 [00:25<00:09, 227.83it/s] 74%|███████▎  | 5883/8000 [00:25<00:09, 229.75it/s] 74%|███████▍  | 5907/8000 [00:25<00:09, 218.92it/s] 74%|███████▍  | 5930/8000 [00:25<00:10, 197.06it/s] 74%|███████▍  | 5954/8000 [00:25<00:09, 207.56it/s] 75%|███████▍  | 5977/8000 [00:25<00:09, 211.80it/s]2021-05-01 08:35:00,107 INFO     Evaluating the model... (6000/8000)
+ 75%|███████▌  | 6001/8000 [00:25<00:09, 210.76it/s] 75%|███████▌  | 6023/8000 [00:26<00:11, 171.42it/s] 76%|███████▌  | 6042/8000 [00:26<00:12, 159.08it/s] 76%|███████▌  | 6066/8000 [00:26<00:10, 176.16it/s] 76%|███████▌  | 6090/8000 [00:26<00:10, 188.51it/s] 76%|███████▋  | 6111/8000 [00:26<00:09, 193.84it/s] 77%|███████▋  | 6136/8000 [00:26<00:09, 206.99it/s] 77%|███████▋  | 6160/8000 [00:26<00:08, 214.30it/s] 77%|███████▋  | 6186/8000 [00:26<00:08, 226.04it/s] 78%|███████▊  | 6213/8000 [00:27<00:07, 235.48it/s] 78%|███████▊  | 6239/8000 [00:27<00:07, 241.49it/s] 78%|███████▊  | 6265/8000 [00:27<00:07, 246.47it/s] 79%|███████▊  | 6292/8000 [00:27<00:06, 250.73it/s] 79%|███████▉  | 6318/8000 [00:27<00:06, 252.30it/s] 79%|███████▉  | 6344/8000 [00:27<00:06, 254.32it/s] 80%|███████▉  | 6370/8000 [00:27<00:06, 254.07it/s] 80%|███████▉  | 6396/8000 [00:27<00:06, 254.43it/s] 80%|████████  | 6423/8000 [00:27<00:06, 256.59it/s] 81%|████████  | 6450/8000 [00:27<00:06, 258.29it/s] 81%|████████  | 6476/8000 [00:28<00:05, 256.55it/s] 81%|████████▏ | 6502/8000 [00:28<00:05, 253.97it/s] 82%|████████▏ | 6528/8000 [00:28<00:05, 255.42it/s] 82%|████████▏ | 6554/8000 [00:28<00:05, 255.38it/s] 82%|████████▏ | 6581/8000 [00:28<00:05, 257.16it/s] 83%|████████▎ | 6608/8000 [00:28<00:05, 258.30it/s] 83%|████████▎ | 6634/8000 [00:28<00:05, 257.58it/s] 83%|████████▎ | 6661/8000 [00:28<00:05, 259.24it/s] 84%|████████▎ | 6688/8000 [00:28<00:05, 259.77it/s] 84%|████████▍ | 6715/8000 [00:28<00:04, 259.92it/s] 84%|████████▍ | 6742/8000 [00:29<00:04, 260.97it/s] 85%|████████▍ | 6769/8000 [00:29<00:04, 248.91it/s] 85%|████████▍ | 6795/8000 [00:29<00:04, 242.99it/s] 85%|████████▌ | 6820/8000 [00:29<00:04, 237.93it/s] 86%|████████▌ | 6845/8000 [00:29<00:04, 239.20it/s] 86%|████████▌ | 6869/8000 [00:29<00:04, 235.98it/s] 86%|████████▌ | 6893/8000 [00:29<00:04, 230.62it/s] 86%|████████▋ | 6917/8000 [00:29<00:04, 227.73it/s] 87%|████████▋ | 6942/8000 [00:29<00:04, 233.43it/s] 87%|████████▋ | 6966/8000 [00:30<00:04, 227.04it/s] 87%|████████▋ | 6989/8000 [00:30<00:04, 221.82it/s]2021-05-01 08:35:04,351 INFO     Evaluating the model... (7000/8000)
+ 88%|████████▊ | 7014/8000 [00:30<00:04, 225.80it/s] 88%|████████▊ | 7037/8000 [00:30<00:04, 224.45it/s] 88%|████████▊ | 7060/8000 [00:30<00:04, 220.92it/s] 89%|████████▊ | 7085/8000 [00:30<00:04, 226.49it/s] 89%|████████▉ | 7108/8000 [00:30<00:04, 221.62it/s] 89%|████████▉ | 7131/8000 [00:30<00:03, 218.54it/s] 89%|████████▉ | 7155/8000 [00:30<00:03, 223.66it/s] 90%|████████▉ | 7178/8000 [00:31<00:03, 221.89it/s] 90%|█████████ | 7201/8000 [00:31<00:03, 218.75it/s] 90%|█████████ | 7223/8000 [00:31<00:03, 205.60it/s] 91%|█████████ | 7244/8000 [00:31<00:03, 189.67it/s] 91%|█████████ | 7268/8000 [00:31<00:03, 201.16it/s] 91%|█████████ | 7292/8000 [00:31<00:03, 211.26it/s] 91%|█████████▏| 7314/8000 [00:31<00:03, 188.35it/s] 92%|█████████▏| 7338/8000 [00:31<00:03, 200.01it/s] 92%|█████████▏| 7361/8000 [00:31<00:03, 208.00it/s] 92%|█████████▏| 7383/8000 [00:32<00:02, 207.74it/s] 93%|█████████▎| 7409/8000 [00:32<00:02, 219.68it/s] 93%|█████████▎| 7433/8000 [00:32<00:02, 224.01it/s] 93%|█████████▎| 7459/8000 [00:32<00:02, 232.05it/s] 94%|█████████▎| 7485/8000 [00:32<00:02, 239.44it/s] 94%|█████████▍| 7511/8000 [00:32<00:02, 243.74it/s] 94%|█████████▍| 7537/8000 [00:32<00:01, 245.98it/s] 95%|█████████▍| 7564/8000 [00:32<00:01, 250.05it/s] 95%|█████████▍| 7591/8000 [00:32<00:01, 253.32it/s] 95%|█████████▌| 7617/8000 [00:32<00:01, 255.22it/s] 96%|█████████▌| 7643/8000 [00:33<00:01, 255.88it/s] 96%|█████████▌| 7669/8000 [00:33<00:01, 256.58it/s] 96%|█████████▌| 7696/8000 [00:33<00:01, 258.11it/s] 97%|█████████▋| 7723/8000 [00:33<00:01, 258.65it/s] 97%|█████████▋| 7749/8000 [00:33<00:00, 258.83it/s] 97%|█████████▋| 7775/8000 [00:33<00:00, 256.73it/s] 98%|█████████▊| 7801/8000 [00:33<00:00, 256.50it/s] 98%|█████████▊| 7828/8000 [00:33<00:00, 258.46it/s] 98%|█████████▊| 7855/8000 [00:33<00:00, 259.20it/s] 99%|█████████▊| 7882/8000 [00:33<00:00, 260.23it/s] 99%|█████████▉| 7909/8000 [00:34<00:00, 259.10it/s] 99%|█████████▉| 7935/8000 [00:34<00:00, 259.25it/s]100%|█████████▉| 7961/8000 [00:34<00:00, 257.47it/s]100%|█████████▉| 7987/8000 [00:34<00:00, 255.53it/s]100%|██████████| 8000/8000 [00:34<00:00, 232.30it/s]
+2021-05-01 08:35:08,579 INFO     Valid pni MRR at step 99999: 0.000386
+2021-05-01 08:35:08,579 INFO     Valid pni HITS1 at step 99999: 0.000034
+2021-05-01 08:35:08,579 INFO     Valid pni HITS3 at step 99999: 0.000364
+2021-05-01 08:35:08,579 INFO     Valid pni HITS10 at step 99999: 0.000449
+2021-05-01 08:35:08,579 INFO     Valid pni num_queries at step 99999: 8000.000000
+2021-05-01 08:35:08,581 INFO     Valid average MRR at step 99999: 0.000386
+2021-05-01 08:35:08,581 INFO     Valid average HITS1 at step 99999: 0.000034
+2021-05-01 08:35:08,582 INFO     Valid average HITS3 at step 99999: 0.000364
+2021-05-01 08:35:08,582 INFO     Valid average HITS10 at step 99999: 0.000449
+2021-05-01 08:35:08,582 INFO     Evaluating on Test Dataset...
+  0%|          | 0/8000 [00:00<?, ?it/s]2021-05-01 08:35:08,589 INFO     Evaluating the model... (0/8000)
+  0%|          | 26/8000 [00:00<00:32, 243.07it/s]  1%|          | 47/8000 [00:00<00:34, 230.65it/s]  1%|          | 67/8000 [00:00<00:36, 219.59it/s]  1%|          | 91/8000 [00:00<00:35, 223.42it/s]  1%|▏         | 114/8000 [00:00<00:35, 225.06it/s]  2%|▏         | 137/8000 [00:00<00:34, 225.80it/s]  2%|▏         | 159/8000 [00:00<00:35, 223.11it/s]  2%|▏         | 183/8000 [00:00<00:34, 226.69it/s]  3%|▎         | 208/8000 [00:00<00:33, 231.31it/s]  3%|▎         | 231/8000 [00:01<00:34, 227.87it/s]  3%|▎         | 254/8000 [00:01<00:34, 222.97it/s]  3%|▎         | 278/8000 [00:01<00:34, 222.55it/s]  4%|▍         | 302/8000 [00:01<00:34, 225.24it/s]  4%|▍         | 325/8000 [00:01<00:36, 211.08it/s]  4%|▍         | 347/8000 [00:01<00:37, 203.27it/s]  5%|▍         | 370/8000 [00:01<00:36, 209.28it/s]  5%|▍         | 393/8000 [00:01<00:35, 214.88it/s]  5%|▌         | 416/8000 [00:01<00:34, 218.01it/s]  5%|▌         | 438/8000 [00:01<00:34, 218.22it/s]  6%|▌         | 461/8000 [00:02<00:34, 219.44it/s]  6%|▌         | 485/8000 [00:02<00:33, 225.10it/s]  6%|▋         | 508/8000 [00:02<00:33, 220.58it/s]  7%|▋         | 533/8000 [00:02<00:32, 226.29it/s]  7%|▋         | 558/8000 [00:02<00:32, 230.50it/s]  7%|▋         | 583/8000 [00:02<00:31, 233.54it/s]  8%|▊         | 607/8000 [00:02<00:31, 233.13it/s]  8%|▊         | 632/8000 [00:02<00:31, 236.25it/s]  8%|▊         | 656/8000 [00:02<00:31, 232.48it/s]  9%|▊         | 682/8000 [00:03<00:30, 240.00it/s]  9%|▉         | 707/8000 [00:03<00:30, 240.13it/s]  9%|▉         | 732/8000 [00:03<00:30, 241.70it/s]  9%|▉         | 758/8000 [00:03<00:29, 245.96it/s] 10%|▉         | 784/8000 [00:03<00:28, 249.95it/s] 10%|█         | 810/8000 [00:03<00:28, 251.37it/s] 10%|█         | 836/8000 [00:03<00:28, 251.46it/s] 11%|█         | 862/8000 [00:03<00:28, 252.73it/s] 11%|█         | 888/8000 [00:03<00:27, 254.09it/s] 11%|█▏        | 914/8000 [00:03<00:27, 255.38it/s] 12%|█▏        | 940/8000 [00:04<00:27, 256.36it/s] 12%|█▏        | 966/8000 [00:04<00:27, 257.22it/s] 12%|█▏        | 992/8000 [00:04<00:27, 256.84it/s]2021-05-01 08:35:12,867 INFO     Evaluating the model... (1000/8000)
+ 13%|█▎        | 1018/8000 [00:04<00:27, 257.56it/s] 13%|█▎        | 1044/8000 [00:04<00:27, 257.37it/s] 13%|█▎        | 1070/8000 [00:04<00:26, 257.68it/s] 14%|█▎        | 1096/8000 [00:04<00:27, 255.28it/s] 14%|█▍        | 1122/8000 [00:04<00:26, 255.18it/s] 14%|█▍        | 1149/8000 [00:04<00:26, 257.05it/s] 15%|█▍        | 1176/8000 [00:04<00:26, 258.73it/s] 15%|█▌        | 1203/8000 [00:05<00:26, 260.12it/s] 15%|█▌        | 1230/8000 [00:05<00:26, 259.64it/s] 16%|█▌        | 1256/8000 [00:05<00:26, 258.82it/s] 16%|█▌        | 1282/8000 [00:05<00:26, 256.69it/s] 16%|█▋        | 1308/8000 [00:05<00:26, 248.43it/s] 17%|█▋        | 1333/8000 [00:05<00:27, 246.10it/s] 17%|█▋        | 1358/8000 [00:05<00:31, 208.71it/s] 17%|█▋        | 1380/8000 [00:05<00:35, 186.95it/s] 18%|█▊        | 1405/8000 [00:06<00:32, 200.56it/s] 18%|█▊        | 1427/8000 [00:06<00:35, 183.05it/s] 18%|█▊        | 1448/8000 [00:06<00:34, 190.24it/s] 18%|█▊        | 1472/8000 [00:06<00:32, 200.61it/s] 19%|█▊        | 1493/8000 [00:06<00:32, 201.89it/s] 19%|█▉        | 1517/8000 [00:06<00:30, 209.90it/s] 19%|█▉        | 1539/8000 [00:06<00:30, 212.23it/s] 20%|█▉        | 1561/8000 [00:06<00:32, 199.93it/s] 20%|█▉        | 1584/8000 [00:06<00:30, 207.46it/s] 20%|██        | 1606/8000 [00:06<00:30, 207.53it/s] 20%|██        | 1627/8000 [00:07<00:31, 204.30it/s] 21%|██        | 1648/8000 [00:07<00:31, 204.48it/s] 21%|██        | 1672/8000 [00:07<00:29, 212.33it/s] 21%|██        | 1694/8000 [00:07<00:30, 204.23it/s] 21%|██▏       | 1715/8000 [00:07<00:30, 203.99it/s] 22%|██▏       | 1738/8000 [00:07<00:29, 208.80it/s] 22%|██▏       | 1760/8000 [00:07<00:29, 210.28it/s] 22%|██▏       | 1784/8000 [00:07<00:28, 216.66it/s] 23%|██▎       | 1808/8000 [00:07<00:27, 222.67it/s] 23%|██▎       | 1832/8000 [00:08<00:27, 226.26it/s] 23%|██▎       | 1855/8000 [00:08<00:27, 227.04it/s] 23%|██▎       | 1878/8000 [00:08<00:30, 203.76it/s] 24%|██▎       | 1899/8000 [00:08<00:31, 194.63it/s] 24%|██▍       | 1925/8000 [00:08<00:29, 208.92it/s] 24%|██▍       | 1951/8000 [00:08<00:27, 220.71it/s] 25%|██▍       | 1977/8000 [00:08<00:26, 229.04it/s]2021-05-01 08:35:17,398 INFO     Evaluating the model... (2000/8000)
+ 25%|██▌       | 2001/8000 [00:08<00:26, 225.24it/s] 25%|██▌       | 2024/8000 [00:08<00:26, 225.54it/s] 26%|██▌       | 2050/8000 [00:09<00:25, 234.23it/s] 26%|██▌       | 2076/8000 [00:09<00:24, 239.02it/s] 26%|██▋       | 2102/8000 [00:09<00:24, 244.70it/s] 27%|██▋       | 2128/8000 [00:09<00:23, 247.52it/s] 27%|██▋       | 2154/8000 [00:09<00:23, 250.50it/s] 27%|██▋       | 2180/8000 [00:09<00:23, 252.61it/s] 28%|██▊       | 2206/8000 [00:09<00:22, 253.43it/s] 28%|██▊       | 2232/8000 [00:09<00:22, 254.66it/s] 28%|██▊       | 2258/8000 [00:09<00:22, 255.47it/s] 29%|██▊       | 2284/8000 [00:09<00:23, 244.41it/s] 29%|██▉       | 2309/8000 [00:10<00:23, 244.35it/s] 29%|██▉       | 2335/8000 [00:10<00:22, 247.53it/s] 30%|██▉       | 2361/8000 [00:10<00:22, 250.85it/s] 30%|██▉       | 2387/8000 [00:10<00:22, 252.19it/s] 30%|███       | 2413/8000 [00:10<00:22, 252.61it/s] 30%|███       | 2439/8000 [00:10<00:21, 254.56it/s] 31%|███       | 2465/8000 [00:10<00:21, 251.61it/s] 31%|███       | 2492/8000 [00:10<00:21, 253.05it/s] 31%|███▏      | 2518/8000 [00:10<00:21, 253.48it/s] 32%|███▏      | 2544/8000 [00:10<00:22, 237.25it/s] 32%|███▏      | 2568/8000 [00:11<00:23, 229.33it/s] 32%|███▏      | 2592/8000 [00:11<00:23, 230.73it/s] 33%|███▎      | 2616/8000 [00:11<00:23, 228.78it/s] 33%|███▎      | 2639/8000 [00:11<00:23, 226.46it/s] 33%|███▎      | 2662/8000 [00:11<00:23, 226.38it/s] 34%|███▎      | 2686/8000 [00:11<00:23, 227.59it/s] 34%|███▍      | 2709/8000 [00:11<00:23, 228.28it/s] 34%|███▍      | 2732/8000 [00:11<00:23, 222.42it/s] 34%|███▍      | 2755/8000 [00:11<00:23, 220.24it/s] 35%|███▍      | 2778/8000 [00:12<00:23, 219.50it/s] 35%|███▌      | 2802/8000 [00:12<00:23, 223.20it/s] 35%|███▌      | 2825/8000 [00:12<00:23, 222.45it/s] 36%|███▌      | 2848/8000 [00:12<00:23, 218.38it/s] 36%|███▌      | 2872/8000 [00:12<00:23, 221.24it/s] 36%|███▌      | 2895/8000 [00:12<00:23, 221.24it/s] 36%|███▋      | 2918/8000 [00:12<00:23, 217.93it/s] 37%|███▋      | 2940/8000 [00:12<00:23, 218.06it/s] 37%|███▋      | 2964/8000 [00:12<00:22, 221.97it/s] 37%|███▋      | 2987/8000 [00:12<00:22, 222.61it/s]2021-05-01 08:35:21,634 INFO     Evaluating the model... (3000/8000)
+ 38%|███▊      | 3010/8000 [00:13<00:22, 218.07it/s] 38%|███▊      | 3034/8000 [00:13<00:22, 221.95it/s] 38%|███▊      | 3058/8000 [00:13<00:21, 225.38it/s] 39%|███▊      | 3082/8000 [00:13<00:21, 229.24it/s] 39%|███▉      | 3106/8000 [00:13<00:21, 229.82it/s] 39%|███▉      | 3131/8000 [00:13<00:20, 233.72it/s] 39%|███▉      | 3155/8000 [00:13<00:21, 226.81it/s] 40%|███▉      | 3181/8000 [00:13<00:20, 234.31it/s] 40%|████      | 3206/8000 [00:13<00:20, 237.43it/s] 40%|████      | 3232/8000 [00:14<00:19, 243.08it/s] 41%|████      | 3259/8000 [00:14<00:19, 249.00it/s] 41%|████      | 3285/8000 [00:14<00:18, 251.60it/s] 41%|████▏     | 3312/8000 [00:14<00:18, 255.02it/s] 42%|████▏     | 3338/8000 [00:14<00:18, 255.31it/s] 42%|████▏     | 3365/8000 [00:14<00:17, 257.62it/s] 42%|████▏     | 3391/8000 [00:14<00:17, 256.84it/s] 43%|████▎     | 3417/8000 [00:14<00:17, 256.27it/s] 43%|████▎     | 3443/8000 [00:14<00:18, 245.01it/s] 43%|████▎     | 3469/8000 [00:14<00:18, 248.54it/s] 44%|████▎     | 3495/8000 [00:15<00:17, 251.22it/s] 44%|████▍     | 3521/8000 [00:15<00:17, 253.68it/s] 44%|████▍     | 3547/8000 [00:15<00:17, 255.23it/s] 45%|████▍     | 3573/8000 [00:15<00:17, 254.06it/s] 45%|████▌     | 3600/8000 [00:15<00:17, 255.86it/s] 45%|████▌     | 3626/8000 [00:15<00:17, 255.39it/s] 46%|████▌     | 3653/8000 [00:15<00:16, 256.87it/s] 46%|████▌     | 3679/8000 [00:15<00:16, 254.53it/s] 46%|████▋     | 3705/8000 [00:15<00:16, 255.72it/s] 47%|████▋     | 3731/8000 [00:15<00:16, 255.14it/s] 47%|████▋     | 3757/8000 [00:16<00:16, 253.40it/s] 47%|████▋     | 3783/8000 [00:16<00:16, 252.34it/s] 48%|████▊     | 3809/8000 [00:16<00:17, 242.94it/s] 48%|████▊     | 3834/8000 [00:16<00:17, 240.12it/s] 48%|████▊     | 3859/8000 [00:16<00:17, 239.83it/s] 49%|████▊     | 3884/8000 [00:16<00:17, 232.67it/s] 49%|████▉     | 3908/8000 [00:16<00:18, 227.15it/s] 49%|████▉     | 3932/8000 [00:16<00:17, 230.75it/s] 49%|████▉     | 3956/8000 [00:16<00:17, 229.04it/s] 50%|████▉     | 3979/8000 [00:17<00:17, 229.01it/s]2021-05-01 08:35:25,743 INFO     Evaluating the model... (4000/8000)
+ 50%|█████     | 4002/8000 [00:17<00:18, 217.47it/s] 50%|█████     | 4024/8000 [00:17<00:19, 202.16it/s] 51%|█████     | 4045/8000 [00:17<00:20, 195.53it/s] 51%|█████     | 4069/8000 [00:17<00:19, 206.52it/s] 51%|█████     | 4091/8000 [00:17<00:18, 209.38it/s] 51%|█████▏    | 4114/8000 [00:17<00:18, 213.87it/s] 52%|█████▏    | 4136/8000 [00:17<00:22, 169.26it/s] 52%|█████▏    | 4157/8000 [00:18<00:21, 178.64it/s] 52%|█████▏    | 4181/8000 [00:18<00:19, 191.83it/s] 53%|█████▎    | 4203/8000 [00:18<00:19, 198.75it/s] 53%|█████▎    | 4227/8000 [00:18<00:18, 208.72it/s] 53%|█████▎    | 4249/8000 [00:18<00:17, 210.82it/s] 53%|█████▎    | 4272/8000 [00:18<00:17, 215.50it/s] 54%|█████▎    | 4297/8000 [00:18<00:16, 223.02it/s] 54%|█████▍    | 4320/8000 [00:18<00:16, 223.94it/s] 54%|█████▍    | 4344/8000 [00:18<00:15, 228.52it/s] 55%|█████▍    | 4369/8000 [00:18<00:15, 232.22it/s] 55%|█████▍    | 4393/8000 [00:19<00:16, 221.19it/s] 55%|█████▌    | 4419/8000 [00:19<00:15, 231.03it/s] 56%|█████▌    | 4443/8000 [00:19<00:15, 232.73it/s] 56%|█████▌    | 4469/8000 [00:19<00:14, 240.08it/s] 56%|█████▌    | 4495/8000 [00:19<00:14, 243.95it/s] 57%|█████▋    | 4521/8000 [00:19<00:14, 248.29it/s] 57%|█████▋    | 4547/8000 [00:19<00:13, 250.67it/s] 57%|█████▋    | 4573/8000 [00:19<00:13, 252.93it/s] 57%|█████▋    | 4599/8000 [00:19<00:13, 251.25it/s] 58%|█████▊    | 4625/8000 [00:19<00:13, 253.33it/s] 58%|█████▊    | 4651/8000 [00:20<00:13, 253.98it/s] 58%|█████▊    | 4678/8000 [00:20<00:12, 256.02it/s] 59%|█████▉    | 4704/8000 [00:20<00:12, 256.55it/s] 59%|█████▉    | 4730/8000 [00:20<00:13, 245.74it/s] 59%|█████▉    | 4756/8000 [00:20<00:13, 248.21it/s] 60%|█████▉    | 4782/8000 [00:20<00:12, 251.52it/s] 60%|██████    | 4808/8000 [00:20<00:12, 252.44it/s] 60%|██████    | 4834/8000 [00:20<00:12, 254.26it/s] 61%|██████    | 4860/8000 [00:20<00:12, 253.17it/s] 61%|██████    | 4886/8000 [00:21<00:12, 253.34it/s] 61%|██████▏   | 4912/8000 [00:21<00:12, 251.49it/s] 62%|██████▏   | 4938/8000 [00:21<00:12, 251.92it/s] 62%|██████▏   | 4964/8000 [00:21<00:12, 252.65it/s] 62%|██████▏   | 4991/8000 [00:21<00:11, 256.26it/s]2021-05-01 08:35:30,039 INFO     Evaluating the model... (5000/8000)
+ 63%|██████▎   | 5017/8000 [00:21<00:11, 256.11it/s] 63%|██████▎   | 5043/8000 [00:21<00:11, 247.97it/s] 63%|██████▎   | 5068/8000 [00:21<00:12, 239.62it/s] 64%|██████▎   | 5093/8000 [00:21<00:12, 240.93it/s] 64%|██████▍   | 5118/8000 [00:21<00:12, 231.69it/s] 64%|██████▍   | 5142/8000 [00:22<00:12, 224.77it/s] 65%|██████▍   | 5165/8000 [00:22<00:12, 225.67it/s] 65%|██████▍   | 5188/8000 [00:22<00:14, 195.45it/s] 65%|██████▌   | 5213/8000 [00:22<00:13, 207.61it/s] 65%|██████▌   | 5235/8000 [00:22<00:13, 210.93it/s] 66%|██████▌   | 5258/8000 [00:22<00:12, 214.16it/s] 66%|██████▌   | 5280/8000 [00:22<00:12, 212.40it/s] 66%|██████▋   | 5305/8000 [00:22<00:12, 218.28it/s] 67%|██████▋   | 5328/8000 [00:22<00:12, 218.12it/s] 67%|██████▋   | 5351/8000 [00:23<00:11, 221.47it/s] 67%|██████▋   | 5374/8000 [00:23<00:11, 219.52it/s] 67%|██████▋   | 5399/8000 [00:23<00:11, 225.63it/s] 68%|██████▊   | 5422/8000 [00:23<00:11, 222.19it/s] 68%|██████▊   | 5445/8000 [00:23<00:11, 221.25it/s] 68%|██████▊   | 5468/8000 [00:23<00:11, 221.79it/s] 69%|██████▊   | 5491/8000 [00:23<00:11, 223.73it/s] 69%|██████▉   | 5514/8000 [00:23<00:11, 220.86it/s] 69%|██████▉   | 5539/8000 [00:23<00:10, 226.86it/s] 70%|██████▉   | 5563/8000 [00:23<00:10, 230.32it/s] 70%|██████▉   | 5588/8000 [00:24<00:10, 233.66it/s] 70%|███████   | 5613/8000 [00:24<00:10, 235.86it/s] 70%|███████   | 5637/8000 [00:24<00:10, 235.20it/s] 71%|███████   | 5661/8000 [00:24<00:10, 230.33it/s] 71%|███████   | 5687/8000 [00:24<00:09, 237.51it/s] 71%|███████▏  | 5711/8000 [00:24<00:09, 230.97it/s] 72%|███████▏  | 5736/8000 [00:24<00:09, 234.38it/s] 72%|███████▏  | 5762/8000 [00:24<00:09, 239.81it/s] 72%|███████▏  | 5788/8000 [00:24<00:09, 244.09it/s] 73%|███████▎  | 5814/8000 [00:25<00:08, 248.56it/s] 73%|███████▎  | 5841/8000 [00:25<00:08, 252.12it/s] 73%|███████▎  | 5867/8000 [00:25<00:08, 254.26it/s] 74%|███████▎  | 5893/8000 [00:25<00:08, 249.92it/s] 74%|███████▍  | 5919/8000 [00:25<00:08, 252.05it/s] 74%|███████▍  | 5945/8000 [00:25<00:08, 253.73it/s] 75%|███████▍  | 5971/8000 [00:25<00:08, 252.76it/s] 75%|███████▍  | 5997/8000 [00:25<00:07, 253.99it/s]2021-05-01 08:35:34,353 INFO     Evaluating the model... (6000/8000)
+ 75%|███████▌  | 6023/8000 [00:25<00:07, 254.60it/s] 76%|███████▌  | 6049/8000 [00:25<00:07, 251.65it/s] 76%|███████▌  | 6075/8000 [00:26<00:07, 252.55it/s] 76%|███████▋  | 6101/8000 [00:26<00:07, 251.07it/s] 77%|███████▋  | 6127/8000 [00:26<00:07, 250.63it/s] 77%|███████▋  | 6153/8000 [00:26<00:07, 252.79it/s] 77%|███████▋  | 6179/8000 [00:26<00:07, 253.88it/s] 78%|███████▊  | 6205/8000 [00:26<00:07, 255.45it/s] 78%|███████▊  | 6231/8000 [00:26<00:06, 254.93it/s] 78%|███████▊  | 6257/8000 [00:26<00:06, 256.22it/s] 79%|███████▊  | 6283/8000 [00:26<00:06, 251.14it/s] 79%|███████▉  | 6309/8000 [00:26<00:06, 244.49it/s] 79%|███████▉  | 6334/8000 [00:27<00:06, 243.55it/s] 79%|███████▉  | 6359/8000 [00:27<00:06, 234.57it/s] 80%|███████▉  | 6383/8000 [00:27<00:07, 229.78it/s] 80%|████████  | 6407/8000 [00:27<00:07, 226.75it/s] 80%|████████  | 6431/8000 [00:27<00:06, 229.97it/s] 81%|████████  | 6455/8000 [00:27<00:06, 227.76it/s] 81%|████████  | 6479/8000 [00:27<00:06, 230.18it/s] 81%|████████▏ | 6503/8000 [00:27<00:06, 228.94it/s] 82%|████████▏ | 6526/8000 [00:27<00:06, 224.48it/s] 82%|████████▏ | 6550/8000 [00:28<00:06, 228.68it/s] 82%|████████▏ | 6573/8000 [00:28<00:06, 223.49it/s] 82%|████████▏ | 6598/8000 [00:28<00:06, 226.43it/s] 83%|████████▎ | 6621/8000 [00:28<00:06, 206.17it/s] 83%|████████▎ | 6643/8000 [00:28<00:06, 207.55it/s] 83%|████████▎ | 6666/8000 [00:28<00:06, 212.85it/s] 84%|████████▎ | 6688/8000 [00:28<00:06, 214.57it/s] 84%|████████▍ | 6712/8000 [00:28<00:05, 220.04it/s] 84%|████████▍ | 6735/8000 [00:28<00:05, 220.14it/s] 84%|████████▍ | 6758/8000 [00:29<00:05, 221.05it/s] 85%|████████▍ | 6783/8000 [00:29<00:05, 227.19it/s] 85%|████████▌ | 6806/8000 [00:29<00:05, 224.24it/s] 85%|████████▌ | 6830/8000 [00:29<00:05, 227.55it/s] 86%|████████▌ | 6855/8000 [00:29<00:04, 231.28it/s] 86%|████████▌ | 6879/8000 [00:29<00:04, 233.40it/s] 86%|████████▋ | 6903/8000 [00:29<00:04, 233.66it/s] 87%|████████▋ | 6927/8000 [00:29<00:04, 235.26it/s] 87%|████████▋ | 6951/8000 [00:29<00:04, 222.42it/s] 87%|████████▋ | 6976/8000 [00:29<00:04, 229.46it/s]2021-05-01 08:35:38,652 INFO     Evaluating the model... (7000/8000)
+ 88%|████████▊ | 7001/8000 [00:30<00:04, 235.11it/s] 88%|████████▊ | 7026/8000 [00:30<00:04, 239.02it/s] 88%|████████▊ | 7052/8000 [00:30<00:03, 243.04it/s] 88%|████████▊ | 7078/8000 [00:30<00:03, 247.59it/s] 89%|████████▉ | 7105/8000 [00:30<00:03, 251.47it/s] 89%|████████▉ | 7131/8000 [00:30<00:03, 251.26it/s] 89%|████████▉ | 7158/8000 [00:30<00:03, 253.91it/s] 90%|████████▉ | 7184/8000 [00:30<00:03, 255.66it/s] 90%|█████████ | 7210/8000 [00:30<00:03, 254.55it/s] 90%|█████████ | 7236/8000 [00:30<00:02, 254.86it/s] 91%|█████████ | 7262/8000 [00:31<00:02, 251.32it/s] 91%|█████████ | 7288/8000 [00:31<00:02, 253.56it/s] 91%|█████████▏| 7314/8000 [00:31<00:02, 255.24it/s] 92%|█████████▏| 7340/8000 [00:31<00:02, 255.51it/s] 92%|█████████▏| 7366/8000 [00:31<00:02, 254.26it/s] 92%|█████████▏| 7392/8000 [00:31<00:02, 253.40it/s] 93%|█████████▎| 7418/8000 [00:31<00:02, 251.35it/s] 93%|█████████▎| 7444/8000 [00:31<00:02, 251.40it/s] 93%|█████████▎| 7470/8000 [00:31<00:02, 250.38it/s] 94%|█████████▎| 7496/8000 [00:32<00:02, 244.15it/s] 94%|█████████▍| 7522/8000 [00:32<00:01, 246.03it/s] 94%|█████████▍| 7547/8000 [00:32<00:01, 246.37it/s] 95%|█████████▍| 7572/8000 [00:32<00:01, 243.20it/s] 95%|█████████▍| 7597/8000 [00:32<00:01, 236.74it/s] 95%|█████████▌| 7622/8000 [00:32<00:01, 237.81it/s] 96%|█████████▌| 7646/8000 [00:32<00:01, 232.21it/s] 96%|█████████▌| 7670/8000 [00:32<00:01, 228.53it/s] 96%|█████████▌| 7693/8000 [00:32<00:01, 226.62it/s] 96%|█████████▋| 7718/8000 [00:32<00:01, 232.14it/s] 97%|█████████▋| 7742/8000 [00:33<00:01, 212.46it/s] 97%|█████████▋| 7764/8000 [00:33<00:01, 204.69it/s] 97%|█████████▋| 7785/8000 [00:33<00:01, 202.09it/s] 98%|█████████▊| 7807/8000 [00:33<00:00, 206.30it/s] 98%|█████████▊| 7830/8000 [00:33<00:00, 210.30it/s] 98%|█████████▊| 7853/8000 [00:33<00:00, 215.02it/s] 98%|█████████▊| 7876/8000 [00:33<00:00, 216.83it/s] 99%|█████████▊| 7899/8000 [00:33<00:00, 218.01it/s] 99%|█████████▉| 7923/8000 [00:33<00:00, 223.97it/s] 99%|█████████▉| 7946/8000 [00:34<00:00, 223.36it/s]100%|█████████▉| 7969/8000 [00:34<00:00, 219.82it/s]100%|█████████▉| 7992/8000 [00:34<00:00, 222.51it/s]100%|██████████| 8000/8000 [00:34<00:00, 233.18it/s]
+2021-05-01 08:35:42,899 INFO     Test pni MRR at step 99999: 0.000414
+2021-05-01 08:35:42,899 INFO     Test pni HITS1 at step 99999: 0.000214
+2021-05-01 08:35:42,899 INFO     Test pni HITS3 at step 99999: 0.000263
+2021-05-01 08:35:42,899 INFO     Test pni HITS10 at step 99999: 0.000406
+2021-05-01 08:35:42,899 INFO     Test pni num_queries at step 99999: 8000.000000
+2021-05-01 08:35:42,900 INFO     Test average MRR at step 99999: 0.000414
+2021-05-01 08:35:42,901 INFO     Test average HITS1 at step 99999: 0.000214
+2021-05-01 08:35:42,902 INFO     Test average HITS3 at step 99999: 0.000263
+2021-05-01 08:35:42,902 INFO     Test average HITS10 at step 99999: 0.000406
+2021-05-01 08:35:42,902 INFO     Training finished!!
 main.py --do_valid --do_test --data_path data/FB15k-betae -n 1 -b 1000 -d 1000 -lr 0.1 --disable_warmup --max_steps 1000 --cpu_num 0 --geo cqd --valid_steps 20 --tasks pni --print_on_screen --test_batch_size 1 --optimizer Adagrad --reg_weight 0.05 --log_steps 5 --checkpoint_path models/fb15k-betae --cqd d2 --cqd-t-norm prod --cqd-normalize --cqd-sigmoid --cqd-k 64 --no-save --cuda
 overwritting args.save_path
 logging to models/fb15k-betae
 99999
-Traceback (most recent call last):
-  File "main.py", line 508, in <module>
-    main(parse_args())
-  File "main.py", line 497, in main
-    valid_all_metrics = evaluate(model, valid_easy_answers, valid_hard_answers, args, valid_dataloader, query_name_dict, 'Valid', step, writer)
-  File "main.py", line 165, in evaluate
-    metrics = KGReasoning.test_step(model, tp_answers, fn_answers, args, dataloader, query_name_dict)
-  File "/home/pminervi/workspace/KGReasoning/models.py", line 657, in test_step
-    argsort = torch.argsort(negative_logit, dim=1, descending=True)
-RuntimeError: transform: failed to synchronize: cudaErrorAssert: device-side assert triggered
