@@ -1,0 +1,30 @@
+2021-05-01 18:37:40,569 INFO     ---------------------------------------------------------------------------------------------
+2021-05-01 18:37:40,569 INFO     Geo: cqd
+2021-05-01 18:37:40,570 INFO     Data Path: data/NELL-q2b
+2021-05-01 18:37:40,570 INFO     #entity: 63361
+2021-05-01 18:37:40,570 INFO     #relation: 400
+2021-05-01 18:37:40,570 INFO     #max steps: 1000
+2021-05-01 18:37:40,570 INFO     Evaluate unoins using: DNF
+2021-05-01 18:37:40,570 INFO     loading data
+2021-05-01 18:37:54,356 INFO     Training info:
+2021-05-01 18:37:54,357 INFO     Validation info:
+2021-05-01 18:37:54,357 INFO     Test info:
+2021-05-01 18:37:56,352 INFO     Model Parameter Configuration:
+2021-05-01 18:37:56,352 INFO     Parameter embeddings.0.weight: torch.Size([63361, 2000]), require_grad = True
+2021-05-01 18:37:56,353 INFO     Parameter embeddings.1.weight: torch.Size([400, 2000]), require_grad = True
+2021-05-01 18:37:56,353 INFO     Parameter Number: 127522000
+2021-05-01 18:37:59,856 INFO     Loading checkpoint models/nell-q2b...
+2021-05-01 18:38:01,097 INFO     tasks = inp
+2021-05-01 18:38:01,097 INFO     init_step = 99999
+2021-05-01 18:38:01,097 INFO     batch_size = 1000
+2021-05-01 18:38:01,097 INFO     hidden_dim = 1000
+2021-05-01 18:38:01,097 INFO     gamma = 12.000000
+2021-05-01 18:38:01,098 INFO     Evaluating on Valid Dataset...
+0it [00:00, ?it/s]
+2021-05-01 18:38:01,100 INFO     Evaluating on Test Dataset...
+0it [00:00, ?it/s]
+2021-05-01 18:38:01,101 INFO     Training finished!!
+main.py --do_valid --do_test --data_path data/NELL-q2b -n 1 -b 1000 -d 1000 -lr 0.1 --disable_warmup --max_steps 1000 --cpu_num 0 --geo cqd --valid_steps 20 --tasks inp --print_on_screen --test_batch_size 1 --optimizer Adagrad --reg_weight 0.05 --log_steps 5 --checkpoint_path models/nell-q2b --cqd d2 --cqd-t-norm prod --cqd-normalize --cqd-sigmoid --cqd-k 2 --no-save --cuda
+overwritting args.save_path
+logging to models/nell-q2b
+99999
