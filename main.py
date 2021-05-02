@@ -161,7 +161,6 @@ def evaluate(model, tp_answers, fn_answers, args, dataloader, query_name_dict, m
     '''
     average_metrics = defaultdict(float)
     all_metrics = defaultdict(float)
-
     metrics = KGReasoning.test_step(model, tp_answers, fn_answers, args, dataloader, query_name_dict)
     num_query_structures = 0
     num_queries = 0

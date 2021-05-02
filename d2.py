@@ -52,6 +52,8 @@ def query_1p(entity_embeddings: nn.Module,
     p_emb = predicate_embeddings(queries[:, 1])
     candidates_emb = entity_embeddings.weight
 
+    assert queries.shape[1] == 2
+
     res, _ = score_candidates(s_emb=s_emb, p_emb=p_emb,
                               candidates_emb=candidates_emb, k=None,
                               entity_embeddings=entity_embeddings,
@@ -91,6 +93,53 @@ def query_2p(entity_embeddings: nn.Module,
                                           candidates_emb=candidates_emb, k=None,
                                           entity_embeddings=entity_embeddings,
                                           scoring_function=scoring_function)
+
+    # [B, K] -> [B, K, N]
+    atom1_scores_3d = atom1_k_scores_2d.reshape(batch_size, -1, 1).repeat(1, 1, nb_entities)
+    # [B * K, N] -> [B, K, N]
+    atom2_scores_3d = atom2_scores_2d.reshape(batch_size, -1, nb_entities)
+
+    res = t_norm(atom1_scores_3d, atom2_scores_3d)
+
+    # [B, K, N] -> [B, N]
+    res, _ = torch.max(res, dim=1)
+    return res
+
+
+def query_2pn(entity_embeddings: nn.Module,
+              predicate_embeddings: nn.Module,
+              queries: Tensor,
+              scoring_function: Callable[[Tensor, Tensor, Tensor], Tensor],
+              k: int,
+              t_norm: Callable[[Tensor, Tensor], Tensor],
+              negation: Callable[[Tensor], Tensor]) -> Tensor:
+
+    s_emb = entity_embeddings(queries[:, 0])
+    p1_emb = predicate_embeddings(queries[:, 1])
+    p2_emb = predicate_embeddings(queries[:, 2])
+
+    candidates_emb = entity_embeddings.weight
+    nb_entities = candidates_emb.shape[0]
+
+    batch_size = s_emb.shape[0]
+    emb_size = s_emb.shape[1]
+
+    # [B, K], [B, K, E]
+    atom1_k_scores_2d, x1_k_emb_3d = score_candidates(s_emb=s_emb, p_emb=p1_emb,
+                                                      candidates_emb=candidates_emb, k=k,
+                                                      entity_embeddings=entity_embeddings,
+                                                      scoring_function=scoring_function)
+
+    # [B * K, E]
+    x1_k_emb_2d = x1_k_emb_3d.reshape(-1, emb_size)
+
+    # [B * K, N]
+    atom2_scores_2d, _ = score_candidates(s_emb=x1_k_emb_2d, p_emb=p2_emb,
+                                          candidates_emb=candidates_emb, k=None,
+                                          entity_embeddings=entity_embeddings,
+                                          scoring_function=scoring_function)
+
+    atom2_scores_2d = negation(atom2_scores_2d)
 
     # [B, K] -> [B, K, N]
     atom1_scores_3d = atom1_k_scores_2d.reshape(batch_size, -1, 1).repeat(1, 1, nb_entities)
@@ -353,13 +402,13 @@ def query_pin(entity_embeddings: nn.Module,
     return res
 
 
-def query_pni(entity_embeddings: nn.Module,
-              predicate_embeddings: nn.Module,
-              queries: Tensor,
-              scoring_function: Callable[[Tensor, Tensor, Tensor], Tensor],
-              k: int,
-              t_norm: Callable[[Tensor, Tensor], Tensor],
-              negation: Callable[[Tensor], Tensor]) -> Tensor:
+def query_pni_v1(entity_embeddings: nn.Module,
+                 predicate_embeddings: nn.Module,
+                 queries: Tensor,
+                 scoring_function: Callable[[Tensor, Tensor, Tensor], Tensor],
+                 k: int,
+                 t_norm: Callable[[Tensor, Tensor], Tensor],
+                 negation: Callable[[Tensor], Tensor]) -> Tensor:
 
     scores_1 = query_2p(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
                         queries=queries[:, 0:3], scoring_function=scoring_function, k=k, t_norm=t_norm)
@@ -367,6 +416,24 @@ def query_pni(entity_embeddings: nn.Module,
                         queries=queries[:, 4:6], scoring_function=scoring_function)
 
     scores_1 = negation(scores_1)
+
+    res = t_norm(scores_1, scores_2)
+    return res
+
+
+def query_pni_v2(entity_embeddings: nn.Module,
+                 predicate_embeddings: nn.Module,
+                 queries: Tensor,
+                 scoring_function: Callable[[Tensor, Tensor, Tensor], Tensor],
+                 k: int,
+                 t_norm: Callable[[Tensor, Tensor], Tensor],
+                 negation: Callable[[Tensor], Tensor]) -> Tensor:
+
+    scores_1 = query_2pn(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
+                         queries=queries[:, 0:3], scoring_function=scoring_function, k=k,
+                         t_norm=t_norm, negation=negation)
+    scores_2 = query_1p(entity_embeddings=entity_embeddings, predicate_embeddings=predicate_embeddings,
+                        queries=queries[:, 4:6], scoring_function=scoring_function)
 
     res = t_norm(scores_1, scores_2)
     return res

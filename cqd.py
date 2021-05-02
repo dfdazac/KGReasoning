@@ -315,7 +315,7 @@ class CQD(nn.Module):
                     return torch.maximum(a, b)
 
                 def negation(a: Tensor) -> Tensor:
-                    return 1 - a
+                    return 1.0 - a
 
                 if self.t_norm_name == CQD.PROD_NORM:
                     def t_norm(a: Tensor, b: Tensor) -> Tensor:
@@ -325,8 +325,21 @@ class CQD(nn.Module):
                         return 1 - ((1 - a) * (1 - b))
 
                 def normalize(scores_: Tensor) -> Tensor:
+                    # min_values_1, _ = torch.min(scores_, axis=1)
+                    # max_values_1, _ = torch.max(scores_, axis=1)
+
                     scores_ = scores_ - scores_.min(1, keepdim=True)[0]
                     scores_ = scores_ / scores_.max(1, keepdim=True)[0]
+
+                    # min_values_2, _ = torch.min(scores_, axis=1)
+                    # max_values_2, _ = torch.max(scores_, axis=1)
+
+                    # print('BEFORE', min_values_1, max_values_1)
+                    # print('AFTER', min_values_2, max_values_2)
+
+                    # import sys
+                    # sys.exit(0)
+
                     return scores_
 
                 def scoring_function(rel_: Tensor, lhs_: Tensor, rhs_: Tensor) -> Tensor:
@@ -389,11 +402,21 @@ class CQD(nn.Module):
                                              scoring_function=scoring_function,
                                              t_norm=t_norm, t_conorm=t_conorm)
                 elif graph_type == "2in":
+
+                    # print(queries[0])
+                    # print(queries[1])
+                    # print(queries[2])
+                    # print(queries[3])
+
                     scores = d2.query_2in(entity_embeddings=self.embeddings[0],
                                           predicate_embeddings=self.embeddings[1],
                                           queries=queries,
                                           scoring_function=scoring_function,
                                           t_norm=t_norm, negation=negation)
+
+                    # import sys
+                    # sys.exit(0)
+
                 elif graph_type == "3in":
                     scores = d2.query_3in(entity_embeddings=self.embeddings[0],
                                           predicate_embeddings=self.embeddings[1],
@@ -407,11 +430,11 @@ class CQD(nn.Module):
                                           scoring_function=scoring_function,
                                           k=self.k, t_norm=t_norm, negation=negation)
                 elif graph_type == "pni":
-                    scores = d2.query_pni(entity_embeddings=self.embeddings[0],
-                                          predicate_embeddings=self.embeddings[1],
-                                          queries=queries,
-                                          scoring_function=scoring_function,
-                                          k=self.k, t_norm=t_norm, negation=negation)
+                    scores = d2.query_pni_v2(entity_embeddings=self.embeddings[0],
+                                             predicate_embeddings=self.embeddings[1],
+                                             queries=queries,
+                                             scoring_function=scoring_function,
+                                             k=self.k, t_norm=t_norm, negation=negation)
                 elif graph_type == "inp":
                     scores = d2.query_inp(entity_embeddings=self.embeddings[0],
                                           predicate_embeddings=self.embeddings[1],

@@ -636,7 +636,7 @@ class KGReasoning(nn.Module):
         total_steps = len(test_dataloader)
         logs = collections.defaultdict(list)
 
-        with torch.set_grad_enabled(isinstance(model, CQD)):
+        with torch.set_grad_enabled(isinstance(model, CQD) and model.method == 'co'):
             for negative_sample, queries, queries_unflatten, query_structures in tqdm(test_dataloader, disable=not args.print_on_screen):
                 batch_queries_dict = collections.defaultdict(list)
                 batch_idxs_dict = collections.defaultdict(list)
