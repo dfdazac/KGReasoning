@@ -1,29 +1,29 @@
-2021-05-01 06:31:14,527 INFO     ---------------------------------------------------------------------------------------------
-2021-05-01 06:31:14,536 INFO     Geo: cqd
-2021-05-01 06:31:14,536 INFO     Data Path: data/NELL-q2b
-2021-05-01 06:31:14,536 INFO     #entity: 63361
-2021-05-01 06:31:14,536 INFO     #relation: 400
-2021-05-01 06:31:14,536 INFO     #max steps: 1000
-2021-05-01 06:31:14,536 INFO     Evaluate unoins using: DNF
-2021-05-01 06:31:14,536 INFO     loading data
-2021-05-01 06:31:30,109 INFO     Training info:
-2021-05-01 06:31:30,110 INFO     Validation info:
-2021-05-01 06:31:30,110 INFO     Test info:
-2021-05-01 06:31:31,613 INFO     Model Parameter Configuration:
-2021-05-01 06:31:31,614 INFO     Parameter embeddings.0.weight: torch.Size([63361, 2000]), require_grad = True
-2021-05-01 06:31:31,614 INFO     Parameter embeddings.1.weight: torch.Size([400, 2000]), require_grad = True
-2021-05-01 06:31:31,614 INFO     Parameter Number: 127522000
-2021-05-01 06:31:35,900 INFO     Loading checkpoint models/nell-q2b...
-2021-05-01 06:31:37,222 INFO     tasks = pni
-2021-05-01 06:31:37,222 INFO     init_step = 99999
-2021-05-01 06:31:37,222 INFO     batch_size = 1000
-2021-05-01 06:31:37,222 INFO     hidden_dim = 1000
-2021-05-01 06:31:37,222 INFO     gamma = 12.000000
-2021-05-01 06:31:37,223 INFO     Evaluating on Valid Dataset...
+2021-05-02 16:37:32,936 INFO     ---------------------------------------------------------------------------------------------
+2021-05-02 16:37:32,936 INFO     Geo: cqd
+2021-05-02 16:37:32,936 INFO     Data Path: data/NELL-q2b
+2021-05-02 16:37:32,936 INFO     #entity: 63361
+2021-05-02 16:37:32,936 INFO     #relation: 400
+2021-05-02 16:37:32,936 INFO     #max steps: 1000
+2021-05-02 16:37:32,936 INFO     Evaluate unoins using: DNF
+2021-05-02 16:37:32,936 INFO     loading data
+2021-05-02 16:37:50,177 INFO     Training info:
+2021-05-02 16:37:50,180 INFO     Validation info:
+2021-05-02 16:37:50,180 INFO     Test info:
+2021-05-02 16:37:51,960 INFO     Model Parameter Configuration:
+2021-05-02 16:37:51,960 INFO     Parameter embeddings.0.weight: torch.Size([63361, 2000]), require_grad = True
+2021-05-02 16:37:51,960 INFO     Parameter embeddings.1.weight: torch.Size([400, 2000]), require_grad = True
+2021-05-02 16:37:51,960 INFO     Parameter Number: 127522000
+2021-05-02 16:37:57,944 INFO     Loading checkpoint models/nell-q2b...
+2021-05-02 16:37:59,521 INFO     tasks = pni
+2021-05-02 16:37:59,522 INFO     init_step = 99999
+2021-05-02 16:37:59,522 INFO     batch_size = 1000
+2021-05-02 16:37:59,522 INFO     hidden_dim = 1000
+2021-05-02 16:37:59,522 INFO     gamma = 12.000000
+2021-05-02 16:37:59,522 INFO     Evaluating on Valid Dataset...
 0it [00:00, ?it/s]
-2021-05-01 06:31:37,228 INFO     Evaluating on Test Dataset...
+2021-05-02 16:37:59,537 INFO     Evaluating on Test Dataset...
 0it [00:00, ?it/s]
-2021-05-01 06:31:37,229 INFO     Training finished!!
+2021-05-02 16:37:59,554 INFO     Training finished!!
 main.py --do_valid --do_test --data_path data/NELL-q2b -n 1 -b 1000 -d 1000 -lr 0.1 --disable_warmup --max_steps 1000 --cpu_num 0 --geo cqd --valid_steps 20 --tasks pni --print_on_screen --test_batch_size 1 --optimizer Adagrad --reg_weight 0.05 --log_steps 5 --checkpoint_path models/nell-q2b --cqd d2 --cqd-t-norm min --cqd-k 8 --no-save --cuda
 overwritting args.save_path
 logging to models/nell-q2b

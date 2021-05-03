@@ -1,29 +1,29 @@
-2021-04-29 18:07:36,869 INFO     ---------------------------------------------------------------------------------------------
-2021-04-29 18:07:36,869 INFO     Geo: cqd
-2021-04-29 18:07:36,869 INFO     Data Path: data/FB15k-q2b
-2021-04-29 18:07:36,869 INFO     #entity: 14951
-2021-04-29 18:07:36,869 INFO     #relation: 2690
-2021-04-29 18:07:36,869 INFO     #max steps: 1000
-2021-04-29 18:07:36,869 INFO     Evaluate unoins using: DNF
-2021-04-29 18:07:36,869 INFO     loading data
-2021-04-29 18:08:44,887 INFO     Training info:
-2021-04-29 18:08:44,888 INFO     Validation info:
-2021-04-29 18:08:44,889 INFO     Test info:
-2021-04-29 18:08:45,266 INFO     Model Parameter Configuration:
-2021-04-29 18:08:45,267 INFO     Parameter embeddings.0.weight: torch.Size([14951, 2000]), require_grad = True
-2021-04-29 18:08:45,268 INFO     Parameter embeddings.1.weight: torch.Size([2690, 2000]), require_grad = True
-2021-04-29 18:08:45,268 INFO     Parameter Number: 35282000
-2021-04-29 18:08:48,143 INFO     Loading checkpoint models/fb15k-q2b...
-2021-04-29 18:08:50,198 INFO     tasks = pni
-2021-04-29 18:08:50,199 INFO     init_step = 99999
-2021-04-29 18:08:50,199 INFO     batch_size = 1000
-2021-04-29 18:08:50,199 INFO     hidden_dim = 1000
-2021-04-29 18:08:50,199 INFO     gamma = 12.000000
-2021-04-29 18:08:50,199 INFO     Evaluating on Valid Dataset...
+2021-05-02 11:33:06,393 INFO     ---------------------------------------------------------------------------------------------
+2021-05-02 11:33:06,393 INFO     Geo: cqd
+2021-05-02 11:33:06,393 INFO     Data Path: data/FB15k-q2b
+2021-05-02 11:33:06,393 INFO     #entity: 14951
+2021-05-02 11:33:06,393 INFO     #relation: 2690
+2021-05-02 11:33:06,393 INFO     #max steps: 1000
+2021-05-02 11:33:06,393 INFO     Evaluate unoins using: DNF
+2021-05-02 11:33:06,393 INFO     loading data
+2021-05-02 11:34:22,209 INFO     Training info:
+2021-05-02 11:34:22,210 INFO     Validation info:
+2021-05-02 11:34:22,210 INFO     Test info:
+2021-05-02 11:34:22,667 INFO     Model Parameter Configuration:
+2021-05-02 11:34:22,667 INFO     Parameter embeddings.0.weight: torch.Size([14951, 2000]), require_grad = True
+2021-05-02 11:34:22,667 INFO     Parameter embeddings.1.weight: torch.Size([2690, 2000]), require_grad = True
+2021-05-02 11:34:22,668 INFO     Parameter Number: 35282000
+2021-05-02 11:34:27,132 INFO     Loading checkpoint models/fb15k-q2b...
+2021-05-02 11:34:27,541 INFO     tasks = pni
+2021-05-02 11:34:27,541 INFO     init_step = 99999
+2021-05-02 11:34:27,541 INFO     batch_size = 1000
+2021-05-02 11:34:27,541 INFO     hidden_dim = 1000
+2021-05-02 11:34:27,541 INFO     gamma = 12.000000
+2021-05-02 11:34:27,541 INFO     Evaluating on Valid Dataset...
 0it [00:00, ?it/s]
-2021-04-29 18:08:50,202 INFO     Evaluating on Test Dataset...
+2021-05-02 11:34:27,560 INFO     Evaluating on Test Dataset...
 0it [00:00, ?it/s]
-2021-04-29 18:08:50,203 INFO     Training finished!!
+2021-05-02 11:34:27,561 INFO     Training finished!!
 main.py --do_valid --do_test --data_path data/FB15k-q2b -n 1 -b 1000 -d 1000 -lr 0.1 --disable_warmup --max_steps 1000 --cpu_num 0 --geo cqd --valid_steps 20 --tasks pni --print_on_screen --test_batch_size 1 --optimizer Adagrad --reg_weight 0.05 --log_steps 5 --checkpoint_path models/fb15k-q2b --cqd d2 --cqd-t-norm prod --cqd-k 2 --no-save --cuda
 overwritting args.save_path
 logging to models/fb15k-q2b
