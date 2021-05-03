@@ -61,6 +61,8 @@ def main(argv):
     if is_mrr is True:
         metric = 'MRR'
 
+    show_metric = 'HITS3'
+
     key_to_path = {path_to_key(path): path for path in args.paths}
 
     data_values = set()
@@ -84,6 +86,8 @@ def main(argv):
     query_pd_values = []
     result_pd_values = []
 
+    has_query = set()
+
     for data in data_values:
         for q in query_values:
 
@@ -105,6 +109,8 @@ def main(argv):
 
             if best_res_test is not None and len(best_res_test) > 0:
                 for k, v in best_res_test.items():
+                    has_query.add(q)
+
                     data_pd_values += [data]
                     query_pd_values += [q]
                     metric_pd_values += [k]
@@ -118,9 +124,11 @@ def main(argv):
     }
 
     df = pd.DataFrame(pd_dict)
-    metric_df = df[df.Metric == metric]
+    metric_df = df[df.Metric == show_metric]
 
     new_df = metric_df.set_index(['Data', 'Query']).drop(['Metric'], axis=1).unstack()
+
+    query_values = [q for q in query_values if q in has_query]
     new_df = new_df[[('Result', q) for q in query_values]]
 
     print(new_df.to_latex())
