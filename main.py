@@ -494,6 +494,7 @@ def main(args):
 
     if args.do_valid:
         logging.info('Evaluating on Valid Dataset...')
+        model.calibrate(valid_queries, valid_hard_answers)
         valid_all_metrics = evaluate(model, valid_easy_answers, valid_hard_answers, args, valid_dataloader, query_name_dict, 'Valid', step, writer)
 
     if args.do_test:

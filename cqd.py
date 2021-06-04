@@ -8,6 +8,9 @@ import torch
 import torch.nn as nn
 from torch import optim, Tensor
 import math
+from sklearn.linear_model import SGDClassifier, LogisticRegression
+import numpy as np
+from tqdm import tqdm
 
 from util import query_to_atoms
 from discrete import top_k_selection
@@ -73,6 +76,9 @@ class CQD(nn.Module):
         test_batch_size = 1000
         batch_entity_range = torch.arange(nentity).to(torch.float).repeat(test_batch_size, 1)
         self.register_buffer('batch_entity_range', batch_entity_range)
+
+        self.calib_coef = None
+        self.calib_intercept = None
 
     def split(self,
               lhs_emb: Tensor,
@@ -167,7 +173,8 @@ class CQD(nn.Module):
     def reduce_query_score(self, atom_scores, conjunction_mask, negation_mask):
         batch_size, num_atoms, *extra_dims = atom_scores.shape
 
-        atom_scores = torch.sigmoid(atom_scores)
+        # atom_scores = torch.sigmoid(atom_scores)
+        atom_scores = self._calibrate_scores(atom_scores)
         scores = atom_scores.clone()
         scores[negation_mask] = 1 - atom_scores[negation_mask]
 
@@ -422,3 +429,71 @@ class CQD(nn.Module):
                     raise ValueError(f'Unknown query type: {graph_type}')
 
         return None, scores, None, all_idxs
+
+    @torch.no_grad()
+    def calibrate(self, train_queries, train_answers):
+        print('Calibrating model...')
+        device = self.embeddings[0].weight.device
+
+        true_triples = []
+        all_corruptions = []
+        all_entities = np.arange(self.nentity, dtype=int)
+
+        for query, query_type in train_queries:
+            if not query_type == ('e', ('r',)):
+                continue
+
+            head = query[0]
+            relation = query[1][0]
+            tails = list(train_answers[query])
+
+            triples = np.empty([len(tails), 3], dtype=int)
+            triples[:, 0] = head
+            triples[:, 1] = relation
+            triples[:, 2] = tails
+            true_triples.extend(triples)
+
+        true_triples = torch.tensor(true_triples)
+        num_true_triples = true_triples.shape[0]
+
+        random_triples = true_triples.clone()
+        np.random.seed(0)
+        rand_ents = np.random.randint(0, self.nentity, num_true_triples)
+        random_triples[:, 2] = torch.tensor(rand_ents, dtype=torch.long)
+
+        calibration_triples = torch.cat([true_triples, random_triples])
+        labels = np.array([1] * num_true_triples + [0] * num_true_triples)
+        model_scores = np.empty(labels.shape)
+
+        start = 0
+        batch_size = 1000
+        num_total_triples = calibration_triples.shape[0]
+        with tqdm(desc='Computing scores for calibration', total=num_total_triples) as bar:
+            while start < calibration_triples.shape[0]:
+                batch_triples = calibration_triples[start:start + batch_size].to(device)
+                batch_size = batch_triples.shape[0]
+
+                lhs_emb = self.embeddings[0](batch_triples[:, 0]).unsqueeze(-2)
+                rel_emb = self.embeddings[1](batch_triples[:, 1]).unsqueeze(-2)
+                rhs_emb = self.embeddings[0](batch_triples[:, 2]).unsqueeze(-2)
+
+                scores, _ = self.score_o(lhs_emb, rel_emb, rhs_emb)
+                scores = scores.squeeze().cpu().numpy()
+                model_scores[start:start + batch_size] = scores
+                start = start + batch_size
+                bar.update(n=scores.shape[0])
+
+        calibrator = LogisticRegression()
+        model_scores = model_scores.reshape(-1, 1)
+        calibrator.fit(model_scores, labels)
+
+        self.calib_coef = calibrator.coef_[0, 0]
+        self.calib_intercept = calibrator.intercept_[0]
+
+        print('Done calibrating!')
+
+    def _calibrate_scores(self, scores):
+        if not self.calib_intercept or not self.calib_coef:
+            raise ValueError('Model is not calibrated yet!')
+
+        return torch.sigmoid(scores * self.calib_coef + self.calib_intercept)
